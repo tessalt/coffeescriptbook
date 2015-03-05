@@ -1,5 +1,7 @@
 # Coffeescript for beginners
 
+## Math
+
 Let's start with some simple math. 
 
 Coffeescript supports all your familiar math operators: `+ - * \` (add, subtract, multiply, divide), plus one you may be unfamiliar with: `%` or "modulus". 
@@ -365,4 +367,24 @@ patrol(16)
 
 # => undefined
 ```
+
+### Using functions
+
+When you're prototyping animations, there's a good chance you won't have to write a whole lot of functions yourself. You will however be *using* quite a few functions, most of them are provided by the framer.js library. 
+
+That's where functions become really useful: when you can share them around. The folks beheind Framer figured out how to do all sorts of useful things related to manipulating pixels on a screen, so they wrapped up all that useful code into functions that you can use. 
+
+Let's say we're using a library that provides a `licensePlateCheck` function. It takes one argument, which is a license plate. It does all sorts of complicated things to associate that license number with a person, find out whether that person has a criminal record, if there are any warrants for their arrest, or if the car is stolen. To use this function, you don't need to know any of that. All you have to know is that it takes one argument, and that argument needs to be a license plate. For any given license plate, the `licensePlateCheck` function will tell you `true` if the plate is associated with criminal activity, and `false` if it's not. 
+
+We also need to know what type of argument to provide. In this case, we need to know that the `licensePlate` argument is a string. Which makes sense, since it's a mix of numbers and letters.
+
+```
+licensePlateCheck("BAD455")
+
+# => true
+```
+
+And that's all we need to do. 
+
+## Other types of data
 
