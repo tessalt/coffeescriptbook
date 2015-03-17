@@ -570,9 +570,9 @@ This is how the `.length` method and the `toUpperCase` method work. They are met
 
 ### Configuration objects
 
-In framer.js, one of the most common uses of object will be to configure animations and elements: 
+In framer.js, one of the most common uses of objects  will be to configure animations and elements: 
 
-```
+``` 
 box = 
   width: 120
   height: 120
@@ -583,3 +583,42 @@ animation =
   duration: 300
   easing: "ease-in"
 ```
+
+# Simple Animations
+
+Let's open up Framer Studio and try to create some simple animations. 
+
+We're going to work with a green square for a while. 
+
+To create a new element on the screen, we use `new Layer`. This is a special kind of function that creates an object. If we assign a variable to the result of `new Layer`, we can maintain a reference to the element that we can manipulate. 
+
+```
+square = new Layer()
+```
+
+You should see a blue square on the screen. 
+
+![screenshot1](https://s3.amazonaws.com/f.cl.ly/items/3E20192V03310u1O1x20/Screen%20Shot%202015-03-16%20at%2010.52.28%20PM.png)
+
+To customize the square so it's not just a blue square, we can pass one argument to `new Layer()`. This argument is a configuration object, you can configure the element using properties for various attributes such as width, height, position, and appearance. 
+
+```
+square = new Layer(
+  width: 200
+  height: 200
+  x: 100
+  y: 100
+)
+```
+
+![screenshot2](https://s3.amazonaws.com/f.cl.ly/items/0e3f2F3F1f1s0r0V0y30/Screen%20Shot%202015-03-16%20at%2010.59.40%20PM.png)
+
+To make that code a bit easier to read, we can get rid of the parentheses. 
+
+```
+square = new Layer
+  width: 200
+  height: 200
+```
+
+There are a lot of cases in coffeescript where we can do this, it can sometimes make the code look a bit cleaner. 
