@@ -388,3 +388,198 @@ And that's all we need to do.
 
 ## Other types of data
 
+Strings, numbers, and booleans are the simplest kinds of values in coffeescript, but we can do more with more complex data types, like arrays and objects. 
+
+### Arrays
+Arrays are lists or collections of multiple items. Say we wanted to keep track of a list of fruits:
+
+```
+fruits = ["apples", "oranges", "bananas"]
+```
+
+Arrays have some built in *methods* (functions that they can use) for finding out information about them: 
+
+```
+fruits.length 
+
+# => 3
+```
+
+You can access elements in an array by their *index*. The index is the element's position within the array. 
+
+**Arrays are zero-indexed**. This means that the first item in the array is item 0, and the second item is item 1. This can be a little confusing at first, but you'll get used to it. 
+
+To access an element in an array, we use square brackets containing the index of the element we're looking for. For example, if we want go get "oranges" from the fruits array: 
+
+```
+fruits = ["apples", "oranges", "bananas"]
+
+print fruits[1]
+
+# => "oranges"
+```
+
+### Adding to arrays
+
+You can add new items to an array with the method `push`. `push` adds the item you specify to the end of the array. 
+
+```
+fruits.push("kiwis")
+
+print fruits
+
+# => ["apples", "oranges", "bananas", "kiwis"]
+```
+
+### Looping through arrays
+
+Arrays can be very powerful in CoffeeScript, because they let you repeat certain functionality over and over with different items in an array. 
+
+One of the most common ways to control your program is by using *loops*. Loops let you do something for every item in an array. 
+
+`toUpperCase` is a method that you can use on strings to capitalize them
+
+If we wanted to print out each element in our array of fruits in capital letters, we could do: 
+
+```
+fruits[0].toUpperCase()
+# => "APPLES"
+
+fruits[1].toUpperCase()
+# => "ORANGES"
+
+fruits[2].toUpperCase()
+# => "BANANAS"
+```
+
+But since we have an array containing our list of fruits, we can do this a bit more efficiently: 
+
+```
+for fruit in fruits
+  fruit.toUpperCase()
+
+# => "APPLES"
+# => "ORANGES"
+# => "BANANAS"
+```
+
+In english, we read that as "for every fruit in our list of fruits, capitalize it"
+
+If we break it down, the `for` loop does two things: it executes our code once for each item in the array, *and* it lets you refer to the currently "active" element by whatever name you like. 
+
+The code `for fruit in fruits` tells us that each time through the array, we'll have a variable called `fruit`. That variable `fruit` will refer to the item we're working with each time through. So the first time through the array, `fruit` will refer to "apples", the second time it will refer to "oranges", etc. 
+
+What if we had a lineup of cars to run license checks on? 
+
+```
+plates = ["BRR010", "BUU888", "NNB001", "MBB991"]
+```
+
+Let's check each plate for criminal activity with a `for` loop: 
+
+```
+for plate in plates
+  licensePlateCheck(plate)
+
+# => false
+# => true
+# => false
+```
+
+**Again, the indentation is significant**. The indentation of the second line means that code gets executed only inside the `for` loop. 
+
+### Objects
+
+Objects are one of the most useful data types in coffeescript. An object is a collection of *properties*. In programming, a *property* is an association between a *name* and a *value*. A name-value pair could be something like "price: $10", where *price* is the name, and *$10* is the value.
+
+If something has properties, you can store them in an object. For example, a "book" object might have a `title` property, an `author` property, and a `genre` property. In coffeescript, we would code that as: 
+
+```
+book = 
+  title: "Slaughterhouse Five"
+  author: "Kurt Vonnegut"
+  genre: "Science Fiction"
+```
+
+You can store any kind of data in an object's properties: 
+
+```
+book = 
+  pages: 256
+  genres: ["Science Fiction", "Satire"]
+```
+
+You can even store another object inside a property: 
+
+```
+book = 
+  author: 
+    name: "Kurt Vonnegut"
+    born: 1922
+    died: 2007
+```
+
+To access properties in an object, we use dots: 
+
+```
+print book.title
+
+# => "Slaugherhouse Five"
+
+print book.pages
+
+# => 256
+```
+
+We can keep going with the dots to access objects within objects: 
+
+```
+print book.author.born
+
+# => 1922
+```
+
+And to access the elements of the array inside the object, we combine the square bracket and the dot syntax:
+
+```
+print book.genres[1]
+
+# => "Satire"
+```
+
+### Methods
+
+Since we can store any kind of data in an object's properties, we can also store functions as properties. When a function is the property of an object, it is called a *method*. 
+
+```
+book = 
+  title: "Slaugherhouse Five"
+  read: ->
+    print "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti voluptate vel, praesentium nobis, asperiores, ea quidem ex suscipit id odio, culpa aut consequatur commodi sit quia. Quia, sed perspiciatis nisi."
+```
+
+The `read` property is a method that belongs to our `book` object. We can call it like we would any function: 
+
+```
+book.read()
+
+# => "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia delectus est molestias labore, provident odio quos mollitia, et totam asperiores possimus quaerat eum esse aperiam aut consequuntur cum enim dolorem."
+```
+
+This is how the `.length` method and the `toUpperCase` method work. They are methods that belong to all string objects. 
+
+### Configuration objects
+
+In framer.js, one of the most common uses of object will be to configure animations and elements: 
+
+```
+box = 
+  width: 120
+  height: 120
+  x: 0
+  y: 0
+
+animation = 
+  duration: 300
+  easing: "ease-in"
+```
