@@ -696,3 +696,44 @@ square.animate
     x: 500
   curve: "ease-in"
 ```
+
+### Other options 
+
+You can set an animation to repeat with `repeat`, and delay it with `delay`, specifying the delay in seconds. 
+
+# Events
+
+When prototyping interactions, you're mostly going to want to react to user input. This is done by using the `on` method to "listen" for events triggered by the user. 
+
+The code for doing something "on" an event can look a bit weird at first, but we'll break it down step by step. 
+
+```
+button = new Layer
+
+button.on Events.Click, ->
+  doFunAnimation() // do animating here
+```
+
+This is actually a method being called with two arguments, though it may not look like it. The format for the `on` method is `on(eventName, function)`, where the `function` is the code that gets run when the event is triggered. When you use a function as an argument like this, it's called a "callback". In plain english, calling the `on` method with a callback is like saying "listen for and do", and the two arguments are the thing that you're listening for, and the thing that you should then do. 
+
+If you remember, in coffeescript, we indicate a function with the following syntax: 
+
+```
+functionName = ->
+```
+
+When we give the `on` method a function as an argument, it doesn't need a name or an equals sign, so we just need the `->` part. The comma is the separation between the first argument (the name of the event), and the second (the function). 
+
+Framer gives us a bunch of events to listen for, all in the format `Events.Name`. Some of the more common events are `Events.Click`, `Events.TouchStart`. 
+
+Let's try it out:
+
+```
+button = new Layer
+
+button.on Events.Click, ->
+  print "clicked!"
+```
+
+## Animation and events
+
