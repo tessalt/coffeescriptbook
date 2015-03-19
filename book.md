@@ -622,3 +622,77 @@ square = new Layer
 ```
 
 There are a lot of cases in coffeescript where we can do this, it can sometimes make the code look a bit cleaner. 
+
+## Manipulate layer
+
+Now that we've assigned the variable `square` to our layer, we can continue to manipulate it. After we've created our layer, we can modify it at any time: 
+
+```
+square.backgroundColor = "red"
+square.x = 200
+```
+
+You can modify a layer's coordinates (x, y), as well as appearance by using camel-cased versions of most CSS properties, as well as some built-in framer properties. For example, `color` is just `color` but `border-radius` becomes `borderRadius`. If you want to rotate an element, you can just modify the `rotation` property framer provides. Framer Studio will autocomplete most of these property names for you, but you can also look them up in the docs. 
+
+## Animate a layer
+
+Let's add our first animation. To animate a layer, we use the `animate` method. 
+
+```
+square.animate()
+```
+
+By itself, `.animate()` isn't goint to do anything. We need to pass it a *configuration object* to tell it what to animate, and how to animate it. A configuration object will follow this format: 
+
+```
+configObject = 
+  properties: 
+    property: value
+    property: value
+  time: 1
+  curve: "ease"
+  delay: 2
+```
+
+The `time`, `curve` and `delay` properties are all optional, but you need to specify one or more properties to animate nested in the `properties` object (it's an object nested inside an object). 
+
+For example, if we want to fade out a square, we would animate the `opacity` property. By default, the opacity is set to 1, so we animate it to 0. 
+
+```
+square.animate
+  properties: 
+    opacity: 0
+```
+
+We can easily transition multiple properties at once: 
+
+```
+square.animate
+  properties: 
+    opacity: 0
+    x: 400
+    y: 400
+    rotation: 180
+```
+
+### Configuring animations
+
+Time-related properties (delay and time), are specified in seconds. By default animations take 1s. Speed up the animation: 
+
+```
+square.animate
+  properties: 
+    opacity: 0
+  time: .2
+```
+
+**Note:** again whitespace is significant here. `opacity` is a property, so it's indented one level further than `properties` to indicate the relationship. Move back out one level to specify `time`, because that's a property of the animation, not a property of the object animating. 
+
+To make your animations more dynamic, you can specify the curve. To learn more about curves, check out [easings.net](http://easings.net/) and the [framer docs](http://framerjs.com/docs/#animation.animation). You can use a built-in easing string like `ease-in`, `ease-out` or `ease-in-out`, or use one of the more advanced functions described in the docs, like `bezier-curve` or `spring-dho`. 
+
+```
+square.animate
+  properties: 
+    x: 500
+  curve: "ease-in"
+```
