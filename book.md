@@ -737,3 +737,41 @@ button.on Events.Click, ->
 
 ## Animation and events
 
+If we combine what we know about events and animations, we can begin to prototype interactions. Let's slide our layer right on click: 
+
+```
+button = new Layer
+
+button.on Events.Click, ->
+  button.animate
+    properties: 
+      x: 500
+```
+
+## Working with screen dimensions
+
+Many of the interactions in web and mobile interfaces require calculations based on the dimensions of the screen itself. For example, if we wanted to slide our box from the left edge of the screen to the right edge, we'll need to know where the right edge is. 
+
+We can access the properties of the screen we're working with by accessing the `Framer.Device.screen.width` and `Framer.Device.screen.height` properties. 
+
+```
+width = Framer.Device.screen.width
+
+button = new Layer
+
+button.on Events.Click, ->
+  button.animate
+    properties:
+      x: width
+```
+
+This will cause the square to animate off the right edge of the screen. The `x` coordinate of our box is calculated from the top left of the screen, so by setting the `x` value to the width of the screen, we've set it just off the edge of the screen. To animate the box so that it stays on the screen, we can subtract the box's width from the screen's width to get the `x` value. By default, the layer is 100px wide. 
+
+```
+button.on Events.Click, ->
+  button.animate
+    properties:
+      x: width - 100
+```
+
+ 
