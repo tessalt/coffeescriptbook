@@ -1007,3 +1007,5 @@ dropdownLayers.menuContent.states.animationOptions =
   time: 0.2
   curve: "ease-out"
 ```
+
+## Touch interactions
