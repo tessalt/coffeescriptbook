@@ -774,4 +774,236 @@ button.on Events.Click, ->
       x: width - 100
 ```
 
- 
+# Prototyping simple interactions
+
+## Dismis modal window
+
+Import the "popup.psd" file into Framer. Set the device type to iPhone 5c or 5s for best arrangement. 
+
+The first thing we're going to prototype is the dismissal of this popup when the user clicks on the "x". The "x" layer group is called "close", so we access it by name (it is a property of the imported `psd` object). We'll add a click event handler to the close: 
+
+```
+psd = Framer.Importer.load "imported/Popup"
+
+psd.close.on Events.Click, ->
+
+```
+
+To start, we'll just fade out the popup on click: 
+
+```
+psd.close.on Events.Click, ->
+  psd.Popup.animate
+    properties: 
+      opacity: 0
+```
+
+That's a bit too slow, so lets adjust the `time` property: 
+
+```
+psd = Framer.Importer.load "imported/Popup"
+
+psd.close.on Events.Click, ->
+  psd.Popup.animate
+    properties: 
+      opacity: 0
+    time: .4
+```
+
+It's a bit of a dull animation, so lets slide it off the screen upwards. To do this, we'll need to animate the layer's `y` property. 
+
+We'll want the layer's end position to be above the top of the screen, and to be all the way off the top of the screen, we'll need to send it above the top order of the screen by the height of the layer itself. 
+
+![illustration maybe?]()
+
+To do that, we'll need to get the height of the layer. We can get that with `psd.Popup.height`. Since the y position of the top of the screen is 0, we'll want to subtract the height from 0: 
+
+```
+layerHeight = psd.Popup.height 
+
+psd.close.on Events.Click, ->
+  psd.Popup.animate
+    properties: 
+      opacity: 0
+      y: 0 - layerHeight
+    time: 0.3
+```
+
+We've saved the layer's height in a `layerHeight` variable so that the code is a bit easier to read. 
+
+To make the animation a bit more dynamic, we can add an "ease-in" curve to it. 
+
+## Multiple animations
+
+Once the modal is dismissed, our prototype currently just shows a mustache badge. It would be cool if that badge pop up out of nowhere after you'd dismissed the mdoal.
+
+To do an animation *after* another one, we have to "listen" for the end of the first animation. We can attach an `AnimationEnd` event listener to the popup layer (the one that is animating), and then do something else once it's finished animating: 
+
+```
+(...same code as before)
+
+psd.Popup.on Events.AnimationEnd, ->
+  print "animation ended"
+
+```
+
+Now lets select the `Mustache` layer and animate it's size using the `scale` property: 
+
+```
+psd.Popup.on Events.AnimationEnd, ->
+  psd.Mustache.animate
+    properties: 
+      scale: 2
+```
+
+Okay, but we wanted the badge to appear from nothing. To do that, we have to initially set the badge to be teeny, and then animate it to a visible size: 
+
+```
+psd.Mustache.scale = 0
+
+psd.Popup.on Events.AnimationEnd, ->
+  psd.Mustache.animate
+    properties: 
+      scale: 1
+```
+
+To add a bit more life to this animation, we're going to make it look a bit bouncy. To achieve a bounce effect on our animation, we can use one of the custom curve functions Framer comes with. The `spring()` function takes 4 arguments: tension, friction, velocity, and tolerance. Explaining all these properties is beyond the scope of this book, but we'll use a simple bounce using the settings `200,15,0`. 
+
+```
+psd.Popup.on Events.AnimationEnd, ->
+  psd.Mustache.animate
+    properties: 
+      scale: 1
+    curve:"spring(200,15,0)"
+```
+
+## Toggle between states: dropdown menu
+
+Import "dropdown.psd" into Framer. 
+
+Let's start off by hiding the menu content by default: 
+
+```
+dropdownLayers.menuContent.opacity = 0
+```
+
+Now we'll add a click event listener on the menu icon, and then switch the opacity to 1:
+
+```
+dropdownLayers.menuIcon.on Events.Click, ->
+  dropdownLayers.menuContent.opacity = 1
+```
+
+There's a problem though: we want the menu to close again when the menu icon is clicked again. Unfortunately, the menu won't know whether to open or close on each click unless we somehow keep track of what state it's already in. 
+
+To do this, we'll create a variable `isOpen` that will be false if the menu is closed, and true if it's open. It'll default to false. 
+
+```
+isOpen = false
+```
+
+Next, we'll set the opacity in the click event based on our `isOpen` variable:
+
+```
+dropdownLayers.menuIcon.on Events.Click, ->
+  if isOpen
+    dropdownLayers.menuContent.opacity = 0
+  else
+    dropdownLayers.menuContent.opacity = 1
+```
+
+For this to work, we'll need to toggle `isOpen` between false and true when the user clicks. To toggle a value between true and false, we can re-assign the variable to it's opposite. True and false are opposite of each other, so not true = false and not false = true. In coffeescript, we use the `!` symbol to mean "not": `true != false`. 
+
+To set a value to its opposite, we do `= !` or "set the value to *not* whatever it currently is"
+
+```
+isOpen = !isOpen
+```
+
+Let's put it all together: 
+
+```
+isOpen = false
+
+dropdownLayers.menuIcon.on Events.Click, ->
+  isOpen = !isOpen
+  if isOpen
+    dropdownLayers.menuContent.opacity = 0
+  else
+    dropdownLayers.menuContent.opacity = 1
+```
+
+And now our menu toggles open when we click it. 
+
+### Easier interactions with states
+
+Framer gives us an easier way to transition between different states, called "states" turns out. Basically, you give a layer a set of named states which specify what it should look like when it is in that state. For example, our menu will have an "open" state where the opacity is 1, and a "closed" state where the opacity is 0. 
+
+To add states to our layer, we use the `states.add` method. Each state consists of a name and property pair, where the property contains the various options for the appearance: 
+
+```
+dropdownLayers.menuContent.states.add
+  open:
+    opacity: 1
+  closed:
+    opacity: 0
+```
+
+Now we can switch between the two states in a few different ways. The easiest way to go back and forth between the two states is just by using `states.next()`. We can take out the `if else` statement now, as well as the `isOpen` variable. 
+
+```
+dropdownLayers.menuContent.states.add
+  open:
+    opacity: 1
+  closed:
+    opacity: 0
+    
+dropdownLayers.menuIcon.on Events.Click, ->
+  dropdownLayers.menuContent.states.next()
+```
+
+By default, `states.next` animates between the two states. To customize this animation, we need to configure `states.animationOptions`:
+
+```
+dropdownLayers.menuContent.states.animationOptions = 
+  time: 0.2
+```
+
+One of the nice things about states is that it makes it easy to customize our animation and make it more complex. Instead of fading in, lets have our menu expand out from the top left. 
+
+To do that, we first need to set the menu's default width and height to 0. 
+
+```
+dropdownLayers.menuContent.width = 0
+dropdownLayers.menuContent.height = 0
+```
+
+And then update the states so that open resets the height and width to the original values, and closed sets them to 0. To get the original height and width values of our menu, we need to save those values as variables before we set them to 0. 
+
+```
+originalWidth = dropdownLayers.menuContent.width
+originalHeight = dropdownLayers.menuContent.height
+
+dropdownLayers.menuContent.width = 0
+dropdownLayers.menuContent.height = 0
+```
+
+And then use those variables in `states.add`: 
+
+```
+dropdownLayers.menuContent.states.add
+  open:
+    width: originalWidth
+    height: originalHeight
+  closed:
+    width: 0
+    height: 0
+```
+
+This animation would look even better with some easing: 
+
+```
+dropdownLayers.menuContent.states.animationOptions = 
+  time: 0.2
+  curve: "ease-out"
+```
