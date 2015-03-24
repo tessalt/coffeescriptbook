@@ -1,0 +1,649 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="coffeescript-for-beginners">Coffeescript for beginners</h1>
+<h2 id="math">Math</h2>
+<p>Let's start with some simple math.</p>
+<p>Coffeescript supports all your familiar math operators: <code>+ - * \</code> (add, subtract, multiply, divide), plus one you may be unfamiliar with: <code>%</code> or &quot;modulus&quot;.</p>
+<p>A lot of what you'll be doing while prototyping interactions is just simple math.</p>
+<p>Quick refresher on what you'll be up against:</p>
+<h2 id="order-of-operations">Order of operations</h2>
+<p>So just like you learned in high school, BEDMAS still applies. If you want some addition and subtraction to happen before the multiplication and addition, put it in brackets.</p>
+<p>Open up your Coffeescript console and observe:</p>
+<pre><code>10 + 20
+# =&gt; 25
+
+150 - 5 * 20
+# =&gt; 50
+
+(150 - 5) * 20
+# =&gt; 2900</code></pre>
+<h2 id="variables">Variables</h2>
+<p>So none of that is terribly useful until we start adding variables into the mix. Variables are containers you can store data in. All sorts of data. Numbers, words, letters, lists, and more. You create a variable with an equals sign:</p>
+<pre><code>a = 50
+
+a
+# =&gt; 50</code></pre>
+<p>You can treat a variable exactly as you would treat whatever you put in the container:</p>
+<pre><code>a = 50
+
+a * 10
+# =&gt; 500</code></pre>
+<h2 id="types-of-data">Types of data</h2>
+<p>There are all different types of data you can program with, and some of them have special abilities and uses.</p>
+<h3 id="numbers">Numbers</h3>
+<p>Numbers are the simple ones. Numbers are numbers. <code>200</code>, <code>-10</code>, <code>4000</code> are all numbers. Don't include commas or spaces in your numbers, and you'll be ok.</p>
+<h3 id="strings">Strings</h3>
+<p>When you're working with letters or punctuation, you're working with <code>strings</code>. Strings come in quotation marks. <strong>Anything in quotation marks is a string</strong>. You can use single quotes or double quotes, but there are fewer complications when you use double-quotes.</p>
+<pre><code>&quot;This is a string&quot;
+&#39;This is also a string&#39;</code></pre>
+<p>You can squish strings together using a <code>+</code> sign. This is called <em>concatenating</em>.</p>
+<pre><code>&quot;My name is &quot; + &quot;Tessa&quot;
+# =&gt; &quot;My name is Tessa&quot;</code></pre>
+<h2 id="doing-things-with-numbers-and-strings">Doing things with numbers and strings</h2>
+<p>Since anything in quotation marks is a string, you can end up with numbers that are actually strings (becasue they're in quotation marks). <code>&quot;40&quot;</code> is a string, <code>40</code> is a number.</p>
+<p>Some strange things can happen if you treat strings like numbers:</p>
+<pre><code>&quot;50&quot; + &quot;50&quot;
+# =&gt; &quot;5050&quot;</code></pre>
+<p>Instead of adding the numbers together mathemtically, the two strings were squished together. If one of the values is a string, and one is a number, we get the same result:</p>
+<pre><code>&quot;50&quot; + 50
+# =&gt; &quot;5050&quot;</code></pre>
+<p>In some cases, mixing numbers and strings will work out okay, but it's best to avoid it when you're trying to do math.</p>
+<p>We can mix strings and numbers on purpose:</p>
+<pre><code>&quot;Toronto is &quot; + 825 + &quot; km from Chicago&quot;
+# =&gt; Toronto is 825 km from Chicago</code></pre>
+<h2 id="using-variables">Using variables</h2>
+<p>Other than some simple math, we can't do much of interest with just numbers and strings and mathematical operators. One of the most powerful tools we have for organizing our code is <em>variables</em>. Variables let you <em>assign</em> a value to an arbitrary symbol for later reference. A variable is a box you can put values into. Any kind of value, like a string or a number. Variables are assigned using the <code>=</code> operator.</p>
+<pre><code>name = &quot;Tessa&quot;
+
+print name
+
+# =&gt; &quot;Tessa&quot;
+
+age = 26
+
+print age
+
+# =&gt; 26</code></pre>
+<p><strong>Note</strong> The <code>print</code> command just outputs the result of our code to a console. In the browser, <code>print</code> doesn't exist, but you can use <code>console.log</code> for the same purpose.</p>
+<p>A variable will retain the value you assigned to it until you change it. You can change a variable any time in your program (hence the name).</p>
+<pre><code>color = &quot;green&quot;
+
+print &quot;my favorite color is &quot; + color
+# =&gt; &quot;my favorite color is green&quot;
+
+color = &quot;red&quot;
+
+print &quot;my new favorite color is &quot; + color
+# =&gt; &quot;my new favorite color is red&quot;</code></pre>
+<p>There are a couple rules about variable names:</p>
+<ul>
+<li>variable names can't contain spaces</li>
+<li>variable names can't start with numbers</li>
+<li>variable names can contain upper case and lower case characters</li>
+<li>variable names can't contain punctuation other than <code>_</code></li>
+</ul>
+<p>There are some common naming conventions and patterns for variable names. When a variable name is more than two words, you can combine the two words together using &quot;camel casing&quot; or underscores.</p>
+<pre><code>my_name = &quot;Tessa&quot;
+
+myName = &quot;Tessa&quot;</code></pre>
+<h2 id="boolean-values">Boolean values</h2>
+<p>Booleans are values that are either true or false. They're indicated with just the words <code>true</code> or <code>false</code> without quotation marks.</p>
+<pre><code>myBoolean = true</code></pre>
+<p>Boolean values are often the result of making comparisons:</p>
+<pre><code>10 &gt; 9
+
+# =&gt; true
+
+9 &lt; 8
+
+# =&gt; false</code></pre>
+<p>You can assign the <em>result</em> of a comparison to a variable:</p>
+<pre><code>theTruth = 10 &lt; 5
+
+print theTruth
+# =&gt; false</code></pre>
+<h3 id="comparing-for-equality">Comparing for equality</h3>
+<p>In regular math, you compare values using the <code>=</code> sign. As you hopefully recall, we're already using the <code>=</code> sign to assign variables (<code>myVar = 10</code>), so it would be confusing and error-prone for us to also use <code>=</code> for comparison.</p>
+<p>In CoffeeScript, you can use the <code>is</code> operator to check to see if two values are the same.</p>
+<p><strong>Note</strong>: you may see code where <code>==</code> is used to compare values. In CoffeeScript <code>is</code> is a shortcut for <code>==</code>. We'll use <code>is</code> because it's easier to read.</p>
+<pre><code>5 is 5
+
+# =&gt; true
+
+num = 5
+
+num is 5
+
+# =&gt; true
+
+num is 10
+
+# =&gt; false</code></pre>
+<p>To negate a condition you use the keyword <code>not</code>. In place of <code>is not</code> you can use the shortform <code>isnt</code></p>
+<pre><code>num = 5
+
+num isnt 10
+# =&gt; true</code></pre>
+<h2 id="conditional-statements">Conditional statements</h2>
+<p>Comparing variables is only useful if we do something with the outcome of the comparison. That's what conditional statements are for. CoffeeScript uses simple <code>if/else</code> statements to run different code in different scenarios:</p>
+<pre><code>num = 14
+
+if num &gt;= 16
+  print &quot;you can learn to drive&quot;
+else
+  print &quot;you&#39;re too young to learn to drive&quot;
+
+# =&gt; &quot;You&#39;re too young to learn to drive&quot;</code></pre>
+<h3 id="indentation">Indentation</h3>
+<p>If you've ever looked at other programming languages like Java or JavaScript before, you might have noticed that they have a lot of symbols like semicolons and parentheses. CoffeeScript avoids using a lot of these symbols, which can make it much easier to read and write. To get away with this, in CoffeeScript we need to follow certain rules about indentation. In the above example, the indentation within the <code>if</code> and <code>else</code> statements is important. It indicates that the indented code &quot;belongs&quot; to the <code>if</code> statement, and so will only be run if the condition is true.</p>
+<h2 id="comments">Comments</h2>
+<p>Sometimes you want to leave notes for yourself or others in your code. Maybe to explain what something does, or remind yourself to come back to something, or to help with organization. Comments don't get read by the computer when your code runs, so you can put whatever you want there.</p>
+<p>In coffeescript, code that starts with a <code>#</code> will be treated as a comment and ignored.</p>
+<pre><code># this is a comment. It doesn&#39;t do anything. But it&#39;s nice to read. </code></pre>
+<h2 id="functions">Functions</h2>
+<p>Functions wrap up a bit of code for re-use. For example, the &quot;age check&quot; code that we wrote above can be wrapped up in a function so that we can re-use it on every young-looking driver we encounter.</p>
+<p>When you make a function, you want to be able to <em>use</em> it somehow, so you have to have a way to reference it. We can do this by assigning our function to a variable:</p>
+<pre><code>checkAge = </code></pre>
+<p>To indicate that we're putting a function in this variable, we use the <code>-&gt;</code> arrow</p>
+<pre><code>checkAge = -&gt;
+  # we&#39;ll put the code for checking age here</code></pre>
+<p>The code above just says &quot;checkAge is a function&quot; but it doesn't do anything yet. To &quot;call&quot; our useless function (calling a function = using a function), we use parentheses.</p>
+<pre><code>checkAge = -&gt;
+  # doesn&#39;t do anything yet
+
+checkAge()</code></pre>
+<p>The <code>()</code> part basically means &quot;go&quot;. It tells the computer &quot;run the function in the checkAge variable&quot;</p>
+<p>So let's make our <code>checkAge</code> function actually do something:</p>
+<pre><code>checkAge = -&gt;
+  if age &gt;= 16
+    print &quot;Carry on&quot;
+  else
+    print &quot;Get out of the car please&quot;</code></pre>
+<p><strong>Note</strong>: the indentation is again significant. All the code wrapped in the <code>checkAge</code> function needs to be indented one level to indicate that it belongs to it.</p>
+<p>Now we can call our function:</p>
+<pre><code>age = 16
+
+checkAge()
+# which will output &quot;Carry on&quot; because we set the age variable to 16</code></pre>
+<p>Lets try it with a couple young drivers:</p>
+<pre><code>age = 15
+
+checkAge()
+
+# =&gt; &quot;Get out of the car please&quot;
+
+age = 18
+
+checkAge() 
+
+# =&gt; &quot;Carry on&quot;</code></pre>
+<h3 id="functions-with-arguments">Functions with arguments</h3>
+<p>Functions can be even more useful if we can give them values to work with. These values are called <em>arguments</em>. If we give <code>checkAge</code> an age argument, we don't need to have a separate age variable.</p>
+<p>Let's rewrite <code>checkAge</code> to accept an <code>age</code> <em>argument</em>:</p>
+<p>In CoffeeScript, we can give a function the ability to accept arguments by adding parentheses containing the argument name before the <code>-&gt;</code> sign.</p>
+<pre><code>checkAge = (age) -&gt;
+  if age &gt;= 16
+    print &quot;Carry on&quot;
+  else
+    print &quot;Get out of the car please&quot;</code></pre>
+<p>Once you've added the argument name to the parentheses, you'll be able to reference whatever <code>age</code> is using its name.</p>
+<p><code>age</code> gets its value when the <code>checkAge</code> function is called. To give <code>checkAge</code> an <code>age</code> argument, we just put the value in the parentheses:</p>
+<pre><code>checkAge(17)
+
+# =&gt; &quot;Carry on&quot;</code></pre>
+<p>Functions can take multiple arguments:</p>
+<pre><code>patrol = (age, speed) -&gt;
+  if speed &gt; 60
+    if age &gt;= 16
+      print &quot;Happy speeding ticket&quot;
+    else
+      print &quot;Get out of the car, kid&quot;</code></pre>
+<p>In this example, the <code>patrol</code> function also takes a <code>speed</code> argument. Now we only do the age check if the speed is greater than 60. Budget cuts.</p>
+<p>Note how all the code nested under the <code>if speed &gt; 60</code> statement is indented an additional level.</p>
+<p>To use our new <code>patrol</code> function, we now have to put two values in the parentheses: the first one is the age, the second one is the speed:</p>
+<pre><code>patrol(17, 70)
+
+# =&gt; &quot;Happy speeding ticket&quot;
+
+patrol(17, 40)
+
+# =&gt; ... (nothing happens)
+
+patrol(15, 90)
+
+# =&gt; &quot;Get out of the car, kid&quot;</code></pre>
+<p>If we forget to add the the <code>speed</code> argument:</p>
+<pre><code>patrol(16)
+
+# =&gt; undefined</code></pre>
+<h3 id="using-functions">Using functions</h3>
+<p>When you're prototyping animations, there's a good chance you won't have to write a whole lot of functions yourself. You will however be <em>using</em> quite a few functions, most of them are provided by the framer.js library.</p>
+<p>That's where functions become really useful: when you can share them around. The folks beheind Framer figured out how to do all sorts of useful things related to manipulating pixels on a screen, so they wrapped up all that useful code into functions that you can use.</p>
+<p>Let's say we're using a library that provides a <code>licensePlateCheck</code> function. It takes one argument, which is a license plate. It does all sorts of complicated things to associate that license number with a person, find out whether that person has a criminal record, if there are any warrants for their arrest, or if the car is stolen. To use this function, you don't need to know any of that. All you have to know is that it takes one argument, and that argument needs to be a license plate. For any given license plate, the <code>licensePlateCheck</code> function will tell you <code>true</code> if the plate is associated with criminal activity, and <code>false</code> if it's not.</p>
+<p>We also need to know what type of argument to provide. In this case, we need to know that the <code>licensePlate</code> argument is a string. Which makes sense, since it's a mix of numbers and letters.</p>
+<pre><code>licensePlateCheck(&quot;BAD455&quot;)
+
+# =&gt; true</code></pre>
+<p>And that's all we need to do.</p>
+<h2 id="other-types-of-data">Other types of data</h2>
+<p>Strings, numbers, and booleans are the simplest kinds of values in coffeescript, but we can do more with more complex data types, like arrays and objects.</p>
+<h3 id="arrays">Arrays</h3>
+<p>Arrays are lists or collections of multiple items. Say we wanted to keep track of a list of fruits:</p>
+<pre><code>fruits = [&quot;apples&quot;, &quot;oranges&quot;, &quot;bananas&quot;]</code></pre>
+<p>Arrays have some built in <em>methods</em> (functions that they can use) for finding out information about them:</p>
+<pre><code>fruits.length 
+
+# =&gt; 3</code></pre>
+<p>You can access elements in an array by their <em>index</em>. The index is the element's position within the array.</p>
+<p><strong>Arrays are zero-indexed</strong>. This means that the first item in the array is item 0, and the second item is item 1. This can be a little confusing at first, but you'll get used to it.</p>
+<p>To access an element in an array, we use square brackets containing the index of the element we're looking for. For example, if we want go get &quot;oranges&quot; from the fruits array:</p>
+<pre><code>fruits = [&quot;apples&quot;, &quot;oranges&quot;, &quot;bananas&quot;]
+
+print fruits[1]
+
+# =&gt; &quot;oranges&quot;</code></pre>
+<h3 id="adding-to-arrays">Adding to arrays</h3>
+<p>You can add new items to an array with the method <code>push</code>. <code>push</code> adds the item you specify to the end of the array.</p>
+<pre><code>fruits.push(&quot;kiwis&quot;)
+
+print fruits
+
+# =&gt; [&quot;apples&quot;, &quot;oranges&quot;, &quot;bananas&quot;, &quot;kiwis&quot;]</code></pre>
+<h3 id="looping-through-arrays">Looping through arrays</h3>
+<p>Arrays can be very powerful in CoffeeScript, because they let you repeat certain functionality over and over with different items in an array.</p>
+<p>One of the most common ways to control your program is by using <em>loops</em>. Loops let you do something for every item in an array.</p>
+<p><code>toUpperCase</code> is a method that you can use on strings to capitalize them</p>
+<p>If we wanted to print out each element in our array of fruits in capital letters, we could do:</p>
+<pre><code>fruits[0].toUpperCase()
+# =&gt; &quot;APPLES&quot;
+
+fruits[1].toUpperCase()
+# =&gt; &quot;ORANGES&quot;
+
+fruits[2].toUpperCase()
+# =&gt; &quot;BANANAS&quot;</code></pre>
+<p>But since we have an array containing our list of fruits, we can do this a bit more efficiently:</p>
+<pre><code>for fruit in fruits
+  fruit.toUpperCase()
+
+# =&gt; &quot;APPLES&quot;
+# =&gt; &quot;ORANGES&quot;
+# =&gt; &quot;BANANAS&quot;</code></pre>
+<p>In english, we read that as &quot;for every fruit in our list of fruits, capitalize it&quot;</p>
+<p>If we break it down, the <code>for</code> loop does two things: it executes our code once for each item in the array, <em>and</em> it lets you refer to the currently &quot;active&quot; element by whatever name you like.</p>
+<p>The code <code>for fruit in fruits</code> tells us that each time through the array, we'll have a variable called <code>fruit</code>. That variable <code>fruit</code> will refer to the item we're working with each time through. So the first time through the array, <code>fruit</code> will refer to &quot;apples&quot;, the second time it will refer to &quot;oranges&quot;, etc.</p>
+<p>What if we had a lineup of cars to run license checks on?</p>
+<pre><code>plates = [&quot;BRR010&quot;, &quot;BUU888&quot;, &quot;NNB001&quot;, &quot;MBB991&quot;]</code></pre>
+<p>Let's check each plate for criminal activity with a <code>for</code> loop:</p>
+<pre><code>for plate in plates
+  licensePlateCheck(plate)
+
+# =&gt; false
+# =&gt; true
+# =&gt; false</code></pre>
+<p><strong>Again, the indentation is significant</strong>. The indentation of the second line means that code gets executed only inside the <code>for</code> loop.</p>
+<h3 id="objects">Objects</h3>
+<p>Objects are one of the most useful data types in coffeescript. An object is a collection of <em>properties</em>. In programming, a <em>property</em> is an association between a <em>name</em> and a <em>value</em>. A name-value pair could be something like &quot;price: $10&quot;, where <em>price</em> is the name, and <em>$10</em> is the value.</p>
+<p>If something has properties, you can store them in an object. For example, a &quot;book&quot; object might have a <code>title</code> property, an <code>author</code> property, and a <code>genre</code> property. In coffeescript, we would code that as:</p>
+<pre><code>book = 
+  title: &quot;Slaughterhouse Five&quot;
+  author: &quot;Kurt Vonnegut&quot;
+  genre: &quot;Science Fiction&quot;</code></pre>
+<p>You can store any kind of data in an object's properties:</p>
+<pre><code>book = 
+  pages: 256
+  genres: [&quot;Science Fiction&quot;, &quot;Satire&quot;]</code></pre>
+<p>You can even store another object inside a property:</p>
+<pre><code>book = 
+  author: 
+    name: &quot;Kurt Vonnegut&quot;
+    born: 1922
+    died: 2007</code></pre>
+<p>To access properties in an object, we use dots:</p>
+<pre><code>print book.title
+
+# =&gt; &quot;Slaugherhouse Five&quot;
+
+print book.pages
+
+# =&gt; 256</code></pre>
+<p>We can keep going with the dots to access objects within objects:</p>
+<pre><code>print book.author.born
+
+# =&gt; 1922</code></pre>
+<p>And to access the elements of the array inside the object, we combine the square bracket and the dot syntax:</p>
+<pre><code>print book.genres[1]
+
+# =&gt; &quot;Satire&quot;</code></pre>
+<h3 id="methods">Methods</h3>
+<p>Since we can store any kind of data in an object's properties, we can also store functions as properties. When a function is the property of an object, it is called a <em>method</em>.</p>
+<pre><code>book = 
+  title: &quot;Slaugherhouse Five&quot;
+  read: -&gt;
+    print &quot;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti voluptate vel, praesentium nobis, asperiores, ea quidem ex suscipit id odio, culpa aut consequatur commodi sit quia. Quia, sed perspiciatis nisi.&quot;</code></pre>
+<p>The <code>read</code> property is a method that belongs to our <code>book</code> object. We can call it like we would any function:</p>
+<pre><code>book.read()
+
+# =&gt; &quot;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia delectus est molestias labore, provident odio quos mollitia, et totam asperiores possimus quaerat eum esse aperiam aut consequuntur cum enim dolorem.&quot;</code></pre>
+<p>This is how the <code>.length</code> method and the <code>toUpperCase</code> method work. They are methods that belong to all string objects.</p>
+<h3 id="configuration-objects">Configuration objects</h3>
+<p>In framer.js, one of the most common uses of objects will be to configure animations and elements:</p>
+<pre><code>box = 
+  width: 120
+  height: 120
+  x: 0
+  y: 0
+
+animation = 
+  duration: 300
+  easing: &quot;ease-in&quot;</code></pre>
+<h1 id="simple-animations">Simple Animations</h1>
+<p>Let's open up Framer Studio and try to create some simple animations.</p>
+<p>We're going to work with a green square for a while.</p>
+<p>To create a new element on the screen, we use <code>new Layer</code>. This is a special kind of function that creates an object. If we assign a variable to the result of <code>new Layer</code>, we can maintain a reference to the element that we can manipulate.</p>
+<pre><code>square = new Layer()</code></pre>
+<p>You should see a blue square on the screen.</p>
+<div class="figure">
+<img src="https://s3.amazonaws.com/f.cl.ly/items/3E20192V03310u1O1x20/Screen%20Shot%202015-03-16%20at%2010.52.28%20PM.png" alt="screenshot1" />
+<p class="caption">screenshot1</p>
+</div>
+<p>To customize the square so it's not just a blue square, we can pass one argument to <code>new Layer()</code>. This argument is a configuration object, you can configure the element using properties for various attributes such as width, height, position, and appearance.</p>
+<pre><code>square = new Layer(
+  width: 200
+  height: 200
+  x: 100
+  y: 100
+)</code></pre>
+<div class="figure">
+<img src="https://s3.amazonaws.com/f.cl.ly/items/0e3f2F3F1f1s0r0V0y30/Screen%20Shot%202015-03-16%20at%2010.59.40%20PM.png" alt="screenshot2" />
+<p class="caption">screenshot2</p>
+</div>
+<p>To make that code a bit easier to read, we can get rid of the parentheses.</p>
+<pre><code>square = new Layer
+  width: 200
+  height: 200</code></pre>
+<p>There are a lot of cases in coffeescript where we can do this, it can sometimes make the code look a bit cleaner.</p>
+<h2 id="manipulate-layer">Manipulate layer</h2>
+<p>Now that we've assigned the variable <code>square</code> to our layer, we can continue to manipulate it. After we've created our layer, we can modify it at any time:</p>
+<pre><code>square.backgroundColor = &quot;red&quot;
+square.x = 200</code></pre>
+<p>You can modify a layer's coordinates (x, y), as well as appearance by using camel-cased versions of most CSS properties, as well as some built-in framer properties. For example, <code>color</code> is just <code>color</code> but <code>border-radius</code> becomes <code>borderRadius</code>. If you want to rotate an element, you can just modify the <code>rotation</code> property framer provides. Framer Studio will autocomplete most of these property names for you, but you can also look them up in the docs.</p>
+<h2 id="animate-a-layer">Animate a layer</h2>
+<p>Let's add our first animation. To animate a layer, we use the <code>animate</code> method.</p>
+<pre><code>square.animate()</code></pre>
+<p>By itself, <code>.animate()</code> isn't goint to do anything. We need to pass it a <em>configuration object</em> to tell it what to animate, and how to animate it. A configuration object will follow this format:</p>
+<pre><code>configObject = 
+  properties: 
+    property: value
+    property: value
+  time: 1
+  curve: &quot;ease&quot;
+  delay: 2</code></pre>
+<p>The <code>time</code>, <code>curve</code> and <code>delay</code> properties are all optional, but you need to specify one or more properties to animate nested in the <code>properties</code> object (it's an object nested inside an object).</p>
+<p>For example, if we want to fade out a square, we would animate the <code>opacity</code> property. By default, the opacity is set to 1, so we animate it to 0.</p>
+<pre><code>square.animate
+  properties: 
+    opacity: 0</code></pre>
+<p>We can easily transition multiple properties at once:</p>
+<pre><code>square.animate
+  properties: 
+    opacity: 0
+    x: 400
+    y: 400
+    rotation: 180</code></pre>
+<h3 id="configuring-animations">Configuring animations</h3>
+<p>Time-related properties (delay and time), are specified in seconds. By default animations take 1s. Speed up the animation:</p>
+<pre><code>square.animate
+  properties: 
+    opacity: 0
+  time: .2</code></pre>
+<p><strong>Note:</strong> again whitespace is significant here. <code>opacity</code> is a property, so it's indented one level further than <code>properties</code> to indicate the relationship. Move back out one level to specify <code>time</code>, because that's a property of the animation, not a property of the object animating.</p>
+<p>To make your animations more dynamic, you can specify the curve. To learn more about curves, check out <a href="http://easings.net/">easings.net</a> and the <a href="http://framerjs.com/docs/#animation.animation">framer docs</a>. You can use a built-in easing string like <code>ease-in</code>, <code>ease-out</code> or <code>ease-in-out</code>, or use one of the more advanced functions described in the docs, like <code>bezier-curve</code> or <code>spring-dho</code>.</p>
+<pre><code>square.animate
+  properties: 
+    x: 500
+  curve: &quot;ease-in&quot;</code></pre>
+<h3 id="other-options">Other options</h3>
+<p>You can set an animation to repeat with <code>repeat</code>, and delay it with <code>delay</code>, specifying the delay in seconds.</p>
+<h1 id="events">Events</h1>
+<p>When prototyping interactions, you're mostly going to want to react to user input. This is done by using the <code>on</code> method to &quot;listen&quot; for events triggered by the user.</p>
+<p>The code for doing something &quot;on&quot; an event can look a bit weird at first, but we'll break it down step by step.</p>
+<pre><code>button = new Layer
+
+button.on Events.Click, -&gt;
+  doFunAnimation() // do animating here</code></pre>
+<p>This is actually a method being called with two arguments, though it may not look like it. The format for the <code>on</code> method is <code>on(eventName, function)</code>, where the <code>function</code> is the code that gets run when the event is triggered. When you use a function as an argument like this, it's called a &quot;callback&quot;. In plain english, calling the <code>on</code> method with a callback is like saying &quot;listen for and do&quot;, and the two arguments are the thing that you're listening for, and the thing that you should then do.</p>
+<p>If you remember, in coffeescript, we indicate a function with the following syntax:</p>
+<pre><code>functionName = -&gt;</code></pre>
+<p>When we give the <code>on</code> method a function as an argument, it doesn't need a name or an equals sign, so we just need the <code>-&gt;</code> part. The comma is the separation between the first argument (the name of the event), and the second (the function).</p>
+<p>Framer gives us a bunch of events to listen for, all in the format <code>Events.Name</code>. Some of the more common events are <code>Events.Click</code>, <code>Events.TouchStart</code>.</p>
+<p>Let's try it out:</p>
+<pre><code>button = new Layer
+
+button.on Events.Click, -&gt;
+  print &quot;clicked!&quot;</code></pre>
+<h2 id="animation-and-events">Animation and events</h2>
+<p>If we combine what we know about events and animations, we can begin to prototype interactions. Let's slide our layer right on click:</p>
+<pre><code>button = new Layer
+
+button.on Events.Click, -&gt;
+  button.animate
+    properties: 
+      x: 500</code></pre>
+<h2 id="working-with-screen-dimensions">Working with screen dimensions</h2>
+<p>Many of the interactions in web and mobile interfaces require calculations based on the dimensions of the screen itself. For example, if we wanted to slide our box from the left edge of the screen to the right edge, we'll need to know where the right edge is.</p>
+<p>We can access the properties of the screen we're working with by accessing the <code>Framer.Device.screen.width</code> and <code>Framer.Device.screen.height</code> properties.</p>
+<pre><code>width = Framer.Device.screen.width
+
+button = new Layer
+
+button.on Events.Click, -&gt;
+  button.animate
+    properties:
+      x: width</code></pre>
+<p>This will cause the square to animate off the right edge of the screen. The <code>x</code> coordinate of our box is calculated from the top left of the screen, so by setting the <code>x</code> value to the width of the screen, we've set it just off the edge of the screen. To animate the box so that it stays on the screen, we can subtract the box's width from the screen's width to get the <code>x</code> value. By default, the layer is 100px wide.</p>
+<pre><code>button.on Events.Click, -&gt;
+  button.animate
+    properties:
+      x: width - 100</code></pre>
+<h1 id="prototyping-simple-interactions">Prototyping simple interactions</h1>
+<h2 id="dismis-modal-window">Dismis modal window</h2>
+<p>Import the &quot;popup.psd&quot; file into Framer. Set the device type to iPhone 5c or 5s for best arrangement.</p>
+<p>The first thing we're going to prototype is the dismissal of this popup when the user clicks on the &quot;x&quot;. The &quot;x&quot; layer group is called &quot;close&quot;, so we access it by name (it is a property of the imported <code>psd</code> object). We'll add a click event handler to the close:</p>
+<pre><code>psd = Framer.Importer.load &quot;imported/Popup&quot;
+
+psd.close.on Events.Click, -&gt;
+</code></pre>
+<p>To start, we'll just fade out the popup on click:</p>
+<pre><code>psd.close.on Events.Click, -&gt;
+  psd.Popup.animate
+    properties: 
+      opacity: 0</code></pre>
+<p>That's a bit too slow, so lets adjust the <code>time</code> property:</p>
+<pre><code>psd = Framer.Importer.load &quot;imported/Popup&quot;
+
+psd.close.on Events.Click, -&gt;
+  psd.Popup.animate
+    properties: 
+      opacity: 0
+    time: .4</code></pre>
+<p>It's a bit of a dull animation, so lets slide it off the screen upwards. To do this, we'll need to animate the layer's <code>y</code> property.</p>
+<p>We'll want the layer's end position to be above the top of the screen, and to be all the way off the top of the screen, we'll need to send it above the top order of the screen by the height of the layer itself.</p>
+<div class="figure">
+<img src="" alt="illustration maybe?" />
+<p class="caption">illustration maybe?</p>
+</div>
+<p>To do that, we'll need to get the height of the layer. We can get that with <code>psd.Popup.height</code>. Since the y position of the top of the screen is 0, we'll want to subtract the height from 0:</p>
+<pre><code>layerHeight = psd.Popup.height 
+
+psd.close.on Events.Click, -&gt;
+  psd.Popup.animate
+    properties: 
+      opacity: 0
+      y: 0 - layerHeight
+    time: 0.3</code></pre>
+<p>We've saved the layer's height in a <code>layerHeight</code> variable so that the code is a bit easier to read.</p>
+<p>To make the animation a bit more dynamic, we can add an &quot;ease-in&quot; curve to it.</p>
+<h2 id="multiple-animations">Multiple animations</h2>
+<p>Once the modal is dismissed, our prototype currently just shows a mustache badge. It would be cool if that badge pop up out of nowhere after you'd dismissed the mdoal.</p>
+<p>To do an animation <em>after</em> another one, we have to &quot;listen&quot; for the end of the first animation. We can attach an <code>AnimationEnd</code> event listener to the popup layer (the one that is animating), and then do something else once it's finished animating:</p>
+<pre><code>(...same code as before)
+
+psd.Popup.on Events.AnimationEnd, -&gt;
+  print &quot;animation ended&quot;
+</code></pre>
+<p>Now lets select the <code>Mustache</code> layer and animate it's size using the <code>scale</code> property:</p>
+<pre><code>psd.Popup.on Events.AnimationEnd, -&gt;
+  psd.Mustache.animate
+    properties: 
+      scale: 2</code></pre>
+<p>Okay, but we wanted the badge to appear from nothing. To do that, we have to initially set the badge to be teeny, and then animate it to a visible size:</p>
+<pre><code>psd.Mustache.scale = 0
+
+psd.Popup.on Events.AnimationEnd, -&gt;
+  psd.Mustache.animate
+    properties: 
+      scale: 1</code></pre>
+<p>To add a bit more life to this animation, we're going to make it look a bit bouncy. To achieve a bounce effect on our animation, we can use one of the custom curve functions Framer comes with. The <code>spring()</code> function takes 4 arguments: tension, friction, velocity, and tolerance. Explaining all these properties is beyond the scope of this book, but we'll use a simple bounce using the settings <code>200,15,0</code>.</p>
+<pre><code>psd.Popup.on Events.AnimationEnd, -&gt;
+  psd.Mustache.animate
+    properties: 
+      scale: 1
+    curve:&quot;spring(200,15,0)&quot;</code></pre>
+<h2 id="toggle-between-states-dropdown-menu">Toggle between states: dropdown menu</h2>
+<p>Import &quot;dropdown.psd&quot; into Framer.</p>
+<p>Let's start off by hiding the menu content by default:</p>
+<pre><code>dropdownLayers.menuContent.opacity = 0</code></pre>
+<p>Now we'll add a click event listener on the menu icon, and then switch the opacity to 1:</p>
+<pre><code>dropdownLayers.menuIcon.on Events.Click, -&gt;
+  dropdownLayers.menuContent.opacity = 1</code></pre>
+<p>There's a problem though: we want the menu to close again when the menu icon is clicked again. Unfortunately, the menu won't know whether to open or close on each click unless we somehow keep track of what state it's already in.</p>
+<p>To do this, we'll create a variable <code>isOpen</code> that will be false if the menu is closed, and true if it's open. It'll default to false.</p>
+<pre><code>isOpen = false</code></pre>
+<p>Next, we'll set the opacity in the click event based on our <code>isOpen</code> variable:</p>
+<pre><code>dropdownLayers.menuIcon.on Events.Click, -&gt;
+  if isOpen
+    dropdownLayers.menuContent.opacity = 0
+  else
+    dropdownLayers.menuContent.opacity = 1</code></pre>
+<p>For this to work, we'll need to toggle <code>isOpen</code> between false and true when the user clicks. To toggle a value between true and false, we can re-assign the variable to it's opposite. True and false are opposite of each other, so not true = false and not false = true. In coffeescript, we use the <code>!</code> symbol to mean &quot;not&quot;: <code>true != false</code>.</p>
+<p>To set a value to its opposite, we do <code>= !</code> or &quot;set the value to <em>not</em> whatever it currently is&quot;</p>
+<pre><code>isOpen = !isOpen</code></pre>
+<p>Let's put it all together:</p>
+<pre><code>isOpen = false
+
+dropdownLayers.menuIcon.on Events.Click, -&gt;
+  isOpen = !isOpen
+  if isOpen
+    dropdownLayers.menuContent.opacity = 0
+  else
+    dropdownLayers.menuContent.opacity = 1</code></pre>
+<p>And now our menu toggles open when we click it.</p>
+<h3 id="easier-interactions-with-states">Easier interactions with states</h3>
+<p>Framer gives us an easier way to transition between different states, called &quot;states&quot; turns out. Basically, you give a layer a set of named states which specify what it should look like when it is in that state. For example, our menu will have an &quot;open&quot; state where the opacity is 1, and a &quot;closed&quot; state where the opacity is 0.</p>
+<p>To add states to our layer, we use the <code>states.add</code> method. Each state consists of a name and property pair, where the property contains the various options for the appearance:</p>
+<pre><code>dropdownLayers.menuContent.states.add
+  open:
+    opacity: 1
+  closed:
+    opacity: 0</code></pre>
+<p>Now we can switch between the two states in a few different ways. The easiest way to go back and forth between the two states is just by using <code>states.next()</code>. We can take out the <code>if else</code> statement now, as well as the <code>isOpen</code> variable.</p>
+<pre><code>dropdownLayers.menuContent.states.add
+  open:
+    opacity: 1
+  closed:
+    opacity: 0
+    
+dropdownLayers.menuIcon.on Events.Click, -&gt;
+  dropdownLayers.menuContent.states.next()</code></pre>
+<p>By default, <code>states.next</code> animates between the two states. To customize this animation, we need to configure <code>states.animationOptions</code>:</p>
+<pre><code>dropdownLayers.menuContent.states.animationOptions = 
+  time: 0.2</code></pre>
+<p>One of the nice things about states is that it makes it easy to customize our animation and make it more complex. Instead of fading in, lets have our menu expand out from the top left.</p>
+<p>To do that, we first need to set the menu's default width and height to 0.</p>
+<pre><code>dropdownLayers.menuContent.width = 0
+dropdownLayers.menuContent.height = 0</code></pre>
+<p>And then update the states so that open resets the height and width to the original values, and closed sets them to 0. To get the original height and width values of our menu, we need to save those values as variables before we set them to 0.</p>
+<pre><code>originalWidth = dropdownLayers.menuContent.width
+originalHeight = dropdownLayers.menuContent.height
+
+dropdownLayers.menuContent.width = 0
+dropdownLayers.menuContent.height = 0</code></pre>
+<p>And then use those variables in <code>states.add</code>:</p>
+<pre><code>dropdownLayers.menuContent.states.add
+  open:
+    width: originalWidth
+    height: originalHeight
+  closed:
+    width: 0
+    height: 0</code></pre>
+<p>This animation would look even better with some easing:</p>
+<pre><code>dropdownLayers.menuContent.states.animationOptions = 
+  time: 0.2
+  curve: &quot;ease-out&quot;</code></pre>
+<h2 id="touch-interactions">Touch interactions</h2>
+<p>Framer comes with a lot of useful utilites for easily prototyping touch-based interactions. We're going to prototype a swipe-based dismissal, like you'd have in a list view on a mobile app.</p>
+<p>Import &quot;swipe.psd&quot; into framer.</p>
+<p>One of the really convenient things Framer includes for touch interactivity is the ability to set a layer to &quot;draggable&quot;. To do this, we set <code>draggable.enabled</code> to true.</p>
+<pre><code>swipeLayers.message.draggable.enabled = true</code></pre>
+<p>We can now drag the layer all over the screen!</p>
+<p>In our example, however, we want to restrict dragging to the x-axis. To do this, we set <code>draggable.speedY</code> to 0.</p>
+<pre><code>swipeLayers.message.draggable.speedY = 0</code></pre>
+<p>Now we don't want the user to have to drag the message all the way off the screen, so we'll take over and animate the message off the screen if it's past a certain point.</p>
+<p>A lot of the code for prototyping touch is going to be similar to this: doing actions based on how much an element has moved. We can do this by comparing the <code>x</code> property of the layer to either it's previous value or some absolute value based on the screen dimensions. We can listen for a number of different events, including <code>TouchStart</code>, <code>TouchMove</code> and <code>TouchEnd</code>. When you're working with draggable elements, you can use <code>DragStart</code>, <code>DragMove</code> and <code>DragEnd</code>.</p>
+<p>In our message-dismissal example we're going to listen for the <code>DragEnd</code> event and then decide what to do.</p>
+<pre><code>swipeLayers.message.on Events.DragEnd, -&gt;</code></pre>
+<p>At this point, we have to come up with some rules for how to animate the message. In our case, the default result will be that the message snaps back to its starting position. If the message has been moved more than halfway off the left side of the screen, we want to animate it off the screen. There are a couple ways we can check for this, but I think the most intuitive is &quot;when the midpoint of the message reaches the left edge of the screen.&quot; This is easy to represent in code, since Framer gives us a convenient <code>midX</code> (and <code>midY</code>) property which returns the center point of the element.</p>
+<pre><code>if swipeLayers.message.midX &lt;= 0</code></pre>
+<p>So in this case, we want to animate the <code>x</code> property of our message to be all the way off the screen. To ensure it's all the way off the screen, we'll set the <code>x</code> value to negative the width of the layer.</p>
+<pre><code>w = swipeLayers.message.width
+
+swipeLayers.message.on Events.DragEnd, -&gt;
+  if swipeLayers.message.midX &lt;= 0
+    swipeLayers.message.animate
+      properties:
+        x: 0 - w</code></pre>
+<p>In other cases, we want to animate the message back to its original <code>x</code> position, which was 0.</p>
+<pre><code>swipeLayers.message.on Events.DragEnd, -&gt;
+  if swipeLayers.message.midX &lt; 0
+    swipeLayers.message.animate
+      properties:
+        x: 0 - w
+  else
+    swipeLayers.message.animate
+      properties:
+        x: 0</code></pre>
+<p>We can make the animations look a lot nicer with some easing and timing:</p>
+<pre><code>swipeLayers.message.on Events.DragEnd, -&gt;
+  if swipeLayers.message.midX &lt; 0
+    swipeLayers.message.animate
+      properties:
+        x: 0 - w
+      time: 0.1
+      curve: &quot;ease-in&quot;
+  else
+    swipeLayers.message.animate
+      properties:
+        x: 0
+      time: 0.2</code></pre>
+<p><strong>Bonus</strong>: animating the red &quot;delete&quot; bar after the message is dismissed.</p>
+<p>This is pretty much the same as the code for animating in the badge after the popup is dismissed:</p>
+<pre><code>swipeLayers.message.on Events.AnimationEnd, -&gt;
+  if swipeLayers.message.midX &lt; 0
+    swipeLayers.delete.animate
+      properties: 
+        scale: .8
+        opacity: 0
+      time: 0.2
+      curve: &quot;ease-in&quot;</code></pre>
+<h1 id="generating-contentloops">Generating content/loops</h1>
+</body>
+</html>

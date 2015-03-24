@@ -412,7 +412,7 @@ You can access elements in an array by their *index*. The index is the element's
 To access an element in an array, we use square brackets containing the index of the element we're looking for. For example, if we want go get "oranges" from the fruits array: 
 
 ```
-fruits = ["apples", "oranges", "bananas"]
+
 
 print fruits[1]
 
@@ -1100,3 +1100,197 @@ swipeLayers.message.on Events.AnimationEnd, ->
       time: 0.2
       curve: "ease-in"
 ```
+
+# Generating elements with loops
+
+If we want to deal with multiple elements of the same type, we can very quickly end up dealing with a lot of repetition. For example, if we wanted a series of squares in a row, we might do: 
+
+```
+new Layer
+  width: 100
+  x: 0
+new Layer
+  width: 100
+  x: 110
+new Layer
+  width: 100
+  x: 220
+new Layer
+  width: 100
+  x: 330
+```
+
+![screenshot3](https://s3.amazonaws.com/f.cl.ly/items/060Z433w0n2o3G0v1f1U/Screen%20Shot%202015-03-23%20at%2010.17.14%20PM.png)
+
+There's a lot of repetition there, but there's an easy way to do this without the repeated code using *loops*. 
+
+Remember when we looped through all the fruits in an array? 
+
+```
+fruits = ["apples", "oranges", "bananas"]
+
+for fruit in fruits
+  fruit.toUpperCase()
+
+# => "APPLES"
+# => "ORANGES"
+# => "BANANAS"
+```
+
+One of the convenient things about coffeescript is that we can make a new array and loop through it all in one line: 
+
+```
+for fruit in ["apples", "oranges", "bananas"]
+  print fruit
+```
+
+If we don't really need an array of *things* but just want to do something x number of times, we can use a shortcut to make an array of x items: 
+
+```
+print [1..5]
+
+# => [1,2,3,4,5]
+```
+
+So if we want to just do something 5 times:
+
+```
+for i in [1..5]
+  print i
+
+# => 1
+# => 2
+# => 3
+# => 4
+# => 5
+```
+
+This is a fairly common pattern when you're prototyping lots of elements in coffeescript. It's a bit of a convention to use `i` for the variable that gets re-assigned for each time through the loop (like in `for fruit in fruits`, `fruit` got re-assigned to "apple", "orange", "banana" each time through the loop). `i` as in "iterator" I think. 
+
+So again, if we wanted to create 4 squares, we can do it much more easily with a loop: 
+
+```
+for i in [0..3]
+  new Layer
+    width: 100
+```
+
+This will just stack all 4 squares on top of each other: 
+
+![screenshot4](https://s3.amazonaws.com/f.cl.ly/items/3V1E3b250D1V0n1Q283I/Screen%20Shot%202015-03-23%20at%2010.31.48%20PM.png)
+
+We want to set the `x` values for the squares to 0, 110, 220, 330, respectively. Conveniently, these are all multiples of our iterator (0 * 110, 1 * 110, 2 * 110, 3 * 110). 
+
+```
+for i in [0..3]
+  new Layer
+    width: 100
+    x: i * 110
+```
+
+![screenshot5](https://s3.amazonaws.com/f.cl.ly/items/3P0Q1I2a2z1n1p0o2T0g/Screen%20Shot%202015-03-23%20at%2010.34.47%20PM.png). 
+
+## Fun with loops
+
+Let's do something more fun with loops. We'll make something similar to the way the cards stack in the iOS Passbook app: 
+
+![screenshot6](https://s3.amazonaws.com/f.cl.ly/items/3x1L420w2u0k3I3V3K1L/Screen%20Shot%202015-03-23%20at%2010.42.36%20PM.png)
+
+And we'll have the cards animate in nicely. [View the example of the finished prototype](http://share.framerjs.com/mcx56zmj0b2o/). 
+
+```
+for i in [0..4]
+  layer = new Layer
+    width: Framer.Device.screen.width
+    height: Framer.Device.screen.height
+    y: 100 * i
+    borderRadius: 50
+```
+
+We've set each layer to be the full width and height of the screen, and offset them by 100px from the top (to get them to stack like this, we multiply 100 * the index of the loop).
+
+If we want the cards to animate in from the bottom of the screen, we have to start with the cards being way down below the bottom of the screen. Let's add the height of the screen to the `y` offset of each layer: 
+
+```
+for i in [0..4]
+  layer = new Layer
+    width: Framer.Device.screen.width
+    height: Framer.Device.screen.height
+    y: 100 * i + Framer.Device.screen.height
+```
+
+Now we'll animate the `y` property to what it was originally: 
+
+```
+for i in [0..4]
+  layer = new Layer
+    width: Framer.Device.screen.width
+    height: Framer.Device.screen.height
+    y: 100 * i + Framer.Device.screen.height
+    borderRadius: 50
+      
+  layer.animate
+    properties: 
+      y: 100 * i
+```
+
+Note that we're still indented in a level, so that we're still inside the loop, where `layer` is assigned to the current layer each time through the loop. 
+
+Now all the cards animate in at the same time, which isn't quite what we want. If we set a delay on the animation, they'll all slide in together after the delay. We have to increase the delay for each time through the loop: 
+
+```
+layer.animate
+  properties: 
+    y: 100 * i
+  delay: i
+```
+
+Now the delay will be 0, the first time through the loop, 1 second the second time, 2 the third etc. To reduce it, we can multiply by `i`
+
+```
+layer.animate
+  properties: 
+    y: 100 * i
+  delay: i * 0.2
+```
+
+And then match the length of the animation to that delay: 
+
+```
+layer.animate
+  properties: 
+    y: 100 * i
+  delay: i * 0.2
+  time: 0.2
+```
+
+It still doesn't look great, but adding a spring curve will make a *huge* difference: 
+
+```
+layer.animate
+  properties: 
+    y: 100 * i
+  delay: i * 0.2
+  time: .2
+  curve:"spring(200,30)"
+```
+
+## Mapping values to arrays
+
+Right now, our cards are all the same colour (slightly transparent blue), they just look like different shades because they're stacked on top of each other. If we wanted to make them different colors, we can store a bunch of colors in an array, and then use those colors for the background colors of the cards. 
+
+Here's a nice array of nice colors: 
+
+```
+colors = ["#f1c40f", "#2ecc71", "#1abc9c", "#3498db", "#9b59b6"]
+```
+
+And then we can access the elements in the array one at a time using `i`: 
+
+```
+for i in [0..4]
+  layer = new Layer
+    backgroundColor: colors[i]
+```
+
+So the first time through the loop, we'll be setting `backgroundColor` to `colors[0]`, which is the first item, which is `#f1c40f` (yellow). Second time through the array `i` is 1, so we'll be grabbing `colors[1]`, which is the greenish color. And so on. 
