@@ -1294,3 +1294,5 @@ for i in [0..4]
 ```
 
 So the first time through the loop, we'll be setting `backgroundColor` to `colors[0]`, which is the first item, which is `#f1c40f` (yellow). Second time through the array `i` is 1, so we'll be grabbing `colors[1]`, which is the greenish color. And so on. 
+
+![screenshot7](https://s3.amazonaws.com/f.cl.ly/items/0a0J0Z260a190Q2n2g3l/Screen%20Shot%202015-03-23%20at%2010.36.42%20PM.png)
