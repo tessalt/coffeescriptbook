@@ -27,33 +27,13 @@ Open up your Coffeescript console and observe:
 # => 2900
 ```
 
-## Variables
-
-So none of that is terribly useful until we start adding variables into the mix. Variables are containers you can store data in. All sorts of data. Numbers, words, letters, lists, and more. You create a variable with an equals sign: 
-
-```
-a = 50
-
-a
-# => 50
-```
-
-You can treat a variable exactly as you would treat whatever you put in the container: 
-
-```
-a = 50
-
-a * 10
-# => 500
-```
-
 ## Types of data
 
 There are all different types of data you can program with, and some of them have special abilities and uses. 
 
 ### Numbers
 
-Numbers are the simple ones. Numbers are numbers. `200`, `-10`, `4000` are all numbers. Don't include commas or spaces in your numbers, and you'll be ok. 
+Numbers are the simple ones. Numbers are numbers. `200`, `-10`, `4000` are all numbers. Don't include commas or spaces in your numbers, and you'll be ok. Numbers in coffeescript can have decimals and can be positive and negative. 
 
 ### Strings
 
@@ -1543,3 +1523,11 @@ If you'd like to take your prototyping skills out of the Framer environment so y
 - [Move.js](http://visionmedia.github.io/move.js/) is a small and easy-to-use library for making CSS-based animations simpler. CSS-based animations are quickly becoming the standard because of their flexibility and performance, and you likely already know a lot of the syntax if you know some CSS.
 - [AnimateCSS](https://github.com/daneden/animate.css) also leverages CSS for animations, and lets you write as very little JavaScript for your animations by moving it all to pre-written CSS. 
 - [Snap.svg](http://snapsvg.io/) is a great library for animating vector graphics in the browser, which are resolution-independent and more flexible than the boxes and circles you can make with regular browser elements. 
+
+# Getting help
+
+First of all, if you work with developers, they should be the first people you ask for help. You'll find that a lot of developers love sharing their knowledge and are generally excited when other members of their team take an interest in code. It doesn't matter if your coworkers have never seen coffeescript before; the concepts are similar accross all programming languages and they'll probably be able to help anyways. 
+
+If you're going it alone, there is a great and growing community behind Framer, primarily congregating on the [Facebook page](https://www.facebook.com/groups/framerjs/), where people share tips and resources and ask and answer questions. 
+
+For more programming-related questions, any developer will tell you that [Stack Overflow](http://stackoverflow.com/) is one of the most valuable resources out there. Checkout the #coffeescript tag to see if your question has been asked before, or ask a new question. You'll probably get an answer quickly, especially if your question is specific, clear, and includes a code example. 
