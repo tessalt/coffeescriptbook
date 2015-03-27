@@ -1297,4 +1297,230 @@ So the first time through the loop, we'll be setting `backgroundColor` to `color
 
 ![screenshot7](https://s3.amazonaws.com/f.cl.ly/items/0a0J0Z260a190Q2n2g3l/Screen%20Shot%202015-03-23%20at%2010.36.42%20PM.png)
 
-# 3d stuff? 
+## Multi-part animations
+
+Let's try something a little more complicated: a multi-step animation with some interactivity and multiple moving parts. 
+
+We're going to prototype a push notification on the Apple Watch, like you would get from a calendar notification. 
+
+Import the icon.psd  (or make your own icon) file into Framer, then bg.psd. Set the device to Apple watch in the 42mm size. 
+
+```
+bgLayers = Framer.Importer.load "imported/bg"
+
+iconLayers = Framer.Importer.load "imported/icon"
+```
+
+We're going to need to reference the width and height of the device, so we'll save those in variables called `w` and `h`. 
+
+```
+w = Framer.Device.screen.width
+h = Framer.Device.screen.height
+```
+
+We're going to set the initial state of the icon as being horizontally centered and positioned just below the bottom of the screen: 
+
+```
+icon = iconLayers.icon
+icon.centerX()
+icon.y = h
+```
+
+`centerX()` is a convenient method from Framer that horizontally centers our layer. There's also `centerY()` and just `center()`.
+
+### Multipart Animation step 1
+
+The first step of our animation involves two transitions: 
+
+1. sliding the icon up over the background 
+2. blurring the background. 
+
+Let's start animating the icon to the center of the screen:
+
+```
+icon.animate
+  properties:
+    midY: h / 2
+```
+
+We're setting the layer's `midY` property to half the height of the device because if we just set `y` property, it would position the top edge of the layer. That would put our icon on the bottom half of the screen instead of at the midpoint. Each layer also has a `midX` property for setting the horizontal center of a layer. 
+
+At the same time as we animate the icon into position, we're going to both blur and fade the background a bit: 
+
+```
+bg = bgLayers.bg
+
+bg.animate
+  properties: 
+    blur: 15
+    opacity: .6
+```
+
+The `blur` property is set in pixels, so you can copy it right out of Photoshop or Sketch. 
+
+Let's speed up the animation and add an Apple-style springy curve: 
+
+```
+icon.animate
+  properties: 
+    midY: h / 2
+  time: .5
+  curve: "spring(120,18,0)"
+    
+bg.animate
+  properties: 
+    blur: 15
+    opacity: .6
+  time: .5
+```
+
+![screenshot7](https://s3.amazonaws.com/f.cl.ly/items/003l1t3T2E2p0g3C2Q1B/Screen%20Shot%202015-03-26%20at%208.15.13%20PM.png)
+
+### Multipart Animation step 2
+
+The next step involves another two transitions: 
+
+1. move the icon to the top left of the screen and shrink it
+2. slide in the content of the notification
+
+To initiate this set of animations *after* the first set have finished, we'll listen for the `AnimationEnd` event on the icon: 
+
+```
+icon.on Events.AnimationEnd, ->
+```
+
+Let's start with shrinking the icon: 
+
+```
+icon.on Events.AnimationEnd, ->
+  icon.animate
+    properties: 
+      scale: .5
+```
+
+At the same time, we'll move it to the top left of the screen. Unfortunately, we can't just move the icon to `x: 0` and `y: 0`, because when we used `scale` to shrink the icon, the icon's bounding box didn't shrink at the same time, so the icon would be positioned too far from the edges. We'll have to adjust for that by subtracting one-half the icon's *new* width from the `x` and `y` properties. 
+
+The icon was originally 196px, so it's 50% scaled size is 98px, so we'll offset x and y by 49px. 
+
+```
+icon.on Events.AnimationEnd, ->
+  icon.animate
+    properties: 
+      scale: .5
+      x: -49
+      y: -49  
+```
+
+At the same time, let's animate in the notification content. Import "watchapp.psd" at the top of the file: 
+
+```
+bgLayers = Framer.Importer.load "imported/bg"
+watchappLayers = Framer.Importer.load "imported/watchapp"
+iconLayers = Framer.Importer.load "imported/icon"
+```
+
+Note the order in which we're importing the files: this layers the files in the correct order. We could explicitly set the `z-index` values of each layer using the `index` property, but this is simpler. 
+
+Let's set the notification layer's initial position below the bottom of the screen: 
+
+```
+notification = watchappLayers.notification
+notification.y = h
+```
+
+Now we'll animate it into the scene at the same time as we move the icon to the top right and shrink it: 
+
+```
+icon.on Events.AnimationEnd, ->
+  icon.animate
+    ...
+  notification.animate
+    properties: 
+      y: 49
+```
+
+We're setting `y` to 49 because it will align with the midpoint of the icon. Now that the notification is aligned with the icon, it looks like the icon is a bit too close to the edge of the screen. Let's push it over by 20px:
+
+```
+icon.on Events.AnimationEnd, ->
+  icon.animate
+    properties: 
+      scale: .5
+      x: -29
+      y: -49
+  notification.animate
+    properties: 
+      y: 49
+```
+
+And speed up the animation and add a spring curve: 
+
+```
+  icon.animate
+    properties: 
+      scale: .5
+      x: -29
+      y: -49
+    time: .3
+    curve: "spring(320,26,0)"
+  notification.animate
+    properties: 
+      y: 49
+    time: .3
+    curve: "spring(320,26,0)"
+```
+
+![screenshot8](https://s3.amazonaws.com/f.cl.ly/items/253z3L1l0V1D001x2A0y/Screen%20Shot%202015-03-26%20at%208.15.21%20PM.png)
+
+### Multipart animation part 3
+
+The last step is to dismiss the notification panel when the button is pressed. We'll find the `button` layer and add a `Click` event listener: 
+
+```
+button = watchappLayers.button
+
+button.on Events.Click, ->
+```
+
+There are a couple things we need to do now to get back to our initial state: 
+
+1. fade out the notification content
+2. fade out the icon
+3. un-blur and un-fade the background
+
+This is mostly code we've seen before by this point: 
+
+```
+button.on Events.Click, ->
+  notification.animate
+    properties:
+      opacity: 0
+  icon.animate
+    properties:
+      opacity: 0
+  bg.animate
+    properties:
+      opacity: 1
+      blur: 0
+```
+
+And then we'll speed all the animations up:
+
+```
+button.on Events.Click, ->
+  notification.animate
+    properties:
+      opacity: 0
+    time: .3
+  icon.animate
+    properties:
+      opacity: 0
+    time: .3
+  bg.animate
+    properties:
+      opacity: 1
+      blur: 0
+    time: .3
+```
+
+Pretty cool, right!
