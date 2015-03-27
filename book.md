@@ -1524,3 +1524,22 @@ button.on Events.Click, ->
 ```
 
 Pretty cool, right!
+
+# Next Steps
+
+I think that with the building blocks from the last few examples you should be able to prototype a pretty wide variety of interactions and animations using Framer. I've intentionally stayed away from discussing topics such as code organization and best practices because I find these concepts unnecessary for beginners and in the context of building prototypes to communicate experiences. 
+
+If you're taking prototyping with Coffeescript seriously, I'd strongly recommend learning some JavaScript fundamentals. Unfortunately, there are few Coffeescript resources aimed at beginner developers, since most coffeescript developers come from the background of already knowing at least some JavaScript. 
+
+For JavaScript (and general programming) fundamentals, I suggest working through the [Codeacademy JavaScript track](http://www.codecademy.com/tracks/javascript). It's an interactive set of tutorials that let you program in the browser and provides feedback on your code, and it's totally free. 
+
+If you're looking for some more in-depth resources, [Codeschool](https://www.codeschool.com/) has excellent JavaScript and Coffeescript courses which feature excellent video tutorials and interactive challenges. 
+
+If you're enjoying programming and want to dig a bit deeper into the fundamentals (using coffeescript), read Reginald Braithwaite's [Coffeescript Ristretto](https://leanpub.com/coffeescript-ristretto), which starts at the very beginning of programming with functions and gets into some pretty advanced concepts, using coffeescript for all code examples. 
+
+If you'd like to take your prototyping skills out of the Framer environment so you can make prototypes or production code for any website, I'd still recommend leveraging a library to help out with the animations. Some suggestions: 
+
+- [jQuery](https://jquery.com/) takes a lot of the pain out of interacting with the native browser environment. Outside of Framer, you might find that working with elements on a page can be a bit complex and verbose, jQuery can help ease the pain, and has a large plugin ecosystem that can give you a lot of extra functionality with very little code. You can accomplish a lot with some basic JavaScript knowledge and jQuery.
+- [Move.js](http://visionmedia.github.io/move.js/) is a small and easy-to-use library for making CSS-based animations simpler. CSS-based animations are quickly becoming the standard because of their flexibility and performance, and you likely already know a lot of the syntax if you know some CSS.
+- [AnimateCSS](https://github.com/daneden/animate.css) also leverages CSS for animations, and lets you write as very little JavaScript for your animations by moving it all to pre-written CSS. 
+- [Snap.svg](http://snapsvg.io/) is a great library for animating vector graphics in the browser, which are resolution-independent and more flexible than the boxes and circles you can make with regular browser elements. 
