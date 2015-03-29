@@ -1,3 +1,62 @@
+# What is Coffeescript?
+
+CoffeeScript is a relatively new programming language used often by front-end developers to create browser-based interfaces. 
+
+CoffeeScript is interesting in that it *compiles to JavaScript*. Compiles just means turns into or is transformed into. When we write CoffeeScript, we need to compile it into JavaScript before it can run in browsers. To understand more about Coffeescript, you'll need to understand a bit about JavaScript.
+
+# What is JavaScript?
+
+JavaScript is the programming language we use in browsers to do things like manipulate HTML and communicate with servers. JavaScript, along with HTML and CSS, allows us to create rich and responsive user interfaces. 
+
+JavaScript is one of the most popular programming languages in the world, mainly because it's the *only* programming language that runs in browsers. 
+
+JavaScript was created by Brendan Eich at Netscape in 1995 to give web developers and designers an accessible way to manipualte web pages. It very quickly gained popularity because it allowed developers to add a lot more functionality to web pages and was relatively easy to learn. 
+
+Despite its popularity, JavaScript has always had many critics. Though many of its early flaws have been overcome in more recent releases of the language, many still consider it to be an "ugly" language with a lot of historical baggage. 
+
+## Why CoffeeScript?
+
+Though there have been various attempts to bring other programming languages to the browser, none have been successful, so we're still more or less "stuck" with JavaScript. 
+
+In the mid-2000s, another language called Ruby was gaining popularity as a server-side programming language (meaning it isn't run in the browser, it's run on the server hosting a web site or application). Ruby, in contrast to languages like JavaScript, was designed to be easily human-readable and writeable, with an emphasis on developer productivity even enjoyability. 
+
+In 2009, Ruby developer Jeremy Ashkenas sought to bring some of the features he liked most about Ruby to client-side development, and created CoffeeScript. 
+
+Since browsers can only understand JavaScript, code written in CoffeeScript first has to be *compiled* into JavaScript before it can run. So if you were writing code in a file called `script.coffee`, you'd have to convert that file to `script.js` using the CoffeeScript compiler. 
+
+Many developers consider that extra step worth while so they can enjoy the benefits of writing CoffeeScript, which they feel makes them more productive and makes up for some of the shortcomings of JavaScript. 
+
+For example, the JavaScript code to output the numbers between 1 and 10 in reverse order looks like this: 
+
+```
+var countdown, num;
+
+countdown = (function() {
+  var i, results;
+  results = [];
+  for (num = i = 10; i >= 1; num = --i) {
+    results.push(num);
+  }
+  return results;
+})();
+```
+
+The same code in CoffeeScript looks like this: 
+
+```
+countdown = (num for num in [10..1])
+```
+
+The code is both shorter and easier to read and comprehend. 
+
+# CoffeeScript and Framer.js
+
+Framer.js is a JavaScript framework for prototyping user interfaces. If you wanted to, you could include framer.js in an HTML file, and then write code using the framework in plain JavaScript. 
+
+**Framer Studio** is a companion Mac application that is based on Framer.js. Framer Studio makes your workflow much easier with features like a live preview panel and Sketch or Photoshop importers. 
+
+Framer Studio's editor allows you to write your code in CoffeeScript instead of JavaScript. Because Framer's target user base is designers, not developers, CoffeeScript offers a gentler learning curve for non-programmers and can be much faster to write, which is key when prototyping. 
+
 # Coffeescript for beginners
 
 ## Math
