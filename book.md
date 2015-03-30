@@ -1074,7 +1074,7 @@ Import "swipe.psd" into framer.
 One of the really convenient things Framer includes for touch interactivity is the ability to set a layer to "draggable". To do this, we set `draggable.enabled` to true. 
 
 ```
-swipeLayers.message.draggable.enabled = true
+file.message.draggable.enabled = true
 ```
 
 We can now drag the layer all over the screen!
@@ -1082,7 +1082,7 @@ We can now drag the layer all over the screen!
 In our example, however, we want to restrict dragging to the x-axis. To do this, we set `draggable.speedY` to 0. 
 
 ```
-swipeLayers.message.draggable.speedY = 0
+file.message.draggable.speedY = 0
 ```
 
 Now we don't want the user to have to drag the message all the way off the screen, so we'll take over and animate the message off the screen if it's past a certain point. 
@@ -1092,23 +1092,23 @@ A lot of the code for prototyping touch is going to be similar to this: doing ac
 In our message-dismissal example we're going to listen for the `DragEnd` event and then decide what to do. 
 
 ```
-swipeLayers.message.on Events.DragEnd, ->
+file.message.on Events.DragEnd, ->
 ```
 
 At this point, we have to come up with some rules for how to animate the message. In our case, the default result will be that the message snaps back to its starting position. If the message has been moved more than halfway off the left side of the screen, we want to animate it off the screen. There are a couple ways we can check for this, but I think the most intuitive is "when the midpoint of the message reaches the left edge of the screen." This is easy to represent in code, since Framer gives us a convenient `midX` (and `midY`) property which returns the center point of the element. 
 
 ```
-if swipeLayers.message.midX <= 0
+if file.message.midX <= 0
 ```
 
 So in this case, we want to animate the `x` property of our message to be all the way off the screen. To ensure it's all the way off the screen, we'll set the `x` value to negative the width of the layer. 
 
 ```
-w = swipeLayers.message.width
+w = file.message.width
 
-swipeLayers.message.on Events.DragEnd, ->
-  if swipeLayers.message.midX <= 0
-    swipeLayers.message.animate
+file.message.on Events.DragEnd, ->
+  if file.message.midX <= 0
+    file.message.animate
       properties:
         x: 0 - w
 ```
@@ -1116,28 +1116,28 @@ swipeLayers.message.on Events.DragEnd, ->
 In other cases, we want to animate the message back to its original `x` position, which was 0. 
 
 ```
-swipeLayers.message.on Events.DragEnd, ->
-  if swipeLayers.message.midX < 0
-    swipeLayers.message.animate
+file.message.on Events.DragEnd, ->
+  if file.message.midX < 0
+    file.message.animate
       properties:
         x: 0 - w
   else
-    swipeLayers.message.animate
+    file.message.animate
       properties:
         x: 0
 ```
 
 We can make the animations look a lot nicer with some easing and timing: 
 ```
-swipeLayers.message.on Events.DragEnd, ->
-  if swipeLayers.message.midX < 0
-    swipeLayers.message.animate
+file.message.on Events.DragEnd, ->
+  if file.message.midX < 0
+    file.message.animate
       properties:
         x: 0 - w
       time: 0.1
       curve: "ease-in"
   else
-    swipeLayers.message.animate
+    file.message.animate
       properties:
         x: 0
       time: 0.2
@@ -1148,9 +1148,9 @@ swipeLayers.message.on Events.DragEnd, ->
 This is pretty much the same as the code for animating in the badge after the popup is dismissed: 
 
 ```
-swipeLayers.message.on Events.AnimationEnd, ->
-  if swipeLayers.message.midX < 0
-    swipeLayers.delete.animate
+file.message.on Events.AnimationEnd, ->
+  if file.message.midX < 0
+    file.delete.animate
       properties: 
         scale: .8
         opacity: 0
