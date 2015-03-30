@@ -55,7 +55,25 @@ Framer.js is a JavaScript framework for prototyping user interfaces. If you want
 
 **Framer Studio** is a companion Mac application that is based on Framer.js. Framer Studio makes your workflow much easier with features like a live preview panel and Sketch or Photoshop importers. 
 
-Framer Studio's editor allows you to write your code in CoffeeScript instead of JavaScript. Because Framer's target user base is designers, not developers, CoffeeScript offers a gentler learning curve for non-programmers and can be much faster to write, which is key when prototyping. 
+Framer Studio's editor allows you to write your code in CoffeeScript instead of JavaScript. Because Framer's target user base is designers, not developers, CoffeeScript offers a gentler learning curve for non-programmers and can be much faster to write, which is key when prototyping.
+
+## Framer Studio vs. Framer.js
+
+Though I'd strongly recommend Framer Studio if you're going to be using Framer for a lot of prototyping, it is possible to take advantage of the library without using the app. The [Github project](https://github.com/koenbok/Framer) includes instructions for setting up a JavaScript project with Framer.js, but it's fairly simple to set it up to use with CoffeeScript. 
+
+In this book, I'll be using Framer Studio for examples. You'll need either Framer Studio or a way of compiling CoffeeScript to follow along. To compile CoffeeScript without using the command line, you can use one of the following GUIs: 
+
+- [Prepros (Mac/Windows/Linux). Indefinite free trial/$29](https://prepros.io/)
+- [Koala (Mac/Windows/Linux). Free](http://koala-app.com/) 
+- [Codekit (Mac). $32](https://incident57.com/codekit/)
+
+**Note**: examples will make use of Framer Studio's built-in device templates. Not tested in regular browser environment. 
+
+# Setup
+
+All you'll need to follow along with this book is Framer Studio or Framer.js and CoffeeScript. For the earlier chapters, I recommend typing code into a browser-based console to observe the output yourself. I suggest [CoffeeScript REPL](http://larryng.github.io/coffeescript-repl/), or if you're familliar with Chrome's web developer console, you can add a plugin that will let you run CoffeeScript, like [CoffeeConsole](http://snook.ca/archives/browsers/coffeeconsole) or [Scratch JS](https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn) (go to settings and select "CoffeeScript" for the transformer).
+
+The later examples require using image assets created for the projects, which came in the **Assets** folder you downloaded with this ebook. 
 
 # Coffeescript for beginners
 
@@ -817,22 +835,22 @@ button.on Events.Click, ->
 
 ## Dismis modal window
 
-Import the "popup.psd" file into Framer. Set the device type to iPhone 5c or 5s for best arrangement. 
+Import the "example1_popup" psd or Sketch file into Framer. Set the device type to iPhone 6 for best arrangement. 
 
 The first thing we're going to prototype is the dismissal of this popup when the user clicks on the "x". The "x" layer group is called "close", so we access it by name (it is a property of the imported `psd` object). We'll add a click event handler to the close: 
 
 ```
-psd = Framer.Importer.load "imported/Popup"
+file = Framer.Importer.load "imported/Popup"
 
-psd.close.on Events.Click, ->
+file.close.on Events.Click, ->
 
 ```
 
 To start, we'll just fade out the popup on click: 
 
 ```
-psd.close.on Events.Click, ->
-  psd.Popup.animate
+file.close.on Events.Click, ->
+  file.popup.animate
     properties: 
       opacity: 0
 ```
@@ -840,10 +858,10 @@ psd.close.on Events.Click, ->
 That's a bit too slow, so lets adjust the `time` property: 
 
 ```
-psd = Framer.Importer.load "imported/Popup"
+file = Framer.Importer.load "imported/Popup"
 
-psd.close.on Events.Click, ->
-  psd.Popup.animate
+file.close.on Events.Click, ->
+  file.popup.animate
     properties: 
       opacity: 0
     time: .4
@@ -858,10 +876,10 @@ We'll want the layer's end position to be above the top of the screen, and to be
 To do that, we'll need to get the height of the layer. We can get that with `psd.Popup.height`. Since the y position of the top of the screen is 0, we'll want to subtract the height from 0: 
 
 ```
-layerHeight = psd.Popup.height 
+layerHeight = file.Popup.height 
 
-psd.close.on Events.Click, ->
-  psd.Popup.animate
+file.close.on Events.Click, ->
+  file.popup.animate
     properties: 
       opacity: 0
       y: 0 - layerHeight
@@ -881,7 +899,7 @@ To do an animation *after* another one, we have to "listen" for the end of the f
 ```
 (...same code as before)
 
-psd.Popup.on Events.AnimationEnd, ->
+file.popup.on Events.AnimationEnd, ->
   print "animation ended"
 
 ```
@@ -889,8 +907,8 @@ psd.Popup.on Events.AnimationEnd, ->
 Now lets select the `Mustache` layer and animate it's size using the `scale` property: 
 
 ```
-psd.Popup.on Events.AnimationEnd, ->
-  psd.Mustache.animate
+file.popup.on Events.AnimationEnd, ->
+  file.mustache.animate
     properties: 
       scale: 2
 ```
@@ -898,10 +916,10 @@ psd.Popup.on Events.AnimationEnd, ->
 Okay, but we wanted the badge to appear from nothing. To do that, we have to initially set the badge to be teeny, and then animate it to a visible size: 
 
 ```
-psd.Mustache.scale = 0
+file.mustache.scale = 0
 
-psd.Popup.on Events.AnimationEnd, ->
-  psd.Mustache.animate
+file.popup.on Events.AnimationEnd, ->
+  file.mustache.animate
     properties: 
       scale: 1
 ```
@@ -909,8 +927,8 @@ psd.Popup.on Events.AnimationEnd, ->
 To add a bit more life to this animation, we're going to make it look a bit bouncy. To achieve a bounce effect on our animation, we can use one of the custom curve functions Framer comes with. The `spring()` function takes 4 arguments: tension, friction, velocity, and tolerance. Explaining all these properties is beyond the scope of this book, but we'll use a simple bounce using the settings `200,15,0`. 
 
 ```
-psd.Popup.on Events.AnimationEnd, ->
-  psd.Mustache.animate
+file.popup.on Events.AnimationEnd, ->
+  file.mustache.animate
     properties: 
       scale: 1
     curve:"spring(200,15,0)"
