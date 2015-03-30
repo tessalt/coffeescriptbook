@@ -1,0 +1,28 @@
+window.__imported__ = window.__imported__ || {};
+window.__imported__["bg/layers.json.js"] = [
+	{
+		"id": 1205,
+		"name": "bg",
+		"layerFrame": {
+			"x": 0,
+			"y": 0,
+			"width": 312,
+			"height": 366
+		},
+		"maskFrame": null,
+		"image": {
+			"path": "images/bg.png",
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"width": 312,
+				"height": 366
+			}
+		},
+		"imageType": "png",
+		"children": [
+			
+		],
+		"modification": "859061246"
+	}
+]
