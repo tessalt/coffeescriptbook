@@ -1360,12 +1360,14 @@ Let's try something a little more complicated: a multi-step animation with some 
 
 We're going to prototype a push notification on the Apple Watch, like you would get from a calendar notification. 
 
-Import the icon.psd  (or make your own icon) file into Framer, then bg.psd. Set the device to Apple watch in the 42mm size. 
+Import the example4_icon.png  (or make your own icon) file into Framer, then example4_bg.png. Set the device to Apple watch in the 42mm size. 
 
 ```
-bgLayers = Framer.Importer.load "imported/bg"
+bg = new Layer 
+  x:0, y:0, width:312, height:366, image:"images/example4_bg.png"
 
-iconLayers = Framer.Importer.load "imported/icon"
+icon = new Layer 
+  x:0, y:0, width:196, height:196, image:"images/example4_icon.png"
 ```
 
 We're going to need to reference the width and height of the device, so we'll save those in variables called `w` and `h`. 
@@ -1378,7 +1380,6 @@ h = Framer.Device.screen.height
 We're going to set the initial state of the icon as being horizontally centered and positioned just below the bottom of the screen: 
 
 ```
-icon = iconLayers.icon
 icon.centerX()
 icon.y = h
 ```
@@ -1405,8 +1406,6 @@ We're setting the layer's `midY` property to half the height of the device becau
 At the same time as we animate the icon into position, we're going to both blur and fade the background a bit: 
 
 ```
-bg = bgLayers.bg
-
 bg.animate
   properties: 
     blur: 15
@@ -1472,7 +1471,7 @@ At the same time, let's animate in the notification content. Import "watchapp.ps
 
 ```
 bgLayers = Framer.Importer.load "imported/bg"
-watchappLayers = Framer.Importer.load "imported/watchapp"
+watch_file = Framer.Importer.load "imported/watchapp"
 iconLayers = Framer.Importer.load "imported/icon"
 ```
 
@@ -1481,7 +1480,7 @@ Note the order in which we're importing the files: this layers the files in the 
 Let's set the notification layer's initial position below the bottom of the screen: 
 
 ```
-notification = watchappLayers.notification
+notification = watch_file.notification
 notification.y = h
 ```
 
@@ -1534,7 +1533,7 @@ And speed up the animation and add a spring curve:
 The last step is to dismiss the notification panel when the button is pressed. We'll find the `button` layer and add a `Click` event listener: 
 
 ```
-button = watchappLayers.button
+button = watch_file.button
 
 button.on Events.Click, ->
 ```
