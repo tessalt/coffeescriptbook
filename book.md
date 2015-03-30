@@ -936,58 +936,58 @@ file.popup.on Events.AnimationEnd, ->
 
 ## Toggle between states: dropdown menu
 
-Import "dropdown.psd" into Framer. 
+Import "example2_dropdown" psd or Sketch file into Framer. 
 
 Let's start off by hiding the menu content by default: 
 
 ```
-dropdownLayers.menuContent.opacity = 0
+file.menu_content.opacity = 0
 ```
 
 Now we'll add a click event listener on the menu icon, and then switch the opacity to 1:
 
 ```
-dropdownLayers.menuIcon.on Events.Click, ->
-  dropdownLayers.menuContent.opacity = 1
+file.menu_icon.on Events.Click, ->
+  file.menu_content.opacity = 1
 ```
 
 There's a problem though: we want the menu to close again when the menu icon is clicked again. Unfortunately, the menu won't know whether to open or close on each click unless we somehow keep track of what state it's already in. 
 
-To do this, we'll create a variable `isOpen` that will be false if the menu is closed, and true if it's open. It'll default to false. 
+To do this, we'll create a variable `is_open` that will be false if the menu is closed, and true if it's open. It'll default to false. 
 
 ```
-isOpen = false
+is_open = false
 ```
 
-Next, we'll set the opacity in the click event based on our `isOpen` variable:
+Next, we'll set the opacity in the click event based on our `is_open` variable:
 
 ```
-dropdownLayers.menuIcon.on Events.Click, ->
-  if isOpen
-    dropdownLayers.menuContent.opacity = 0
+file.menu_icon.on Events.Click, ->
+  if is_open
+    file.menu_content.opacity = 0
   else
-    dropdownLayers.menuContent.opacity = 1
+    file.menu_content.opacity = 1
 ```
 
-For this to work, we'll need to toggle `isOpen` between false and true when the user clicks. To toggle a value between true and false, we can re-assign the variable to it's opposite. True and false are opposite of each other, so not true = false and not false = true. In coffeescript, we use the `!` symbol to mean "not": `true != false`. 
+For this to work, we'll need to toggle `is_open` between false and true when the user clicks. To toggle a value between true and false, we can re-assign the variable to it's opposite. True and false are opposite of each other, so not true = false and not false = true. In coffeescript, we use the `!` symbol to mean "not": `true != false`. 
 
 To set a value to its opposite, we do `= !` or "set the value to *not* whatever it currently is"
 
 ```
-isOpen = !isOpen
+is_open = !is_open
 ```
 
 Let's put it all together: 
 
 ```
-isOpen = false
+is_open = false
 
-dropdownLayers.menuIcon.on Events.Click, ->
-  isOpen = !isOpen
-  if isOpen
-    dropdownLayers.menuContent.opacity = 0
+file.menu_icon.on Events.Click, ->
+  is_open = !is_open
+  if is_open
+    file.menu_content.opacity = 0
   else
-    dropdownLayers.menuContent.opacity = 1
+    file.menu_content.opacity = 1
 ```
 
 And now our menu toggles open when we click it. 
@@ -999,7 +999,7 @@ Framer gives us an easier way to transition between different states, called "st
 To add states to our layer, we use the `states.add` method. Each state consists of a name and property pair, where the property contains the various options for the appearance: 
 
 ```
-dropdownLayers.menuContent.states.add
+file.menu_content.states.add
   open:
     opacity: 1
   closed:
@@ -1009,20 +1009,20 @@ dropdownLayers.menuContent.states.add
 Now we can switch between the two states in a few different ways. The easiest way to go back and forth between the two states is just by using `states.next()`. We can take out the `if else` statement now, as well as the `isOpen` variable. 
 
 ```
-dropdownLayers.menuContent.states.add
+file.menu_content.states.add
   open:
     opacity: 1
   closed:
     opacity: 0
     
-dropdownLayers.menuIcon.on Events.Click, ->
-  dropdownLayers.menuContent.states.next()
+file.menu_icon.on Events.Click, ->
+  file.menu_content.states.next()
 ```
 
 By default, `states.next` animates between the two states. To customize this animation, we need to configure `states.animationOptions`:
 
 ```
-dropdownLayers.menuContent.states.animationOptions = 
+file.menu_content.states.animationOptions = 
   time: 0.2
 ```
 
@@ -1031,27 +1031,27 @@ One of the nice things about states is that it makes it easy to customize our an
 To do that, we first need to set the menu's default width and height to 0. 
 
 ```
-dropdownLayers.menuContent.width = 0
-dropdownLayers.menuContent.height = 0
+file.menu_content.width = 0
+file.menu_content.height = 0
 ```
 
 And then update the states so that open resets the height and width to the original values, and closed sets them to 0. To get the original height and width values of our menu, we need to save those values as variables before we set them to 0. 
 
 ```
-originalWidth = dropdownLayers.menuContent.width
-originalHeight = dropdownLayers.menuContent.height
+original_width = file.menu_content.width
+original_height = file.menu_content.height
 
-dropdownLayers.menuContent.width = 0
-dropdownLayers.menuContent.height = 0
+file.menu_content.width = 0
+file.menu_content.height = 0
 ```
 
 And then use those variables in `states.add`: 
 
 ```
-dropdownLayers.menuContent.states.add
+file.menu_content.states.add
   open:
-    width: originalWidth
-    height: originalHeight
+    width: original_width
+    height: original_height
   closed:
     width: 0
     height: 0
@@ -1060,7 +1060,7 @@ dropdownLayers.menuContent.states.add
 This animation would look even better with some easing: 
 
 ```
-dropdownLayers.menuContent.states.animationOptions = 
+file.menu_content.states.animationOptions = 
   time: 0.2
   curve: "ease-out"
 ```
