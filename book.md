@@ -885,43 +885,45 @@ button.on Events.Click, ->
 
 Import the "example1_popup" psd or Sketch file into Framer Studio. Set the device type to iPhone 6 for best arrangement. 
 
-The first thing we're going to prototype is the dismissal of this popup when the user clicks on the "x". The "x" layer group is called "close", so we access it by name (it is a property of the imported `psd` object). We'll add a click event handler to the close: 
+![modal](https://s3.amazonaws.com/f.cl.ly/items/2E263s1b3E0D3g3X2L20/Screen%20Shot%202015-04-01%20at%209.33.37%20PM.png)
+
+The first thing we're going to prototype is the dismissal of this popup when the user clicks on the "x". The "x" layer group is called "close", so we access it by name (it is a property of the imported `psd` object). We'll add a click event handler to the close layer: 
+
+```
+file = Framer.Importer.load "imported/example1_popup"
+
+file.close.on Events.Click, ->
+
+```
+
+To start, we'll just fade out the popup on click. The popup layer is called "popup" so we access it with `file.popup`: 
+
+```
+file.close.on Events.Click, ->
+  file.popup.animate
+    properties: 
+      opacity: 0
+```
+
+That's a bit too slow, so let's adjust the `time` property: 
 
 ```
 file = Framer.Importer.load "imported/Popup"
 
 file.close.on Events.Click, ->
-
-```
-
-To start, we'll just fade out the popup on click: 
-
-```
-file.close.on Events.Click, ->
   file.popup.animate
     properties: 
       opacity: 0
+    time: 0.4
 ```
 
-That's a bit too slow, so lets adjust the `time` property: 
+It's a bit of a dull animation, so let's slide it off the screen upwards. To do this, we'll need to animate the layer's `y` property. 
 
-```
-file = Framer.Importer.load "imported/Popup"
-
-file.close.on Events.Click, ->
-  file.popup.animate
-    properties: 
-      opacity: 0
-    time: .4
-```
-
-It's a bit of a dull animation, so lets slide it off the screen upwards. To do this, we'll need to animate the layer's `y` property. 
-
-We'll want the layer's end position to be above the top of the screen, and to be all the way off the top of the screen, we'll need to send it above the top order of the screen by the height of the layer itself. 
+We'll want the layer's end position to be above the top of the screen, and to be all the way off the top of the screen, we'll need to send it above the top edge of the screen by the height of the layer itself. 
 
 ![illustration maybe?]()
 
-To do that, we'll need to get the height of the layer. We can get that with `psd.Popup.height`. Since the y position of the top of the screen is 0, we'll want to subtract the height from 0: 
+To do that, we'll need to get the height of the layer. We can get that with `file.Popup.height`. Since the y position of the top of the screen is 0, we'll want to subtract the height from 0: 
 
 ```
 layerHeight = file.Popup.height 
@@ -931,16 +933,26 @@ file.close.on Events.Click, ->
     properties: 
       opacity: 0
       y: 0 - layerHeight
-    time: 0.3
+    time: 0.4
 ```
 
 We've saved the layer's height in a `layerHeight` variable so that the code is a bit easier to read. 
 
 To make the animation a bit more dynamic, we can add an "ease-in" curve to it. 
 
-## Multiple animations
+```
+file.close.on Events.Click, ->
+  file.popup.animate
+    properties: 
+      opacity: 0
+      y: 0 - layerHeight
+    time: 0.4
+    curve: "ease-in"
+```
 
-Once the modal is dismissed, our prototype currently just shows a mustache badge. It would be cool if that badge pop up out of nowhere after you'd dismissed the mdoal.
+### Multiple animations
+
+Once the modal is dismissed, our prototype currently just shows a mustache badge. It would be cool if that badge popped up from nowhere after you'd dismissed the mdoal.
 
 To do an animation *after* another one, we have to "listen" for the end of the first animation. We can attach an `AnimationEnd` event listener to the popup layer (the one that is animating), and then do something else once it's finished animating: 
 
@@ -952,7 +964,7 @@ file.popup.on Events.AnimationEnd, ->
 
 ```
 
-Now lets select the `Mustache` layer and animate it's size using the `scale` property: 
+Now lets select the `mustache` layer and animate its size using the `scale` property: 
 
 ```
 file.popup.on Events.AnimationEnd, ->
@@ -961,7 +973,7 @@ file.popup.on Events.AnimationEnd, ->
       scale: 2
 ```
 
-Okay, but we wanted the badge to appear from nothing. To do that, we have to initially set the badge to be teeny, and then animate it to a visible size: 
+Okay, but maybe we wanted the badge to appear from nothing. To do that, we have to initially set the badge to be teeny, and then animate it to a visible size: 
 
 ```
 file.mustache.scale = 0
@@ -972,7 +984,7 @@ file.popup.on Events.AnimationEnd, ->
       scale: 1
 ```
 
-To add a bit more life to this animation, we're going to make it look a bit bouncy. To achieve a bounce effect on our animation, we can use one of the custom curve functions Framer comes with. The `spring()` function takes 4 arguments: tension, friction, velocity, and tolerance. Explaining all these properties is beyond the scope of this book, but we'll use a simple bounce using the settings `200,15,0`. 
+To add a bit more life to this animation, we're going to make it look bouncy. To achieve a bounce effect on our animation, we can use one of the custom curve functions Framer comes with. The `spring()` function takes 4 arguments: tension, friction, velocity, and tolerance. Explaining all these properties is beyond the scope of this book, but we'll use a simple bounce using the settings `200, 15, 0`. 
 
 ```
 file.popup.on Events.AnimationEnd, ->
@@ -982,13 +994,19 @@ file.popup.on Events.AnimationEnd, ->
     curve:"spring(200,15,0)"
 ```
 
-## Toggle between states: dropdown menu
+## Example 2: Toggling between states
+
+We're going to toggle a menu between closed and open states when an icon is clicked: 
+
+![dropdown](https://s3.amazonaws.com/f.cl.ly/items/0L162K1h1l1V0v1m0d1R/Image%202015-04-01%20at%209.42.32%20PM.png)
 
 Import "example2_dropdown" psd or Sketch file into Framer. 
 
 Let's start off by hiding the menu content by default: 
 
 ```
+file = Framer.Importer.load "imported/example2_dropdown"
+
 file.menu_content.opacity = 0
 ```
 
@@ -1017,7 +1035,7 @@ file.menu_icon.on Events.Click, ->
     file.menu_content.opacity = 1
 ```
 
-For this to work, we'll need to toggle `is_open` between false and true when the user clicks. To toggle a value between true and false, we can re-assign the variable to it's opposite. True and false are opposite of each other, so not true = false and not false = true. In CoffeeScript, we use the `!` symbol to mean "not": `true != false`. 
+For this to work, we'll need to toggle `is_open` between `false` and `true` when the user clicks the icon. To toggle a value between true and false, we can re-assign the variable to it's opposite. True and false are opposite of each other, so not true = false and not false = true. In CoffeeScript, we use the `!` symbol to mean "not": `true != false`. 
 
 To set a value to its opposite, we do `= !` or "set the value to *not* whatever it currently is"
 
@@ -1054,7 +1072,7 @@ file.menu_content.states.add
     opacity: 0
 ```
 
-Now we can switch between the two states in a few different ways. The easiest way to go back and forth between the two states is just by using `states.next()`. We can take out the `if else` statement now, as well as the `isOpen` variable. 
+Now we can switch between the two states in a few different ways. The easiest way to go back and forth between the two states is just by using `states.next()`. We can take out the `if else` statement now, as well as the `is_open` variable. 
 
 ```
 file.menu_content.states.add
@@ -1067,7 +1085,7 @@ file.menu_icon.on Events.Click, ->
   file.menu_content.states.next()
 ```
 
-By default, `states.next` animates between the two states. To customize this animation, we need to configure `states.animationOptions`:
+By default, `states.next` animates between the two states. To customize this animation, we need to add and configure `states.animationOptions`:
 
 ```
 file.menu_content.states.animationOptions = 
@@ -1083,7 +1101,7 @@ file.menu_content.width = 0
 file.menu_content.height = 0
 ```
 
-And then update the states so that open resets the height and width to the original values, and closed sets them to 0. To get the original height and width values of our menu, we need to save those values as variables before we set them to 0. 
+And then update the states so that `open` resets the height and width to the original values, and `closed` sets them to 0. To get the original height and width values of our menu, we need to save those values as variables before we set them to 0. 
 
 ```
 original_width = file.menu_content.width
@@ -1113,7 +1131,7 @@ file.menu_content.states.animationOptions =
   curve: "ease-out"
 ```
 
-## Touch interactions
+## Example 3: Touch interactions
 
 Framer comes with a lot of useful utilites for easily prototyping touch-based interactions. We're going to prototype a swipe-based dismissal, like you'd have in a list view on a mobile app. 
 
