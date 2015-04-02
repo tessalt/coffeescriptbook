@@ -1135,11 +1135,15 @@ file.menu_content.states.animationOptions =
 
 Framer comes with a lot of useful utilites for easily prototyping touch-based interactions. We're going to prototype a swipe-based dismissal, like you'd have in a list view on a mobile app. 
 
+![swipey](https://s3.amazonaws.com/f.cl.ly/items/230X3a0B3V163Q0K260l/Screen-Shot-2015-04-01-at-9.49.05-PM.png)
+
 Import "swipe.psd" into framer. 
 
-One of the really convenient things Framer includes for touch interactivity is the ability to set a layer to "draggable". To do this, we set `draggable.enabled` to true. 
+One of the really convenient things Framer includes for touch interactivity is the ability to make a layer "draggable". To do this, we set `draggable.enabled` to true. 
 
 ```
+file = Framer.Importer.load "imported/example3_swipe"
+
 file.message.draggable.enabled = true
 ```
 
@@ -1167,7 +1171,7 @@ At this point, we have to come up with some rules for how to animate the message
 if file.message.midX <= 0
 ```
 
-So in this case, we want to animate the `x` property of our message to be all the way off the screen. To ensure it's all the way off the screen, we'll set the `x` value to negative the width of the layer. 
+So in this case, we want to animate the `x` property of our message to be all the way off the screen. To ensure it's all the way off the screen, we'll set the `x` value to 0 minus the width of the layer. 
 
 ```
 w = file.message.width
@@ -1224,7 +1228,7 @@ file.message.on Events.AnimationEnd, ->
       curve: "ease-in"
 ```
 
-# Generating elements with loops
+## Example 4: Generating elements with loops
 
 If we want to deal with multiple elements of the same type, we can very quickly end up dealing with a lot of repetition. For example, if we wanted a series of squares in a row, we might do: 
 
@@ -1265,9 +1269,13 @@ One of the convenient things about CoffeeScript is that we can make a new array 
 ```
 for fruit in ["apples", "oranges", "bananas"]
   print fruit
+
+# => "apples"
+# => "oranges"
+# => "bananas"
 ```
 
-If we don't really need an array of *things* but just want to do something x number of times, we can use a shortcut to make an array of x items: 
+If we don't really need an array of *things* but just want to do something *x* number of times, we can use a shortcut to make an array of x items: 
 
 ```
 print [1..5]
@@ -1288,7 +1296,7 @@ for i in [1..5]
 # => 5
 ```
 
-This is a fairly common pattern when you're prototyping lots of elements in CoffeeScript. It's a bit of a convention to use `i` for the variable that gets re-assigned for each time through the loop (like in `for fruit in fruits`, `fruit` got re-assigned to "apple", "orange", "banana" each time through the loop). `i` as in "iterator" I think. 
+This is a fairly common pattern when you're prototyping lots of elements in CoffeeScript. It's a bit of a convention to use `i` for the variable that gets re-assigned for each time through the loop (like in `for fruit in fruits`, `fruit` got re-assigned to "apple", "orange", "banana" each time through the loop). `i` as in "iterator" or "index". 
 
 So again, if we wanted to create 4 squares, we can do it much more easily with a loop: 
 
@@ -1302,7 +1310,7 @@ This will just stack all 4 squares on top of each other:
 
 ![screenshot4](https://s3.amazonaws.com/f.cl.ly/items/3V1E3b250D1V0n1Q283I/Screen%20Shot%202015-03-23%20at%2010.31.48%20PM.png)
 
-We want to set the `x` values for the squares to 0, 110, 220, 330, respectively. Conveniently, these are all multiples of our iterator (0 * 110, 1 * 110, 2 * 110, 3 * 110). 
+We want to set the `x` values for the squares to 0, 110, 220, 330, respectively. Conveniently, these are all multiples of our index (0 * 110, 1 * 110, 2 * 110, 3 * 110). 
 
 ```
 for i in [0..3]
@@ -1313,7 +1321,7 @@ for i in [0..3]
 
 ![screenshot5](https://s3.amazonaws.com/f.cl.ly/items/3P0Q1I2a2z1n1p0o2T0g/Screen%20Shot%202015-03-23%20at%2010.34.47%20PM.png). 
 
-## Fun with loops
+### Fun with loops
 
 Let's do something more fun with loops. We'll make something similar to the way the cards stack in the iOS Passbook app: 
 
@@ -1368,7 +1376,7 @@ layer.animate
   delay: i
 ```
 
-Now the delay will be 0, the first time through the loop, 1 second the second time, 2 the third etc. To reduce it, we can multiply by `i`
+Now the delay will be 0, the first time through the loop, 1 second the second time, 2 the third etc. To reduce it, we can multiply by `i` by whatever we want the delay to be between each item:
 
 ```
 layer.animate
@@ -1398,7 +1406,7 @@ layer.animate
   curve:"spring(200,30)"
 ```
 
-## Mapping values to arrays
+### Mapping values to arrays
 
 Right now, our cards are all the same colour (slightly transparent blue), they just look like different shades because they're stacked on top of each other. If we wanted to make them different colors, we can store a bunch of colors in an array, and then use those colors for the background colors of the cards. 
 
@@ -1420,11 +1428,13 @@ So the first time through the loop, we'll be setting `backgroundColor` to `color
 
 ![screenshot7](https://s3.amazonaws.com/f.cl.ly/items/0a0J0Z260a190Q2n2g3l/Screen%20Shot%202015-03-23%20at%2010.36.42%20PM.png)
 
-## Multi-part animations
+## Example 5: Multi-part animations
 
 Let's try something a little more complicated: a multi-step animation with some interactivity and multiple moving parts. 
 
 We're going to prototype a push notification on the Apple Watch, like you would get from a calendar notification. 
+
+![watch](https://s3.amazonaws.com/f.cl.ly/items/2V0x1C0R0O3B0N1S1l2K/watches.png)
 
 Import the example4_icon.png  (or make your own icon) file into Framer, then example4_bg.png. Set the device to Apple watch in the 42mm size. 
 
@@ -1467,7 +1477,7 @@ icon.animate
     midY: h / 2
 ```
 
-We're setting the layer's `midY` property to half the height of the device because if we just set `y` property, it would position the top edge of the layer. That would put our icon on the bottom half of the screen instead of at the midpoint. Each layer also has a `midX` property for setting the horizontal center of a layer. 
+We're setting the layer's `midY` property to half the height of the device, because if we just set `y` property, it would position the top edge of the layer. That would put our icon on the bottom half of the screen instead of at the midpoint. Each layer also has a `midX` property for setting the horizontal center of a layer. 
 
 At the same time as we animate the icon into position, we're going to both blur and fade the background a bit: 
 
@@ -1475,10 +1485,10 @@ At the same time as we animate the icon into position, we're going to both blur 
 bg.animate
   properties: 
     blur: 15
-    opacity: .6
+    opacity: 0.6
 ```
 
-The `blur` property is set in pixels, so you can copy it right out of Photoshop or Sketch. 
+The `blur` property is set in pixels, so you can copy it right out of the Gaussian blur in Photoshop or Sketch. 
 
 Let's speed up the animation and add an Apple-style springy curve: 
 
@@ -1486,14 +1496,14 @@ Let's speed up the animation and add an Apple-style springy curve:
 icon.animate
   properties: 
     midY: h / 2
-  time: .5
+  time: 0.5
   curve: "spring(120,18,0)"
     
 bg.animate
   properties: 
     blur: 15
-    opacity: .6
-  time: .5
+    opacity: 0.6
+  time: 0.5
 ```
 
 ![screenshot7](https://s3.amazonaws.com/f.cl.ly/items/003l1t3T2E2p0g3C2Q1B/Screen%20Shot%202015-03-26%20at%208.15.13%20PM.png)
@@ -1520,7 +1530,7 @@ icon.on Events.AnimationEnd, ->
       scale: .5
 ```
 
-At the same time, we'll move it to the top left of the screen. Unfortunately, we can't just move the icon to `x: 0` and `y: 0`, because when we used `scale` to shrink the icon, the icon's bounding box didn't shrink at the same time, so the icon would be positioned too far from the edges. We'll have to adjust for that by subtracting one-half the icon's *new* width from the `x` and `y` properties. 
+At the same time, we'll move it to the top left of the screen. Unfortunately, we can't just move the icon to `x: 0` and `y: 0`, because when we used `scale` to shrink the icon, the icon's bounding box didn't shrink at the same time, so the icon would be positioned too far from the edges. We'll have to adjust for that by subtracting one-half the icon's *new* width from the `x` and `y` values. 
 
 The icon was originally 196px, so it's 50% scaled size is 98px, so we'll offset x and y by 49px. 
 
@@ -1536,9 +1546,13 @@ icon.on Events.AnimationEnd, ->
 At the same time, let's animate in the notification content. Import "watchapp.psd" at the top of the file: 
 
 ```
-bgLayers = Framer.Importer.load "imported/bg"
+bg = new Layer 
+  x:0, y:0, width:312, height:366, image:"images/example4_bg.png"
+
 watch_file = Framer.Importer.load "imported/watchapp"
-iconLayers = Framer.Importer.load "imported/icon"
+
+icon = new Layer 
+  x:0, y:0, width:196, height:196, image:"images/example4_icon.png"
 ```
 
 Note the order in which we're importing the files: this layers the files in the correct order. We could explicitly set the `z-index` values of each layer using the `index` property, but this is simpler. 
@@ -1555,7 +1569,7 @@ Now we'll animate it into the scene at the same time as we move the icon to the 
 ```
 icon.on Events.AnimationEnd, ->
   icon.animate
-    ...
+    # code from earlier goes here
   notification.animate
     properties: 
       y: 49
@@ -1661,9 +1675,9 @@ If you're enjoying programming and want to dig a bit deeper into the fundamental
 
 If you'd like to take your prototyping skills out of the Framer environment so you can make prototypes or production code for any website, I'd still recommend leveraging a library to help out with the animations. Some suggestions: 
 
-- [jQuery](https://jquery.com/) takes a lot of the pain out of interacting with the native browser environment. Outside of Framer, you might find that working with elements on a page can be a bit complex and verbose, jQuery can help ease the pain, and has a large plugin ecosystem that can give you a lot of extra functionality with very little code. You can accomplish a lot with some basic JavaScript knowledge and jQuery.
+- [jQuery](https://jquery.com/) takes a lot of the pain out of interacting with the native browser environment. Outside of Framer, you might find that working with elements on a page can be a bit complex and verbose. jQuery can help ease that pain, and has a large plugin ecosystem that can give you a lot of extra functionality with very little code. You can accomplish a lot with some basic JavaScript knowledge and jQuery.
 - [Move.js](http://visionmedia.github.io/move.js/) is a small and easy-to-use library for making CSS-based animations simpler. CSS-based animations are quickly becoming the standard because of their flexibility and performance, and you likely already know a lot of the syntax if you know some CSS.
-- [AnimateCSS](https://github.com/daneden/animate.css) also leverages CSS for animations, and lets you write as very little JavaScript for your animations by moving it all to pre-written CSS. 
+- [AnimateCSS](https://github.com/daneden/animate.css) also leverages CSS for animations, and lets you write minimal JavaScript for your animations by moving it all to pre-written CSS. 
 - [Snap.svg](http://snapsvg.io/) is a great library for animating vector graphics in the browser, which are resolution-independent and more flexible than the boxes and circles you can make with regular browser elements. 
 
 # Getting help
@@ -1673,3 +1687,5 @@ First of all, if you work with developers, they should be the first people you a
 If you're going it alone, there is a great and growing community behind Framer, primarily congregating on the [Facebook page](https://www.facebook.com/groups/framerjs/), where people share tips and resources and ask and answer questions. 
 
 For more programming-related questions, any developer will tell you that [Stack Overflow](http://stackoverflow.com/) is one of the most valuable resources out there. Checkout the #CoffeeScript tag to see if your question has been asked before, or ask a new question. You'll probably get an answer quickly, especially if your question is specific, clear, and includes a code example. 
+
+When you're Googling around for answers to your questions, seek out answers from reputable sources like the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript). 
