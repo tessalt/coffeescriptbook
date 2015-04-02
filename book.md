@@ -1689,3 +1689,23 @@ If you're going it alone, there is a great and growing community behind Framer, 
 For more programming-related questions, any developer will tell you that [Stack Overflow](http://stackoverflow.com/) is one of the most valuable resources out there. Checkout the #CoffeeScript tag to see if your question has been asked before, or ask a new question. You'll probably get an answer quickly, especially if your question is specific, clear, and includes a code example. 
 
 When you're Googling around for answers to your questions, seek out answers from reputable sources like the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript). 
+
+# Acknowledgements
+
+Thanks to ___ and ____ for technical review and proofreading assistance. 
+
+## If you find a typo or mistake
+
+Please report an issue on the [Github repo](https://github.com/tessalt/coffeescriptbook) or shoot me a memo on [Twitter](https://twitter.com/tessthornton). 
+
+# About the Author
+
+Tessa Thornton is a JavaScript and CoffeeScript developer at [Shopify](http://www.shopify.com) in Toronto, Canada. She is an experienced developer, technical writer, and has been using CoffeeScript since before it got cool and then not cool and then cool again. 
+
+She has a BA in Philosophy and Anthropology, which she puts to good use getting offended by strangers on the internet, and occasionally even writing essays.
+
+## Contact
+
+Twitter: [@tessthornton](https://twitter.com/tessthornton)
+
+Github: [tessalt](github.com/tessalt)
