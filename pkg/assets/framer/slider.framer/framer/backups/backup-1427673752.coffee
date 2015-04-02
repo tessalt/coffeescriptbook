@@ -1,5 +1,5 @@
-# This imports all the layers for "example3_swipe2" into example3_swipe2Layers
-file = Framer.Importer.load "imported/example3_swipe2"
+# This imports all the layers for "example3_swipe" into example3_swipeLayers1
+file = Framer.Importer.load "imported/example3_swipe"
 
 w = Framer.Device.screen.width
 

@@ -296,7 +296,7 @@ window.Framer.Defaults.DeviceView = {
   "deviceScale" : -1,
   "orientation" : 0,
   "contentScale" : 1,
-  "deviceType" : "applewatchsport-42-aluminum-sportband-green"
+  "deviceType" : "applewatchsport-42-aluminum-sportband-white"
 };
 
 window.FramerStudioInfo = {

@@ -1,16 +1,16 @@
 # This imports all the layers for "example2_dropdown" into example2_dropdownLayers1
 file = Framer.Importer.load "imported/example2_dropdown"
 
-originalWidth = file.menu_content.width
-originalHeight = file.menu_content.height
+original_width = file.menu_content.width
+original_height = file.menu_content.height
 
 file.menu_content.width = 0
 file.menu_content.height = 0
 
 file.menu_content.states.add
   open:
-    width: originalWidth
-    height: originalHeight
+    width: original_width
+    height: original_height
   closed:
     width: 0
     height: 0

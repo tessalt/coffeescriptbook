@@ -1,10 +1,12 @@
-# What is Coffeescript?
+# Introduction
 
-CoffeeScript is a relatively new programming language used often by front-end developers to create browser-based interfaces. 
+## What is CoffeeScript?
 
-CoffeeScript is interesting in that it *compiles to JavaScript*. Compiles just means turns into or is transformed into. When we write CoffeeScript, we need to compile it into JavaScript before it can run in browsers. To understand more about Coffeescript, you'll need to understand a bit about JavaScript.
+CoffeeScript is a relatively new programming language often used by front-end developers to create browser-based interfaces. 
 
-# What is JavaScript?
+CoffeeScript is interesting in that it *compiles to JavaScript*. Compiles just means turns into or is transformed into. When we write CoffeeScript, we need to *compile* it into JavaScript before it can run in browsers. To understand more about CoffeeScript, you'll need to understand a bit about JavaScript.
+
+## What is JavaScript?
 
 JavaScript is the programming language we use in browsers to do things like manipulate HTML and communicate with servers. JavaScript, along with HTML and CSS, allows us to create rich and responsive user interfaces. 
 
@@ -18,13 +20,13 @@ Despite its popularity, JavaScript has always had many critics. Though many of i
 
 Though there have been various attempts to bring other programming languages to the browser, none have been successful, so we're still more or less "stuck" with JavaScript. 
 
-In the mid-2000s, another language called Ruby was gaining popularity as a server-side programming language (meaning it isn't run in the browser, it's run on the server hosting a web site or application). Ruby, in contrast to languages like JavaScript, was designed to be easily human-readable and writeable, with an emphasis on developer productivity even enjoyability. 
+In the mid-2000s, another language called Ruby was gaining popularity as a server-side programming language (meaning it isn't run in the browser, it's run on the server that hosts a web site or application). Ruby, in contrast to languages like JavaScript, was designed to be easily human-readable and writeable, with an emphasis on developer productivity even enjoyability. 
 
-In 2009, Ruby developer Jeremy Ashkenas sought to bring some of the features he liked most about Ruby to client-side development, and created CoffeeScript. 
+In 2009, Ruby developer Jeremy Ashkenas sought to bring some of the features he liked most about Ruby to client-side development (client-side means stuff that happens in the browser), and created CoffeeScript. 
 
-Since browsers can only understand JavaScript, code written in CoffeeScript first has to be *compiled* into JavaScript before it can run. So if you were writing code in a file called `script.coffee`, you'd have to convert that file to `script.js` using the CoffeeScript compiler. 
+Since browsers can only understand JavaScript, code written in CoffeeScript first has to be *compiled* into JavaScript before it can run so that browsers can understand it. So if you were writing code in a file called `script.coffee`, you'd have to convert that file to `script.js` using the CoffeeScript compiler. 
 
-Many developers consider that extra step worth while so they can enjoy the benefits of writing CoffeeScript, which they feel makes them more productive and makes up for some of the shortcomings of JavaScript. 
+Many developers consider that extra step a worthwhile cost for the benefits of writing CoffeeScript, which they feel makes them more productive and makes up for some of the shortcomings of JavaScript. 
 
 For example, the JavaScript code to output the numbers between 1 and 10 in reverse order looks like this: 
 
@@ -49,15 +51,15 @@ countdown = (num for num in [10..1])
 
 The code is both shorter and easier to read and comprehend. 
 
-# CoffeeScript and Framer.js
+## CoffeeScript and Framer.js
 
-Framer.js is a JavaScript framework for prototyping user interfaces. If you wanted to, you could include framer.js in an HTML file, and then write code using the framework in plain JavaScript. 
+Framer.js is a JavaScript framework for prototyping user interfaces. If you wanted to, you could include framer.js in an HTML file, and then write that takes advantage of the framework in plain JavaScript. 
 
 **Framer Studio** is a companion Mac application that is based on Framer.js. Framer Studio makes your workflow much easier with features like a live preview panel and Sketch or Photoshop importers. 
 
 Framer Studio's editor allows you to write your code in CoffeeScript instead of JavaScript. Because Framer's target user base is designers, not developers, CoffeeScript offers a gentler learning curve for non-programmers and can be much faster to write, which is key when prototyping.
 
-## Framer Studio vs. Framer.js
+### Framer Studio vs. Framer.js
 
 Though I'd strongly recommend Framer Studio if you're going to be using Framer for a lot of prototyping, it is possible to take advantage of the library without using the app. The [Github project](https://github.com/koenbok/Framer) includes instructions for setting up a JavaScript project with Framer.js, but it's fairly simple to set it up to use with CoffeeScript. 
 
@@ -69,29 +71,29 @@ In this book, I'll be using Framer Studio for examples. You'll need either Frame
 
 **Note**: examples will make use of Framer Studio's built-in device templates. Not tested in regular browser environment. 
 
-# Setup
+## Setup
 
-All you'll need to follow along with this book is Framer Studio or Framer.js and CoffeeScript. For the earlier chapters, I recommend typing code into a browser-based console to observe the output yourself. I suggest [CoffeeScript REPL](http://larryng.github.io/coffeescript-repl/), or if you're familliar with Chrome's web developer console, you can add a plugin that will let you run CoffeeScript, like [CoffeeConsole](http://snook.ca/archives/browsers/coffeeconsole) or [Scratch JS](https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn) (go to settings and select "CoffeeScript" for the transformer).
+All you'll need to follow along with this book is Framer Studio or Framer.js and CoffeeScript. For the earlier chapters, I recommend typing code into a browser-based console to observe the output yourself. I suggest [CoffeeScript REPL](http://larryng.github.io/CoffeeScript-repl/), or if you're familliar with Chrome's web developer console, you can add a plugin that will let you run CoffeeScript, like [CoffeeConsole](http://snook.ca/archives/browsers/coffeeconsole) or [Scratch JS](https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn) (go to settings and select "CoffeeScript" for the transformer).
 
 The later examples require using image assets created for the projects, which came in the **Assets** folder you downloaded with this ebook. 
 
-# Coffeescript for beginners
+# Chapter 1: CoffeeScript for beginners
 
 ## Math
 
 Let's start with some simple math. 
 
-Coffeescript supports all your familiar math operators: `+ - * \` (add, subtract, multiply, divide), plus one you may be unfamiliar with: `%` or "modulus". 
+CoffeeScript supports all your familiar math operators: `+ - * \` (add, subtract, multiply, divide), plus one you may be unfamiliar with: `%` or [modulo](https://msdn.microsoft.com/en-us/library/ie/9f59bza0%28v=vs.94%29.aspx). 
 
 A lot of what you'll be doing while prototyping interactions is just simple math.
 
 Quick refresher on what you'll be up against: 
 
-## Order of operations
+### Order of operations
 
 So just like you learned in high school, BEDMAS still applies. If you want some addition and subtraction to happen before the multiplication and addition, put it in brackets. 
 
-Open up your Coffeescript console and observe: 
+Type into your CoffeeScript console of choice and observe: 
 
 ```
 10 + 20
@@ -104,17 +106,19 @@ Open up your Coffeescript console and observe:
 # => 2900
 ```
 
+Numbers and math will behave more or less the way you remember from middle school. If you get stuck trying to do something like rounding a number, check out the [MDN documentation for `Math`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) or just try a search. 
+
 ## Types of data
 
 There are all different types of data you can program with, and some of them have special abilities and uses. 
 
 ### Numbers
 
-Numbers are the simple ones. Numbers are numbers. `200`, `-10`, `4000` are all numbers. Don't include commas or spaces in your numbers, and you'll be ok. Numbers in coffeescript can have decimals and can be positive and negative. 
+Numbers are the simple ones. Numbers are numbers. `200`, `-10`, `4000` are all numbers. Don't include commas or spaces in your numbers, and you'll be ok. Numbers in CoffeeScript can have decimals and can be positive or negative. 
 
 ### Strings
 
-When you're working with letters or punctuation, you're working with `strings`. Strings come in quotation marks. **Anything in quotation marks is a string**. You can use single quotes or double quotes, but there are fewer complications when you use double-quotes.
+When you're working with letters or words or punctuation, you're working with `strings`. Strings come in quotation marks. **Anything in quotation marks is a string**. You can use single quotes or double quotes, but there are fewer complications when you use double-quotes.
 
 ```
 "This is a string"
@@ -128,7 +132,7 @@ You can squish strings together using a `+` sign. This is called *concatenating*
 # => "My name is Tessa"
 ```
 
-## Doing things with numbers and strings
+#### Doing things with numbers and strings
 
 Since anything in quotation marks is a string, you can end up with numbers that are actually strings (becasue they're in quotation marks). `"40"` is a string, `40` is a number. 
 
@@ -147,13 +151,6 @@ Instead of adding the numbers together mathemtically, the two strings were squis
 ```
 
 In some cases, mixing numbers and strings will work out okay, but it's best to avoid it when you're trying to do math. 
-
-We can mix strings and numbers on purpose: 
-
-```
-"Toronto is " + 825 + " km from Chicago"
-# => Toronto is 825 km from Chicago
-```
 
 ## Using variables
 
@@ -175,7 +172,7 @@ print age
 
 **Note** The `print` command just outputs the result of our code to a console. In the browser, `print` doesn't exist, but you can use `console.log` for the same purpose.
 
-A variable will retain the value you assigned to it until you change it. You can change a variable any time in your program (hence the name). 
+A variable will retain the value you assigned to it until you change it. You can change a variable any time in your program (hence the name *variable*). 
 
 ```
 color = "green"
@@ -196,13 +193,35 @@ There are a couple rules about variable names:
 - variable names can contain upper case and lower case characters
 - variable names can't contain punctuation other than `_`
 
-There are some common naming conventions and patterns for variable names. When a variable name is more than two words, you can combine the two words together using "camel casing" or underscores. 
+There are some common naming conventions and patterns for variable names. When a variable name is more than two words, you can combine the two words together using underscores "camel casing". 
 
 ```
 my_name = "Tessa"
 
 myName = "Tessa"
 ```
+
+### String interpolation
+
+The example `print "my favorite color is " + color` wasn't all that complicated, but combining variables with strings can easily get a bit messy. For example, if the variable comes in the middle of the string: 
+
+```
+color = "green"
+
+print "my favorite color is " + color + ", what's yours?"
+```
+
+We have to use a bunch of `+` signs, and remember where to put spaces and punctuation. There's an easier way, called *string interpolation*. We can embed the variable right in the string if we surround it with `#{}`: 
+
+```
+color = "green"
+
+print "my favorite color is #{color}, what's yours?"
+
+# => "my favorite color is green, what's yours?"
+```
+
+String interpolation can make our code much easier to read. 
 
 ## Boolean values
 
@@ -263,6 +282,7 @@ To negate a condition you use the keyword `not`. In place of `is not` you can us
 num = 5
 
 num isnt 10
+
 # => true
 ```
 
@@ -281,6 +301,8 @@ else
 # => "You're too young to learn to drive"
 ```
 
+**Note** `>=` means "greater than or eaqual to" just as `<=` means "less than or equal to".
+
 ### Indentation
 
 If you've ever looked at other programming languages like Java or JavaScript before, you might have noticed that they have a lot of symbols like semicolons and parentheses. CoffeeScript avoids using a lot of these symbols, which can make it much easier to read and write. To get away with this, in CoffeeScript we need to follow certain rules about indentation. In the above example, the indentation within the `if` and `else` statements is important. It indicates that the indented code "belongs" to the `if` statement, and so will only be run if the condition is true. 
@@ -289,7 +311,7 @@ If you've ever looked at other programming languages like Java or JavaScript bef
 
 Sometimes you want to leave notes for yourself or others in your code. Maybe to explain what something does, or remind yourself to come back to something, or to help with organization. Comments don't get read by the computer when your code runs, so you can put whatever you want there. 
 
-In coffeescript, code that starts with a `#` will be treated as a comment and ignored. 
+In CoffeeScript, lines that start with a `#` will be treated as comments and ignored. 
 
 ```
 # this is a comment. It doesn't do anything. But it's nice to read. 
@@ -341,6 +363,7 @@ Now we can call our function:
 age = 16
 
 checkAge()
+
 # which will output "Carry on" because we set the age variable to 16
 ```
 
@@ -378,7 +401,7 @@ checkAge = (age) ->
 
 Once you've added the argument name to the parentheses, you'll be able to reference whatever `age` is using its name. 
 
-`age` gets its value when the `checkAge` function is called. To give `checkAge` an `age` argument, we just put the value in the parentheses: 
+`age` gets its value when the `checkAge` function is called. To give `checkAge` an `age` argument, we put the value in the parentheses: 
 
 ```
 checkAge(17)
@@ -425,13 +448,13 @@ patrol(16)
 # => undefined
 ```
 
-### Using functions
+### Using pre-written functions
 
-When you're prototyping animations, there's a good chance you won't have to write a whole lot of functions yourself. You will however be *using* quite a few functions, most of them are provided by the framer.js library. 
+When you're prototyping animations and interactions, there's a good chance you won't have to write a whole lot of functions yourself. You will however be *using* quite a few functions, most of them are provided by the framer.js library. 
 
 That's where functions become really useful: when you can share them around. The folks beheind Framer figured out how to do all sorts of useful things related to manipulating pixels on a screen, so they wrapped up all that useful code into functions that you can use. 
 
-Let's say we're using a library that provides a `licensePlateCheck` function. It takes one argument, which is a license plate. It does all sorts of complicated things to associate that license number with a person, find out whether that person has a criminal record, if there are any warrants for their arrest, or if the car is stolen. To use this function, you don't need to know any of that. All you have to know is that it takes one argument, and that argument needs to be a license plate. For any given license plate, the `licensePlateCheck` function will tell you `true` if the plate is associated with criminal activity, and `false` if it's not. 
+Let's say we're using a library that gives us a `licensePlateCheck` function. It takes one argument, which is a license plate. It does all sorts of complicated things to associate that license number with a person, find out whether that person has a criminal record, if there are any warrants for their arrest, or if the car is stolen. To use this function, you don't need to know any of that. All you have to know is that it takes one argument, and that that argument needs to be a license plate. For any given license plate, the `licensePlateCheck` function will tell you `true` if the plate is associated with criminal activity, and `false` if it's not. 
 
 We also need to know what type of argument to provide. In this case, we need to know that the `licensePlate` argument is a string. Which makes sense, since it's a mix of numbers and letters.
 
@@ -441,11 +464,11 @@ licensePlateCheck("BAD455")
 # => true
 ```
 
-And that's all we need to do. 
+And that's all we need to do to find out that the license plate is associated with trouble. 
 
 ## Other types of data
 
-Strings, numbers, and booleans are the simplest kinds of values in coffeescript, but we can do more with more complex data types, like arrays and objects. 
+Strings, numbers, and booleans are the simplest kinds of values in CoffeeScript, but we can do more with more complex data types, like arrays and objects. 
 
 ### Arrays
 Arrays are lists or collections of multiple items. Say we wanted to keep track of a list of fruits:
@@ -454,7 +477,7 @@ Arrays are lists or collections of multiple items. Say we wanted to keep track o
 fruits = ["apples", "oranges", "bananas"]
 ```
 
-Arrays have some built in *methods* (functions that they can use) for finding out information about them: 
+Arrays have some built in *methods* (functions that they can use) for finding out information about them, like `length`: 
 
 ```
 fruits.length 
@@ -469,12 +492,12 @@ You can access elements in an array by their *index*. The index is the element's
 To access an element in an array, we use square brackets containing the index of the element we're looking for. For example, if we want go get "oranges" from the fruits array: 
 
 ```
-
-
 print fruits[1]
 
 # => "oranges"
 ```
+
+Since "oranges" is item 1 in the array (the second item). 
 
 ### Adding to arrays
 
@@ -509,7 +532,7 @@ fruits[2].toUpperCase()
 # => "BANANAS"
 ```
 
-But since we have an array containing our list of fruits, we can do this a bit more efficiently: 
+But since we have an array containing our list of fruits, we can do this a lot more efficiently with a `for` loop: 
 
 ```
 for fruit in fruits
@@ -520,7 +543,7 @@ for fruit in fruits
 # => "BANANAS"
 ```
 
-In english, we read that as "for every fruit in our list of fruits, capitalize it"
+In english, we read that as "for every fruit in our list of fruits, capitalize that fruit"
 
 If we break it down, the `for` loop does two things: it executes our code once for each item in the array, *and* it lets you refer to the currently "active" element by whatever name you like. 
 
@@ -547,9 +570,9 @@ for plate in plates
 
 ### Objects
 
-Objects are one of the most useful data types in coffeescript. An object is a collection of *properties*. In programming, a *property* is an association between a *name* and a *value*. A name-value pair could be something like "price: $10", where *price* is the name, and *$10* is the value.
+Objects are one of the most useful data types in CoffeeScript. An object is a collection of *properties*. In programming, a *property* is an association between a *name* and a *value*. A name-value pair could be something like "price: $10", where *price* is the name, and *$10* is the value, or "age: 30", where *age* is the name, nad *30* is the value.
 
-If something has properties, you can store them in an object. For example, a "book" object might have a `title` property, an `author` property, and a `genre` property. In coffeescript, we would code that as: 
+If something has properties, you can store them in an object. For example, a "book" object might have a `title` property, an `author` property, and a `genre` property. In CoffeeScript, we would code that as: 
 
 ```
 book = 
@@ -558,12 +581,13 @@ book =
   genre: "Science Fiction"
 ```
 
-You can store any kind of data in an object's properties: 
+You can store any kind of data in an object's properties, including arrays and booleans: 
 
 ```
 book = 
   pages: 256
   genres: ["Science Fiction", "Satire"]
+  fiction: true
 ```
 
 You can even store another object inside a property: 
@@ -575,6 +599,8 @@ book =
     born: 1922
     died: 2007
 ```
+
+Note that we use `=` and `:` in the above example. Note the difference: `=` assigns a varibale name (book) to an object, and `:` matches up names and values. `author` is the name, and the object containing `name`, `born`, and `died` is the value. 
 
 To access properties in an object, we use dots: 
 
@@ -604,7 +630,7 @@ print book.genres[1]
 # => "Satire"
 ```
 
-### Methods
+#### Methods
 
 Since we can store any kind of data in an object's properties, we can also store functions as properties. When a function is the property of an object, it is called a *method*. 
 
@@ -612,7 +638,7 @@ Since we can store any kind of data in an object's properties, we can also store
 book = 
   title: "Slaugherhouse Five"
   read: ->
-    print "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti voluptate vel, praesentium nobis, asperiores, ea quidem ex suscipit id odio, culpa aut consequatur commodi sit quia. Quia, sed perspiciatis nisi."
+    print "All this happened, more or less."
 ```
 
 The `read` property is a method that belongs to our `book` object. We can call it like we would any function: 
@@ -620,14 +646,14 @@ The `read` property is a method that belongs to our `book` object. We can call i
 ```
 book.read()
 
-# => "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia delectus est molestias labore, provident odio quos mollitia, et totam asperiores possimus quaerat eum esse aperiam aut consequuntur cum enim dolorem."
+# => "All this happened, more or less."
 ```
 
 This is how the `.length` method and the `toUpperCase` method work. They are methods that belong to all string objects. 
 
-### Configuration objects
+#### Configuration objects
 
-In framer.js, one of the most common uses of objects  will be to configure animations and elements: 
+In framer.js, one of the most common uses of objects will be to configure animations and elements: 
 
 ``` 
 box = 
@@ -641,13 +667,17 @@ animation =
   easing: "ease-in"
 ```
 
-# Simple Animations
+Objects are ideal for configuring animations and elements since they all have many properties of different types (some are numbers, some are strings, etc). 
+
+# Chapter 2: Simple Animations
 
 Let's open up Framer Studio and try to create some simple animations. 
 
-We're going to work with a green square for a while. 
+## Creating layers
 
-To create a new element on the screen, we use `new Layer`. This is a special kind of function that creates an object. If we assign a variable to the result of `new Layer`, we can maintain a reference to the element that we can manipulate. 
+We're going to work with a small square for a while. 
+
+To create a new element on the screen, we use `new Layer`. This is a special kind of function that creates an object. If we assign a variable to the result of `new Layer`, we can maintain a reference to that element that we can manipulate. 
 
 ```
 square = new Layer()
@@ -657,7 +687,7 @@ You should see a blue square on the screen.
 
 ![screenshot1](https://s3.amazonaws.com/f.cl.ly/items/3E20192V03310u1O1x20/Screen%20Shot%202015-03-16%20at%2010.52.28%20PM.png)
 
-To customize the square so it's not just a blue square, we can pass one argument to `new Layer()`. This argument is a configuration object, you can configure the element using properties for various attributes such as width, height, position, and appearance. 
+To customize the square so it's not just a plain blue square, we can pass one argument to `new Layer()`. This argument is a configuration object, you can configure the element using properties for various attributes such as width, height, position, and appearance. 
 
 ```
 square = new Layer(
@@ -678,9 +708,9 @@ square = new Layer
   height: 200
 ```
 
-There are a lot of cases in coffeescript where we can do this, it can sometimes make the code look a bit cleaner. 
+There are a lot of cases in CoffeeScript where we can remove parentheses like this, and it can sometimes make the code look a bit cleaner. 
 
-## Manipulate layer
+## Manipulating layers
 
 Now that we've assigned the variable `square` to our layer, we can continue to manipulate it. After we've created our layer, we can modify it at any time: 
 
@@ -689,9 +719,11 @@ square.backgroundColor = "red"
 square.x = 200
 ```
 
-You can modify a layer's coordinates (x, y), as well as appearance by using camel-cased versions of most CSS properties, as well as some built-in framer properties. For example, `color` is just `color` but `border-radius` becomes `borderRadius`. If you want to rotate an element, you can just modify the `rotation` property framer provides. Framer Studio will autocomplete most of these property names for you, but you can also look them up in the docs. 
+Note the dot syntax: this is because `square` is an object. It has a `backgroundColor` property and a lot of other properties that we can manipulate. 
 
-## Animate a layer
+You can modify a layer's coordinates (x, y), as well as appearance by using camel-cased (camelCased) versions of most CSS properties, as well as some built-in framer properties. For example, `color` is just `color` but `border-radius` becomes `borderRadius`. If you want to rotate an element, you can modify the `rotation` property framer provides. Framer Studio will autocomplete most of these property names for you, but you can also look them up in the [docs](http://framerjs.com/docs/). 
+
+## Animating layers
 
 Let's add our first animation. To animate a layer, we use the `animate` method. 
 
@@ -734,7 +766,7 @@ square.animate
 
 ### Configuring animations
 
-Time-related properties (delay and time), are specified in seconds. By default animations take 1s. Speed up the animation: 
+Time-related properties (delay and time), are specified in seconds. By default, animations take 1s. Speed up the animation: 
 
 ```
 square.animate
@@ -754,15 +786,23 @@ square.animate
   curve: "ease-in"
 ```
 
-### Other options 
+#### Other animation options 
 
-You can set an animation to repeat with `repeat`, and delay it with `delay`, specifying the delay in seconds. 
+You can set an animation to repeat any number of times with `repeat`, and delay it with `delay`, specifying the delay in seconds. 
 
-# Events
+```
+square.animate
+  properties: 
+    opacity: 0
+  repeat: 4
+  delay: 2
+```
 
-When prototyping interactions, you're mostly going to want to react to user input. This is done by using the `on` method to "listen" for events triggered by the user. 
+# Chapter 3: Events
 
-The code for doing something "on" an event can look a bit weird at first, but we'll break it down step by step. 
+When prototyping interactions, you're often going to want to react to user input. This is done by using the `on` method to "listen" for events triggered by the user. 
+
+The code for doing something "on" an event might look a bit weird at first, but we'll break it down step by step. 
 
 ```
 button = new Layer
@@ -771,9 +811,11 @@ button.on Events.Click, ->
   doFunAnimation() // do animating here
 ```
 
-This is actually a method being called with two arguments, though it may not look like it. The format for the `on` method is `on(eventName, function)`, where the `function` is the code that gets run when the event is triggered. When you use a function as an argument like this, it's called a "callback". In plain english, calling the `on` method with a callback is like saying "listen for and do", and the two arguments are the thing that you're listening for, and the thing that you should then do. 
+This is actually a method being called with two arguments, though it may not look like it. The format for the `on` method is `on(eventName, function)`, where the `function` is the code that gets run when the event is triggered. 
 
-If you remember, in coffeescript, we indicate a function with the following syntax: 
+When you use a function as an argument like this, it's called a "callback". In plain english, calling the `on` method with a callback is like saying "listen for and do", and the two arguments are the thing that you're listening for, and the thing that you should then do. 
+
+If you remember, in CoffeeScript, we indicate a function with the following syntax: 
 
 ```
 functionName = ->
@@ -781,7 +823,13 @@ functionName = ->
 
 When we give the `on` method a function as an argument, it doesn't need a name or an equals sign, so we just need the `->` part. The comma is the separation between the first argument (the name of the event), and the second (the function). 
 
-Framer gives us a bunch of events to listen for, all in the format `Events.Name`. Some of the more common events are `Events.Click`, `Events.TouchStart`. 
+It might make more sense if we leave on the parentheses: 
+
+```
+button.on(Events.Click, ->)
+```
+
+Framer gives us a bunch of events to listen for, all in the format `Events.Name`. Some of the more common events are `Events.Click` and `Events.TouchStart`. 
 
 Let's try it out:
 
@@ -792,7 +840,7 @@ button.on Events.Click, ->
   print "clicked!"
 ```
 
-## Animation and events
+### Animations and events
 
 If we combine what we know about events and animations, we can begin to prototype interactions. Let's slide our layer right on click: 
 
@@ -805,7 +853,7 @@ button.on Events.Click, ->
       x: 500
 ```
 
-## Working with screen dimensions
+### Working with screen dimensions
 
 Many of the interactions in web and mobile interfaces require calculations based on the dimensions of the screen itself. For example, if we wanted to slide our box from the left edge of the screen to the right edge, we'll need to know where the right edge is. 
 
@@ -822,7 +870,7 @@ button.on Events.Click, ->
       x: width
 ```
 
-This will cause the square to animate off the right edge of the screen. The `x` coordinate of our box is calculated from the top left of the screen, so by setting the `x` value to the width of the screen, we've set it just off the edge of the screen. To animate the box so that it stays on the screen, we can subtract the box's width from the screen's width to get the `x` value. By default, the layer is 100px wide. 
+This will cause the square to animate off the right edge of the screen. The `x` coordinate of our box is calculated from the top left of the screen, so by setting the `x` value to the width of the screen, we've set it just off the edge of the screen. To animate the box so that it stays on the screen, we can subtract the box's width from the screen's width to get the `x` value. By default, all layers are 100px wide. 
 
 ```
 button.on Events.Click, ->
@@ -831,11 +879,11 @@ button.on Events.Click, ->
       x: width - 100
 ```
 
-# Prototyping simple interactions
+# Chapter 4: Prototyping simple interactions
 
-## Dismis modal window
+## Example 1: Dismiss modal window
 
-Import the "example1_popup" psd or Sketch file into Framer. Set the device type to iPhone 6 for best arrangement. 
+Import the "example1_popup" psd or Sketch file into Framer Studio. Set the device type to iPhone 6 for best arrangement. 
 
 The first thing we're going to prototype is the dismissal of this popup when the user clicks on the "x". The "x" layer group is called "close", so we access it by name (it is a property of the imported `psd` object). We'll add a click event handler to the close: 
 
@@ -969,7 +1017,7 @@ file.menu_icon.on Events.Click, ->
     file.menu_content.opacity = 1
 ```
 
-For this to work, we'll need to toggle `is_open` between false and true when the user clicks. To toggle a value between true and false, we can re-assign the variable to it's opposite. True and false are opposite of each other, so not true = false and not false = true. In coffeescript, we use the `!` symbol to mean "not": `true != false`. 
+For this to work, we'll need to toggle `is_open` between false and true when the user clicks. To toggle a value between true and false, we can re-assign the variable to it's opposite. True and false are opposite of each other, so not true = false and not false = true. In CoffeeScript, we use the `!` symbol to mean "not": `true != false`. 
 
 To set a value to its opposite, we do `= !` or "set the value to *not* whatever it currently is"
 
@@ -1194,7 +1242,7 @@ for fruit in fruits
 # => "BANANAS"
 ```
 
-One of the convenient things about coffeescript is that we can make a new array and loop through it all in one line: 
+One of the convenient things about CoffeeScript is that we can make a new array and loop through it all in one line: 
 
 ```
 for fruit in ["apples", "oranges", "bananas"]
@@ -1222,7 +1270,7 @@ for i in [1..5]
 # => 5
 ```
 
-This is a fairly common pattern when you're prototyping lots of elements in coffeescript. It's a bit of a convention to use `i` for the variable that gets re-assigned for each time through the loop (like in `for fruit in fruits`, `fruit` got re-assigned to "apple", "orange", "banana" each time through the loop). `i` as in "iterator" I think. 
+This is a fairly common pattern when you're prototyping lots of elements in CoffeeScript. It's a bit of a convention to use `i` for the variable that gets re-assigned for each time through the loop (like in `for fruit in fruits`, `fruit` got re-assigned to "apple", "orange", "banana" each time through the loop). `i` as in "iterator" I think. 
 
 So again, if we wanted to create 4 squares, we can do it much more easily with a loop: 
 
@@ -1585,13 +1633,13 @@ Pretty cool, right!
 
 I think that with the building blocks from the last few examples you should be able to prototype a pretty wide variety of interactions and animations using Framer. I've intentionally stayed away from discussing topics such as code organization and best practices because I find these concepts unnecessary for beginners and in the context of building prototypes to communicate experiences. 
 
-If you're taking prototyping with Coffeescript seriously, I'd strongly recommend learning some JavaScript fundamentals. Unfortunately, there are few Coffeescript resources aimed at beginner developers, since most coffeescript developers come from the background of already knowing at least some JavaScript. 
+If you're taking prototyping with CoffeeScript seriously, I'd strongly recommend learning some JavaScript fundamentals. Unfortunately, there are few CoffeeScript resources aimed at beginner developers, since most CoffeeScript developers come from the background of already knowing at least some JavaScript. 
 
-For JavaScript (and general programming) fundamentals, I suggest working through the [Codeacademy JavaScript track](http://www.codecademy.com/tracks/javascript). It's an interactive set of tutorials that let you program in the browser and provides feedback on your code, and it's totally free. 
+For JavaScript (and general programming) fundamentals, I suggest working through the [Codeacademy JavaScript track](http://www.codecademy.com/tracks/JavaScript). It's an interactive set of tutorials that let you program in the browser and provides feedback on your code, and it's totally free. 
 
-If you're looking for some more in-depth resources, [Codeschool](https://www.codeschool.com/) has excellent JavaScript and Coffeescript courses which feature excellent video tutorials and interactive challenges. 
+If you're looking for some more in-depth resources, [Codeschool](https://www.codeschool.com/) has excellent JavaScript and CoffeeScript courses which feature excellent video tutorials and interactive challenges. 
 
-If you're enjoying programming and want to dig a bit deeper into the fundamentals (using coffeescript), read Reginald Braithwaite's [Coffeescript Ristretto](https://leanpub.com/coffeescript-ristretto), which starts at the very beginning of programming with functions and gets into some pretty advanced concepts, using coffeescript for all code examples. 
+If you're enjoying programming and want to dig a bit deeper into the fundamentals (using CoffeeScript), read Reginald Braithwaite's [CoffeeScript Ristretto](https://leanpub.com/CoffeeScript-ristretto), which starts at the very beginning of programming with functions and gets into some pretty advanced concepts, using CoffeeScript for all code examples. 
 
 If you'd like to take your prototyping skills out of the Framer environment so you can make prototypes or production code for any website, I'd still recommend leveraging a library to help out with the animations. Some suggestions: 
 
@@ -1602,8 +1650,8 @@ If you'd like to take your prototyping skills out of the Framer environment so y
 
 # Getting help
 
-First of all, if you work with developers, they should be the first people you ask for help. You'll find that a lot of developers love sharing their knowledge and are generally excited when other members of their team take an interest in code. It doesn't matter if your coworkers have never seen coffeescript before; the concepts are similar accross all programming languages and they'll probably be able to help anyways. 
+First of all, if you work with developers, they should be the first people you ask for help. You'll find that a lot of developers love sharing their knowledge and are generally excited when other members of their team take an interest in code. It doesn't matter if your coworkers have never seen CoffeeScript before; the concepts are similar accross all programming languages and they'll probably be able to help anyways. 
 
 If you're going it alone, there is a great and growing community behind Framer, primarily congregating on the [Facebook page](https://www.facebook.com/groups/framerjs/), where people share tips and resources and ask and answer questions. 
 
-For more programming-related questions, any developer will tell you that [Stack Overflow](http://stackoverflow.com/) is one of the most valuable resources out there. Checkout the #coffeescript tag to see if your question has been asked before, or ask a new question. You'll probably get an answer quickly, especially if your question is specific, clear, and includes a code example. 
+For more programming-related questions, any developer will tell you that [Stack Overflow](http://stackoverflow.com/) is one of the most valuable resources out there. Checkout the #CoffeeScript tag to see if your question has been asked before, or ask a new question. You'll probably get an answer quickly, especially if your question is specific, clear, and includes a code example. 
