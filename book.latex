@@ -1,0 +1,2325 @@
+\section{Introduction}\label{introduction}
+
+\subsection{What is CoffeeScript?}\label{what-is-coffeescript}
+
+CoffeeScript is a relatively new programming language often used by
+front-end developers to create browser-based interfaces.
+
+CoffeeScript is interesting in that it \emph{compiles to JavaScript}.
+Compiles just means turns into or is transformed into. When we write
+CoffeeScript, we need to \emph{compile} it into JavaScript before it can
+run in browsers. To understand more about CoffeeScript, you'll need to
+understand a bit about JavaScript.
+
+\subsection{What is JavaScript?}\label{what-is-javascript}
+
+JavaScript is the programming language we use in browsers to do things
+like manipulate HTML and communicate with servers. JavaScript, along
+with HTML and CSS, allows us to create rich and responsive user
+interfaces.
+
+JavaScript is one of the most popular programming languages in the
+world, mainly because it's the \emph{only} programming language that
+runs in browsers.
+
+JavaScript was created by Brendan Eich at Netscape in 1995 to give web
+developers and designers an accessible way to manipualte web pages. It
+very quickly gained popularity because it allowed developers to add a
+lot more functionality to web pages and was relatively easy to learn.
+
+Despite its popularity, JavaScript has always had many critics. Though
+many of its early flaws have been overcome in more recent releases of
+the language, many still consider it to be an ``ugly'' language with a
+lot of historical baggage.
+
+\subsection{Why CoffeeScript?}\label{why-coffeescript}
+
+Though there have been various attempts to bring other programming
+languages to the browser, none have been successful, so we're still more
+or less ``stuck'' with JavaScript.
+
+In the mid-2000s, another language called Ruby was gaining popularity as
+a server-side programming language (meaning it isn't run in the browser,
+it's run on the server that hosts a web site or application). Ruby, in
+contrast to languages like JavaScript, was designed to be easily
+human-readable and writeable, with an emphasis on developer productivity
+even enjoyability.
+
+In 2009, Ruby developer Jeremy Ashkenas sought to bring some of the
+features he liked most about Ruby to client-side development
+(client-side means stuff that happens in the browser), and created
+CoffeeScript.
+
+Since browsers can only understand JavaScript, code written in
+CoffeeScript first has to be \emph{compiled} into JavaScript before it
+can run so that browsers can understand it. So if you were writing code
+in a file called \lstinline!script.coffee!, you'd have to convert that
+file to \lstinline!script.js! using the CoffeeScript compiler.
+
+Many developers consider that extra step a worthwhile cost for the
+benefits of writing CoffeeScript, which they feel makes them more
+productive and makes up for some of the shortcomings of JavaScript.
+
+For example, the JavaScript code to output the numbers between 1 and 10
+in reverse order looks like this:
+
+\begin{lstlisting}[language=Java]
+var countdown, num;
+
+countdown = (function() {
+  var i, results;
+  results = [];
+  for (num = i = 10; i >= 1; num = --i) {
+    results.push(num);
+  }
+  return results;
+})();
+\end{lstlisting}
+
+The same code in CoffeeScript looks like this:
+
+\begin{lstlisting}[language=Ruby]
+countdown = (num for num in [10..1])
+\end{lstlisting}
+
+The code is both shorter and easier to read and comprehend.
+
+\subsection{CoffeeScript and
+Framer.js}\label{coffeescript-and-framer.js}
+
+Framer.js is a JavaScript framework for prototyping user interfaces. If
+you wanted to, you could include framer.js in an HTML file, and then
+write that takes advantage of the framework in plain JavaScript.
+
+\textbf{Framer Studio} is a companion Mac application that is based on
+Framer.js. Framer Studio makes your workflow much easier with features
+like a live preview panel and Sketch or Photoshop importers.
+
+Framer Studio's editor allows you to write your code in CoffeeScript
+instead of JavaScript. Because Framer's target user base is designers,
+not developers, CoffeeScript offers a gentler learning curve for
+non-programmers and can be much faster to write, which is key when
+prototyping.
+
+\subsubsection{Framer Studio
+vs.~Framer.js}\label{framer-studio-vs.framer.js}
+
+Though I'd strongly recommend Framer Studio if you're going to be using
+Framer for a lot of prototyping, it is possible to take advantage of the
+library without using the app. The
+\href{https://github.com/koenbok/Framer}{Github project} includes
+instructions for setting up a JavaScript project with Framer.js, but
+it's fairly simple to set it up to use with CoffeeScript.
+
+In this book, I'll be using Framer Studio for examples. You'll need
+either Framer Studio or a way of compiling CoffeeScript to follow along.
+To compile CoffeeScript without using the command line, you can use one
+of the following GUIs:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \href{https://prepros.io/}{Prepros (Mac/Windows/Linux). Indefinite
+  free trial/\$29}
+\item
+  \href{http://koala-app.com/}{Koala (Mac/Windows/Linux). Free}
+\item
+  \href{https://incident57.com/codekit/}{Codekit (Mac). \$32}
+\end{itemize}
+
+\textbf{Note}: examples will make use of Framer Studio's built-in device
+templates. Not tested in regular browser environment.
+
+\subsection{Setup}\label{setup}
+
+All you'll need to follow along with this book is Framer Studio or
+Framer.js and CoffeeScript. For the earlier chapters, I recommend typing
+code into a browser-based console to observe the output yourself. I
+suggest \href{http://larryng.github.io/CoffeeScript-repl/}{CoffeeScript
+REPL}, or if you're familliar with Chrome's web developer console, you
+can add a plugin that will let you run CoffeeScript, like
+\href{http://snook.ca/archives/browsers/coffeeconsole}{CoffeeConsole} or
+\href{https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn}{Scratch
+JS} (go to settings and select ``CoffeeScript'' for the transformer).
+
+The later examples require using image assets created for the projects,
+which came in the \textbf{Assets} folder you downloaded with this ebook.
+
+\section{Chapter 1: CoffeeScript for
+beginners}\label{chapter-1-coffeescript-for-beginners}
+
+\subsection{Math}\label{math}
+
+Let's start with some simple math.
+
+CoffeeScript supports all your familiar math operators:
+\lstinline!+ - * \! (add, subtract, multiply, divide), plus one you may
+be unfamiliar with: \lstinline!%! or
+\href{https://msdn.microsoft.com/en-us/library/ie/9f59bza0\%28v=vs.94\%29.aspx}{modulo}.
+
+A lot of what you'll be doing while prototyping interactions is just
+simple math.
+
+Quick refresher on what you'll be up against:
+
+\subsubsection{Order of operations}\label{order-of-operations}
+
+So just like you learned in high school, BEDMAS still applies. If you
+want some addition and subtraction to happen before the multiplication
+and addition, put it in brackets.
+
+Type into your CoffeeScript console of choice and observe:
+
+\begin{lstlisting}[language=Ruby]
+10 + 20
+# => 25
+
+150 - 5 * 20
+# => 50
+
+(150 - 5) * 20
+# => 2900
+\end{lstlisting}
+
+Numbers and math will behave more or less the way you remember from
+middle school. If you get stuck trying to do something like rounding a
+number, check out the
+\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math}{MDN
+documentation for \lstinline!Math!} or just try a search.
+
+\subsection{Types of data}\label{types-of-data}
+
+There are all different types of data you can program with, and some of
+them have special abilities and uses.
+
+\subsubsection{Numbers}\label{numbers}
+
+Numbers are the simple ones. Numbers are numbers. \lstinline!200!,
+\lstinline!-10!, \lstinline!4000! are all numbers. Don't include commas
+or spaces in your numbers, and you'll be ok. Numbers in CoffeeScript can
+have decimals and can be positive or negative.
+
+\subsubsection{Strings}\label{strings}
+
+When you're working with letters or words or punctuation, you're working
+with \lstinline!strings!. Strings come in quotation marks.
+\textbf{Anything in quotation marks is a string}. You can use single
+quotes or double quotes, but there are fewer complications when you use
+double-quotes.
+
+\begin{lstlisting}
+"This is a string"
+'This is also a string'
+\end{lstlisting}
+
+You can squish strings together using a \lstinline!+! sign. This is
+called \emph{concatenating}.
+
+\begin{lstlisting}
+"My name is " + "Tessa"
+# => "My name is Tessa"
+\end{lstlisting}
+
+\paragraph{Doing things with numbers and
+strings}\label{doing-things-with-numbers-and-strings}
+
+Since anything in quotation marks is a string, you can end up with
+numbers that are actually strings (becasue they're in quotation marks).
+\lstinline!"40"! is a string, \lstinline!40! is a number.
+
+Some strange things can happen if you treat strings like numbers:
+
+\begin{lstlisting}
+"50" + "50"
+# => "5050"
+\end{lstlisting}
+
+Instead of adding the numbers together mathemtically, the two strings
+were squished together. If one of the values is a string, and one is a
+number, we get the same result:
+
+\begin{lstlisting}
+"50" + 50
+# => "5050"
+\end{lstlisting}
+
+In some cases, mixing numbers and strings will work out okay, but it's
+best to avoid it when you're trying to do math.
+
+\subsection{Using variables}\label{using-variables}
+
+Other than some simple math, we can't do much of interest with just
+numbers and strings and mathematical operators. One of the most powerful
+tools we have for organizing our code is \emph{variables}. Variables let
+you \emph{assign} a value to an arbitrary symbol for later reference. A
+variable is a box you can put values into. Any kind of value, like a
+string or a number. Variables are assigned using the \lstinline!=!
+operator.
+
+\begin{lstlisting}
+name = "Tessa"
+
+print name
+
+# => "Tessa"
+
+age = 26
+
+print age
+
+# => 26
+\end{lstlisting}
+
+\textbf{Note} The \lstinline!print! command just outputs the result of
+our code to a console. In the browser, \lstinline!print! doesn't exist,
+but you can use \lstinline!console.log! for the same purpose.
+
+A variable will retain the value you assigned to it until you change it.
+You can change a variable any time in your program (hence the name
+\emph{variable}).
+
+\begin{lstlisting}
+color = "green"
+
+print "my favorite color is " + color
+# => "my favorite color is green"
+
+color = "red"
+
+print "my new favorite color is " + color
+# => "my new favorite color is red"
+\end{lstlisting}
+
+There are a couple rules about variable names:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  variable names can't contain spaces
+\item
+  variable names can't start with numbers
+\item
+  variable names can contain upper case and lower case characters
+\item
+  variable names can't contain punctuation other than \lstinline!_!
+\end{itemize}
+
+There are some common naming conventions and patterns for variable
+names. When a variable name is more than two words, you can combine the
+two words together using underscores ``camel casing''.
+
+\begin{lstlisting}
+my_name = "Tessa"
+
+myName = "Tessa"
+\end{lstlisting}
+
+\subsubsection{String interpolation}\label{string-interpolation}
+
+The example \lstinline!print "my favorite color is " + color! wasn't all
+that complicated, but combining variables with strings can easily get a
+bit messy. For example, if the variable comes in the middle of the
+string:
+
+\begin{lstlisting}
+color = "green"
+
+print "my favorite color is " + color + ", what's yours?"
+\end{lstlisting}
+
+We have to use a bunch of \lstinline!+! signs, and remember where to put
+spaces and punctuation. There's an easier way, called \emph{string
+interpolation}. We can embed the variable right in the string if we
+surround it with \lstinline!#{}!:
+
+\begin{lstlisting}
+color = "green"
+
+print "my favorite color is #{color}, what's yours?"
+
+# => "my favorite color is green, what's yours?"
+\end{lstlisting}
+
+String interpolation can make our code much easier to read.
+
+\subsection{Boolean values}\label{boolean-values}
+
+Booleans are values that are either true or false. They're indicated
+with just the words \lstinline!true! or \lstinline!false! without
+quotation marks.
+
+\begin{lstlisting}
+myBoolean = true
+\end{lstlisting}
+
+Boolean values are often the result of making comparisons:
+
+\begin{lstlisting}
+10 > 9
+
+# => true
+
+9 < 8
+
+# => false
+\end{lstlisting}
+
+You can assign the \emph{result} of a comparison to a variable:
+
+\begin{lstlisting}
+theTruth = 10 < 5
+
+print theTruth
+# => false
+\end{lstlisting}
+
+\subsubsection{Comparing for equality}\label{comparing-for-equality}
+
+In regular math, you compare values using the \lstinline!=! sign. As you
+hopefully recall, we're already using the \lstinline!=! sign to assign
+variables (\lstinline!myVar = 10!), so it would be confusing and
+error-prone for us to also use \lstinline!=! for comparison.
+
+In CoffeeScript, you can use the \lstinline!is! operator to check to see
+if two values are the same.
+
+\textbf{Note}: you may see code where \lstinline!==! is used to compare
+values. In CoffeeScript \lstinline!is! is a shortcut for \lstinline!==!.
+We'll use \lstinline!is! because it's easier to read.
+
+\begin{lstlisting}
+5 is 5
+
+# => true
+
+num = 5
+
+num is 5
+
+# => true
+
+num is 10
+
+# => false
+\end{lstlisting}
+
+To negate a condition you use the keyword \lstinline!not!. In place of
+\lstinline!is not! you can use the shortform \lstinline!isnt!
+
+\begin{lstlisting}
+num = 5
+
+num isnt 10
+
+# => true
+\end{lstlisting}
+
+\subsection{Conditional statements}\label{conditional-statements}
+
+Comparing variables is only useful if we do something with the outcome
+of the comparison. That's what conditional statements are for.
+CoffeeScript uses simple \lstinline!if/else! statements to run different
+code in different scenarios:
+
+\begin{lstlisting}
+num = 14
+
+if num >= 16
+  print "you can learn to drive"
+else
+  print "you're too young to learn to drive"
+
+# => "You're too young to learn to drive"
+\end{lstlisting}
+
+\textbf{Note} \lstinline!>=! means ``greater than or eaqual to'' just as
+\lstinline!<=! means ``less than or equal to''.
+
+\subsubsection{Indentation}\label{indentation}
+
+If you've ever looked at other programming languages like Java or
+JavaScript before, you might have noticed that they have a lot of
+symbols like semicolons and parentheses. CoffeeScript avoids using a lot
+of these symbols, which can make it much easier to read and write. To
+get away with this, in CoffeeScript we need to follow certain rules
+about indentation. In the above example, the indentation within the
+\lstinline!if! and \lstinline!else! statements is important. It
+indicates that the indented code ``belongs'' to the \lstinline!if!
+statement, and so will only be run if the condition is true.
+
+\subsection{Comments}\label{comments}
+
+Sometimes you want to leave notes for yourself or others in your code.
+Maybe to explain what something does, or remind yourself to come back to
+something, or to help with organization. Comments don't get read by the
+computer when your code runs, so you can put whatever you want there.
+
+In CoffeeScript, lines that start with a \lstinline!#! will be treated
+as comments and ignored.
+
+\begin{lstlisting}
+# this is a comment. It doesn't do anything. But it's nice to read. 
+\end{lstlisting}
+
+\subsection{Functions}\label{functions}
+
+Functions wrap up a bit of code for re-use. For example, the ``age
+check'' code that we wrote above can be wrapped up in a function so that
+we can re-use it on every young-looking driver we encounter.
+
+When you make a function, you want to be able to \emph{use} it somehow,
+so you have to have a way to reference it. We can do this by assigning
+our function to a variable:
+
+\begin{lstlisting}
+checkAge = 
+\end{lstlisting}
+
+To indicate that we're putting a function in this variable, we use the
+\lstinline!->! arrow
+
+\begin{lstlisting}
+checkAge = ->
+  # we'll put the code for checking age here
+\end{lstlisting}
+
+The code above just says ``checkAge is a function'' but it doesn't do
+anything yet. To ``call'' our useless function (calling a function =
+using a function), we use parentheses.
+
+\begin{lstlisting}
+checkAge = ->
+  # doesn't do anything yet
+
+checkAge()
+\end{lstlisting}
+
+The \lstinline!()! part basically means ``go''. It tells the computer
+``run the function in the checkAge variable''
+
+So let's make our \lstinline!checkAge! function actually do something:
+
+\begin{lstlisting}
+checkAge = ->
+  if age >= 16
+    print "Carry on"
+  else
+    print "Get out of the car please"
+\end{lstlisting}
+
+\textbf{Note}: the indentation is again significant. All the code
+wrapped in the \lstinline!checkAge! function needs to be indented one
+level to indicate that it belongs to it.
+
+Now we can call our function:
+
+\begin{lstlisting}
+age = 16
+
+checkAge()
+
+# which will output "Carry on" because we set the age variable to 16
+\end{lstlisting}
+
+Lets try it with a couple young drivers:
+
+\begin{lstlisting}
+age = 15
+
+checkAge()
+
+# => "Get out of the car please"
+
+age = 18
+
+checkAge() 
+
+# => "Carry on"
+\end{lstlisting}
+
+\subsubsection{Functions with arguments}\label{functions-with-arguments}
+
+Functions can be even more useful if we can give them values to work
+with. These values are called \emph{arguments}. If we give
+\lstinline!checkAge! an age argument, we don't need to have a separate
+age variable.
+
+Let's rewrite \lstinline!checkAge! to accept an \lstinline!age!
+\emph{argument}:
+
+In CoffeeScript, we can give a function the ability to accept arguments
+by adding parentheses containing the argument name before the
+\lstinline!->! sign.
+
+\begin{lstlisting}
+checkAge = (age) ->
+  if age >= 16
+    print "Carry on"
+  else
+    print "Get out of the car please"
+\end{lstlisting}
+
+Once you've added the argument name to the parentheses, you'll be able
+to reference whatever \lstinline!age! is using its name.
+
+\lstinline!age! gets its value when the \lstinline!checkAge! function is
+called. To give \lstinline!checkAge! an \lstinline!age! argument, we put
+the value in the parentheses:
+
+\begin{lstlisting}
+checkAge(17)
+
+# => "Carry on"
+\end{lstlisting}
+
+Functions can take multiple arguments:
+
+\begin{lstlisting}
+patrol = (age, speed) ->
+  if speed > 60
+    if age >= 16
+      print "Happy speeding ticket"
+    else
+      print "Get out of the car, kid"
+\end{lstlisting}
+
+In this example, the \lstinline!patrol! function also takes a
+\lstinline!speed! argument. Now we only do the age check if the speed is
+greater than 60. Budget cuts.
+
+Note how all the code nested under the \lstinline!if speed > 60!
+statement is indented an additional level.
+
+To use our new \lstinline!patrol! function, we now have to put two
+values in the parentheses: the first one is the age, the second one is
+the speed:
+
+\begin{lstlisting}
+patrol(17, 70)
+
+# => "Happy speeding ticket"
+
+patrol(17, 40)
+
+# => ... (nothing happens)
+
+patrol(15, 90)
+
+# => "Get out of the car, kid"
+\end{lstlisting}
+
+If we forget to add the the \lstinline!speed! argument:
+
+\begin{lstlisting}
+patrol(16)
+
+# => undefined
+\end{lstlisting}
+
+\subsubsection{Using pre-written
+functions}\label{using-pre-written-functions}
+
+When you're prototyping animations and interactions, there's a good
+chance you won't have to write a whole lot of functions yourself. You
+will however be \emph{using} quite a few functions, most of them are
+provided by the framer.js library.
+
+That's where functions become really useful: when you can share them
+around. The folks beheind Framer figured out how to do all sorts of
+useful things related to manipulating pixels on a screen, so they
+wrapped up all that useful code into functions that you can use.
+
+Let's say we're using a library that gives us a
+\lstinline!licensePlateCheck! function. It takes one argument, which is
+a license plate. It does all sorts of complicated things to associate
+that license number with a person, find out whether that person has a
+criminal record, if there are any warrants for their arrest, or if the
+car is stolen. To use this function, you don't need to know any of that.
+All you have to know is that it takes one argument, and that that
+argument needs to be a license plate. For any given license plate, the
+\lstinline!licensePlateCheck! function will tell you \lstinline!true! if
+the plate is associated with criminal activity, and \lstinline!false! if
+it's not.
+
+We also need to know what type of argument to provide. In this case, we
+need to know that the \lstinline!licensePlate! argument is a string.
+Which makes sense, since it's a mix of numbers and letters.
+
+\begin{lstlisting}
+licensePlateCheck("BAD455")
+
+# => true
+\end{lstlisting}
+
+And that's all we need to do to find out that the license plate is
+associated with trouble.
+
+\subsection{Other types of data}\label{other-types-of-data}
+
+Strings, numbers, and booleans are the simplest kinds of values in
+CoffeeScript, but we can do more with more complex data types, like
+arrays and objects.
+
+\subsubsection{Arrays}\label{arrays}
+
+Arrays are lists or collections of multiple items. Say we wanted to keep
+track of a list of fruits:
+
+\begin{lstlisting}
+fruits = ["apples", "oranges", "bananas"]
+\end{lstlisting}
+
+Arrays have some built in \emph{methods} (functions that they can use)
+for finding out information about them, like \lstinline!length!:
+
+\begin{lstlisting}
+fruits.length 
+
+# => 3
+\end{lstlisting}
+
+You can access elements in an array by their \emph{index}. The index is
+the element's position within the array.
+
+\textbf{Arrays are zero-indexed}. This means that the first item in the
+array is item 0, and the second item is item 1. This can be a little
+confusing at first, but you'll get used to it.
+
+To access an element in an array, we use square brackets containing the
+index of the element we're looking for. For example, if we want go get
+``oranges'' from the fruits array:
+
+\begin{lstlisting}
+print fruits[1]
+
+# => "oranges"
+\end{lstlisting}
+
+Since ``oranges'' is item 1 in the array (the second item).
+
+\subsubsection{Adding to arrays}\label{adding-to-arrays}
+
+You can add new items to an array with the method \lstinline!push!.
+\lstinline!push! adds the item you specify to the end of the array.
+
+\begin{lstlisting}
+fruits.push("kiwis")
+
+print fruits
+
+# => ["apples", "oranges", "bananas", "kiwis"]
+\end{lstlisting}
+
+\subsubsection{Looping through arrays}\label{looping-through-arrays}
+
+Arrays can be very powerful in CoffeeScript, because they let you repeat
+certain functionality over and over with different items in an array.
+
+One of the most common ways to control your program is by using
+\emph{loops}. Loops let you do something for every item in an array.
+
+\lstinline!toUpperCase! is a method that you can use on strings to
+capitalize them
+
+If we wanted to print out each element in our array of fruits in capital
+letters, we could do:
+
+\begin{lstlisting}
+fruits[0].toUpperCase()
+# => "APPLES"
+
+fruits[1].toUpperCase()
+# => "ORANGES"
+
+fruits[2].toUpperCase()
+# => "BANANAS"
+\end{lstlisting}
+
+But since we have an array containing our list of fruits, we can do this
+a lot more efficiently with a \lstinline!for! loop:
+
+\begin{lstlisting}
+for fruit in fruits
+  fruit.toUpperCase()
+
+# => "APPLES"
+# => "ORANGES"
+# => "BANANAS"
+\end{lstlisting}
+
+In english, we read that as ``for every fruit in our list of fruits,
+capitalize that fruit''
+
+If we break it down, the \lstinline!for! loop does two things: it
+executes our code once for each item in the array, \emph{and} it lets
+you refer to the currently ``active'' element by whatever name you like.
+
+The code \lstinline!for fruit in fruits! tells us that each time through
+the array, we'll have a variable called \lstinline!fruit!. That variable
+\lstinline!fruit! will refer to the item we're working with each time
+through. So the first time through the array, \lstinline!fruit! will
+refer to ``apples'', the second time it will refer to ``oranges'', etc.
+
+What if we had a lineup of cars to run license checks on?
+
+\begin{lstlisting}
+plates = ["BRR010", "BUU888", "NNB001", "MBB991"]
+\end{lstlisting}
+
+Let's check each plate for criminal activity with a \lstinline!for!
+loop:
+
+\begin{lstlisting}
+for plate in plates
+  licensePlateCheck(plate)
+
+# => false
+# => true
+# => false
+\end{lstlisting}
+
+\textbf{Again, the indentation is significant}. The indentation of the
+second line means that code gets executed only inside the
+\lstinline!for! loop.
+
+\subsubsection{Objects}\label{objects}
+
+Objects are one of the most useful data types in CoffeeScript. An object
+is a collection of \emph{properties}. In programming, a \emph{property}
+is an association between a \emph{name} and a \emph{value}. A name-value
+pair could be something like ``price: \$10'', where \emph{price} is the
+name, and \emph{\$10} is the value, or ``age: 30'', where \emph{age} is
+the name, nad \emph{30} is the value.
+
+If something has properties, you can store them in an object. For
+example, a ``book'' object might have a \lstinline!title! property, an
+\lstinline!author! property, and a \lstinline!genre! property. In
+CoffeeScript, we would code that as:
+
+\begin{lstlisting}
+book = 
+  title: "Slaughterhouse Five"
+  author: "Kurt Vonnegut"
+  genre: "Science Fiction"
+\end{lstlisting}
+
+You can store any kind of data in an object's properties, including
+arrays and booleans:
+
+\begin{lstlisting}
+book = 
+  pages: 256
+  genres: ["Science Fiction", "Satire"]
+  fiction: true
+\end{lstlisting}
+
+You can even store another object inside a property:
+
+\begin{lstlisting}
+book = 
+  author: 
+    name: "Kurt Vonnegut"
+    born: 1922
+    died: 2007
+\end{lstlisting}
+
+Note that we use \lstinline!=! and \lstinline!:! in the above example.
+Note the difference: \lstinline!=! assigns a varibale name (book) to an
+object, and \lstinline!:! matches up names and values.
+\lstinline!author! is the name, and the object containing
+\lstinline!name!, \lstinline!born!, and \lstinline!died! is the value.
+
+To access properties in an object, we use dots:
+
+\begin{lstlisting}
+print book.title
+
+# => "Slaugherhouse Five"
+
+print book.pages
+
+# => 256
+\end{lstlisting}
+
+We can keep going with the dots to access objects within objects:
+
+\begin{lstlisting}
+print book.author.born
+
+# => 1922
+\end{lstlisting}
+
+And to access the elements of the array inside the object, we combine
+the square bracket and the dot syntax:
+
+\begin{lstlisting}
+print book.genres[1]
+
+# => "Satire"
+\end{lstlisting}
+
+\paragraph{Methods}\label{methods}
+
+Since we can store any kind of data in an object's properties, we can
+also store functions as properties. When a function is the property of
+an object, it is called a \emph{method}.
+
+\begin{lstlisting}
+book = 
+  title: "Slaugherhouse Five"
+  read: ->
+    print "All this happened, more or less."
+\end{lstlisting}
+
+The \lstinline!read! property is a method that belongs to our
+\lstinline!book! object. We can call it like we would any function:
+
+\begin{lstlisting}
+book.read()
+
+# => "All this happened, more or less."
+\end{lstlisting}
+
+This is how the \lstinline!.length! method and the
+\lstinline!toUpperCase! method work. They are methods that belong to all
+string objects.
+
+\paragraph{Configuration objects}\label{configuration-objects}
+
+In framer.js, one of the most common uses of objects will be to
+configure animations and elements:
+
+\begin{lstlisting}
+box = 
+  width: 120
+  height: 120
+  x: 0
+  y: 0
+
+animation = 
+  duration: 300
+  easing: "ease-in"
+\end{lstlisting}
+
+Objects are ideal for configuring animations and elements since they all
+have many properties of different types (some are numbers, some are
+strings, etc).
+
+\section{Chapter 2: Simple
+Animations}\label{chapter-2-simple-animations}
+
+Let's open up Framer Studio and try to create some simple animations.
+
+\subsection{Creating layers}\label{creating-layers}
+
+We're going to work with a small square for a while.
+
+To create a new element on the screen, we use \lstinline!new Layer!.
+This is a special kind of function that creates an object. If we assign
+a variable to the result of \lstinline!new Layer!, we can maintain a
+reference to that element that we can manipulate.
+
+\begin{lstlisting}
+square = new Layer()
+\end{lstlisting}
+
+You should see a blue square on the screen.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/3E20192V03310u1O1x20/Screen\%20Shot\%202015-03-16\%20at\%2010.52.28\%20PM.png}
+\caption{screenshot1}
+\end{figure}
+
+To customize the square so it's not just a plain blue square, we can
+pass one argument to \lstinline!new Layer()!. This argument is a
+configuration object, you can configure the element using properties for
+various attributes such as width, height, position, and appearance.
+
+\begin{lstlisting}
+square = new Layer(
+  width: 200
+  height: 200
+  x: 100
+  y: 100
+)
+\end{lstlisting}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/0e3f2F3F1f1s0r0V0y30/Screen\%20Shot\%202015-03-16\%20at\%2010.59.40\%20PM.png}
+\caption{screenshot2}
+\end{figure}
+
+To make that code a bit easier to read, we can get rid of the
+parentheses.
+
+\begin{lstlisting}
+square = new Layer
+  width: 200
+  height: 200
+\end{lstlisting}
+
+There are a lot of cases in CoffeeScript where we can remove parentheses
+like this, and it can sometimes make the code look a bit cleaner.
+
+\subsection{Manipulating layers}\label{manipulating-layers}
+
+Now that we've assigned the variable \lstinline!square! to our layer, we
+can continue to manipulate it. After we've created our layer, we can
+modify it at any time:
+
+\begin{lstlisting}
+square.backgroundColor = "red"
+square.x = 200
+\end{lstlisting}
+
+Note the dot syntax: this is because \lstinline!square! is an object. It
+has a \lstinline!backgroundColor! property and a lot of other properties
+that we can manipulate.
+
+You can modify a layer's coordinates (x, y), as well as appearance by
+using camel-cased (camelCased) versions of most CSS properties, as well
+as some built-in framer properties. For example, \lstinline!color! is
+just \lstinline!color! but \lstinline!border-radius! becomes
+\lstinline!borderRadius!. If you want to rotate an element, you can
+modify the \lstinline!rotation! property framer provides. Framer Studio
+will autocomplete most of these property names for you, but you can also
+look them up in the \href{http://framerjs.com/docs/}{docs}.
+
+\subsection{Animating layers}\label{animating-layers}
+
+Let's add our first animation. To animate a layer, we use the
+\lstinline!animate! method.
+
+\begin{lstlisting}
+square.animate()
+\end{lstlisting}
+
+By itself, \lstinline!.animate()! isn't goint to do anything. We need to
+pass it a \emph{configuration object} to tell it what to animate, and
+how to animate it. A configuration object will follow this format:
+
+\begin{lstlisting}
+configObject = 
+  properties: 
+    property: value
+    property: value
+  time: 1
+  curve: "ease"
+  delay: 2
+\end{lstlisting}
+
+The \lstinline!time!, \lstinline!curve! and \lstinline!delay! properties
+are all optional, but you need to specify one or more properties to
+animate nested in the \lstinline!properties! object (it's an object
+nested inside an object).
+
+For example, if we want to fade out a square, we would animate the
+\lstinline!opacity! property. By default, the opacity is set to 1, so we
+animate it to 0.
+
+\begin{lstlisting}
+square.animate
+  properties: 
+    opacity: 0
+\end{lstlisting}
+
+We can easily transition multiple properties at once:
+
+\begin{lstlisting}
+square.animate
+  properties: 
+    opacity: 0
+    x: 400
+    y: 400
+    rotation: 180
+\end{lstlisting}
+
+\subsubsection{Configuring animations}\label{configuring-animations}
+
+Time-related properties (delay and time), are specified in seconds. By
+default, animations take 1s. Speed up the animation:
+
+\begin{lstlisting}
+square.animate
+  properties: 
+    opacity: 0
+  time: .2
+\end{lstlisting}
+
+\textbf{Note:} again whitespace is significant here. \lstinline!opacity!
+is a property, so it's indented one level further than
+\lstinline!properties! to indicate the relationship. Move back out one
+level to specify \lstinline!time!, because that's a property of the
+animation, not a property of the object animating.
+
+To make your animations more dynamic, you can specify the curve. To
+learn more about curves, check out
+\href{http://easings.net/}{easings.net} and the
+\href{http://framerjs.com/docs/\#animation.animation}{framer docs}. You
+can use a built-in easing string like \lstinline!ease-in!,
+\lstinline!ease-out! or \lstinline!ease-in-out!, or use one of the more
+advanced functions described in the docs, like \lstinline!bezier-curve!
+or \lstinline!spring-dho!.
+
+\begin{lstlisting}
+square.animate
+  properties: 
+    x: 500
+  curve: "ease-in"
+\end{lstlisting}
+
+\paragraph{Other animation options}\label{other-animation-options}
+
+You can set an animation to repeat any number of times with
+\lstinline!repeat!, and delay it with \lstinline!delay!, specifying the
+delay in seconds.
+
+\begin{lstlisting}
+square.animate
+  properties: 
+    opacity: 0
+  repeat: 4
+  delay: 2
+\end{lstlisting}
+
+\section{Chapter 3: Events}\label{chapter-3-events}
+
+When prototyping interactions, you're often going to want to react to
+user input. This is done by using the \lstinline!on! method to
+``listen'' for events triggered by the user.
+
+The code for doing something ``on'' an event might look a bit weird at
+first, but we'll break it down step by step.
+
+\begin{lstlisting}
+button = new Layer
+
+button.on Events.Click, ->
+  doFunAnimation() // do animating here
+\end{lstlisting}
+
+This is actually a method being called with two arguments, though it may
+not look like it. The format for the \lstinline!on! method is
+\lstinline!on(eventName, function)!, where the \lstinline!function! is
+the code that gets run when the event is triggered.
+
+When you use a function as an argument like this, it's called a
+``callback''. In plain english, calling the \lstinline!on! method with a
+callback is like saying ``listen for and do'', and the two arguments are
+the thing that you're listening for, and the thing that you should then
+do.
+
+If you remember, in CoffeeScript, we indicate a function with the
+following syntax:
+
+\begin{lstlisting}
+functionName = ->
+\end{lstlisting}
+
+When we give the \lstinline!on! method a function as an argument, it
+doesn't need a name or an equals sign, so we just need the
+\lstinline!->! part. The comma is the separation between the first
+argument (the name of the event), and the second (the function).
+
+It might make more sense if we leave on the parentheses:
+
+\begin{lstlisting}
+button.on(Events.Click, ->)
+\end{lstlisting}
+
+Framer gives us a bunch of events to listen for, all in the format
+\lstinline!Events.Name!. Some of the more common events are
+\lstinline!Events.Click! and \lstinline!Events.TouchStart!.
+
+Let's try it out:
+
+\begin{lstlisting}
+button = new Layer
+
+button.on Events.Click, ->
+  print "clicked!"
+\end{lstlisting}
+
+\subsubsection{Animations and events}\label{animations-and-events}
+
+If we combine what we know about events and animations, we can begin to
+prototype interactions. Let's slide our layer right on click:
+
+\begin{lstlisting}
+button = new Layer
+
+button.on Events.Click, ->
+  button.animate
+    properties: 
+      x: 500
+\end{lstlisting}
+
+\subsubsection{Working with screen
+dimensions}\label{working-with-screen-dimensions}
+
+Many of the interactions in web and mobile interfaces require
+calculations based on the dimensions of the screen itself. For example,
+if we wanted to slide our box from the left edge of the screen to the
+right edge, we'll need to know where the right edge is.
+
+We can access the properties of the screen we're working with by
+accessing the \lstinline!Framer.Device.screen.width! and
+\lstinline!Framer.Device.screen.height! properties.
+
+\begin{lstlisting}
+width = Framer.Device.screen.width
+
+button = new Layer
+
+button.on Events.Click, ->
+  button.animate
+    properties:
+      x: width
+\end{lstlisting}
+
+This will cause the square to animate off the right edge of the screen.
+The \lstinline!x! coordinate of our box is calculated from the top left
+of the screen, so by setting the \lstinline!x! value to the width of the
+screen, we've set it just off the edge of the screen. To animate the box
+so that it stays on the screen, we can subtract the box's width from the
+screen's width to get the \lstinline!x! value. By default, all layers
+are 100px wide.
+
+\begin{lstlisting}
+button.on Events.Click, ->
+  button.animate
+    properties:
+      x: width - 100
+\end{lstlisting}
+
+\section{Chapter 4: Prototyping simple
+interactions}\label{chapter-4-prototyping-simple-interactions}
+
+\subsection{Example 1: Dismiss modal
+window}\label{example-1-dismiss-modal-window}
+
+Import the ``example1\_popup'' psd or Sketch file into Framer Studio.
+Set the device type to iPhone 6 for best arrangement.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/2E263s1b3E0D3g3X2L20/Screen\%20Shot\%202015-04-01\%20at\%209.33.37\%20PM.png}
+\caption{modal}
+\end{figure}
+
+The first thing we're going to prototype is the dismissal of this popup
+when the user clicks on the ``x''. The ``x'' layer group is called
+``close'', so we access it by name (it is a property of the imported
+\lstinline!psd! object). We'll add a click event handler to the close
+layer:
+
+\begin{lstlisting}
+file = Framer.Importer.load "imported/example1_popup"
+
+file.close.on Events.Click, ->
+\end{lstlisting}
+
+To start, we'll just fade out the popup on click. The popup layer is
+called ``popup'' so we access it with \lstinline!file.popup!:
+
+\begin{lstlisting}
+file.close.on Events.Click, ->
+  file.popup.animate
+    properties: 
+      opacity: 0
+\end{lstlisting}
+
+That's a bit too slow, so let's adjust the \lstinline!time! property:
+
+\begin{lstlisting}
+file = Framer.Importer.load "imported/Popup"
+
+file.close.on Events.Click, ->
+  file.popup.animate
+    properties: 
+      opacity: 0
+    time: 0.4
+\end{lstlisting}
+
+It's a bit of a dull animation, so let's slide it off the screen
+upwards. To do this, we'll need to animate the layer's \lstinline!y!
+property.
+
+We'll want the layer's end position to be above the top of the screen,
+and to be all the way off the top of the screen, we'll need to send it
+above the top edge of the screen by the height of the layer itself.
+
+To do that, we'll need to get the height of the layer. We can get that
+with \lstinline!file.Popup.height!. Since the y position of the top of
+the screen is 0, we'll want to subtract the height from 0:
+
+\begin{lstlisting}
+layerHeight = file.Popup.height 
+
+file.close.on Events.Click, ->
+  file.popup.animate
+    properties: 
+      opacity: 0
+      y: 0 - layerHeight
+    time: 0.4
+\end{lstlisting}
+
+We've saved the layer's height in a \lstinline!layerHeight! variable so
+that the code is a bit easier to read.
+
+To make the animation a bit more dynamic, we can add an ``ease-in''
+curve to it.
+
+\begin{lstlisting}
+file.close.on Events.Click, ->
+  file.popup.animate
+    properties: 
+      opacity: 0
+      y: 0 - layerHeight
+    time: 0.4
+    curve: "ease-in"
+\end{lstlisting}
+
+\subsubsection{Multiple animations}\label{multiple-animations}
+
+Once the modal is dismissed, our prototype currently just shows a
+mustache badge. It would be cool if that badge popped up from nowhere
+after you'd dismissed the mdoal.
+
+To do an animation \emph{after} another one, we have to ``listen'' for
+the end of the first animation. We can attach an
+\lstinline!AnimationEnd! event listener to the popup layer (the one that
+is animating), and then do something else once it's finished animating:
+
+\begin{lstlisting}
+(...same code as before)
+
+file.popup.on Events.AnimationEnd, ->
+  print "animation ended"
+\end{lstlisting}
+
+Now lets select the \lstinline!mustache! layer and animate its size
+using the \lstinline!scale! property:
+
+\begin{lstlisting}
+file.popup.on Events.AnimationEnd, ->
+  file.mustache.animate
+    properties: 
+      scale: 2
+\end{lstlisting}
+
+Okay, but maybe we wanted the badge to appear from nothing. To do that,
+we have to initially set the badge to be teeny, and then animate it to a
+visible size:
+
+\begin{lstlisting}
+file.mustache.scale = 0
+
+file.popup.on Events.AnimationEnd, ->
+  file.mustache.animate
+    properties: 
+      scale: 1
+\end{lstlisting}
+
+To add a bit more life to this animation, we're going to make it look
+bouncy. To achieve a bounce effect on our animation, we can use one of
+the custom curve functions Framer comes with. The \lstinline!spring()!
+function takes 4 arguments: tension, friction, velocity, and tolerance.
+Explaining all these properties is beyond the scope of this book, but
+we'll use a simple bounce using the settings \lstinline!200, 15, 0!.
+
+\begin{lstlisting}
+file.popup.on Events.AnimationEnd, ->
+  file.mustache.animate
+    properties: 
+      scale: 1
+    curve:"spring(200,15,0)"
+\end{lstlisting}
+
+\subsection{Example 2: Toggling between
+states}\label{example-2-toggling-between-states}
+
+We're going to toggle a menu between closed and open states when an icon
+is clicked:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/0L162K1h1l1V0v1m0d1R/Image\%202015-04-01\%20at\%209.42.32\%20PM.png}
+\caption{dropdown}
+\end{figure}
+
+Import ``example2\_dropdown'' psd or Sketch file into Framer.
+
+Let's start off by hiding the menu content by default:
+
+\begin{lstlisting}
+file = Framer.Importer.load "imported/example2_dropdown"
+
+file.menu_content.opacity = 0
+\end{lstlisting}
+
+Now we'll add a click event listener on the menu icon, and then switch
+the opacity to 1:
+
+\begin{lstlisting}
+file.menu_icon.on Events.Click, ->
+  file.menu_content.opacity = 1
+\end{lstlisting}
+
+There's a problem though: we want the menu to close again when the menu
+icon is clicked again. Unfortunately, the menu won't know whether to
+open or close on each click unless we somehow keep track of what state
+it's already in.
+
+To do this, we'll create a variable \lstinline!is_open! that will be
+false if the menu is closed, and true if it's open. It'll default to
+false.
+
+\begin{lstlisting}
+is_open = false
+\end{lstlisting}
+
+Next, we'll set the opacity in the click event based on our
+\lstinline!is_open! variable:
+
+\begin{lstlisting}
+file.menu_icon.on Events.Click, ->
+  if is_open
+    file.menu_content.opacity = 0
+  else
+    file.menu_content.opacity = 1
+\end{lstlisting}
+
+For this to work, we'll need to toggle \lstinline!is_open! between
+\lstinline!false! and \lstinline!true! when the user clicks the icon. To
+toggle a value between true and false, we can re-assign the variable to
+it's opposite. True and false are opposite of each other, so not true =
+false and not false = true. In CoffeeScript, we use the \lstinline"!"
+symbol to mean ``not'': \lstinline"true != false".
+
+To set a value to its opposite, we do \lstinline"= !" or ``set the value
+to \emph{not} whatever it currently is''
+
+\begin{lstlisting}
+is_open = !is_open
+\end{lstlisting}
+
+Let's put it all together:
+
+\begin{lstlisting}
+is_open = false
+
+file.menu_icon.on Events.Click, ->
+  is_open = !is_open
+  if is_open
+    file.menu_content.opacity = 0
+  else
+    file.menu_content.opacity = 1
+\end{lstlisting}
+
+And now our menu toggles open when we click it.
+
+\subsubsection{Easier interactions with
+states}\label{easier-interactions-with-states}
+
+Framer gives us an easier way to transition between different states,
+called ``states'' turns out. Basically, you give a layer a set of named
+states which specify what it should look like when it is in that state.
+For example, our menu will have an ``open'' state where the opacity is
+1, and a ``closed'' state where the opacity is 0.
+
+To add states to our layer, we use the \lstinline!states.add! method.
+Each state consists of a name and property pair, where the property
+contains the various options for the appearance:
+
+\begin{lstlisting}
+file.menu_content.states.add
+  open:
+    opacity: 1
+  closed:
+    opacity: 0
+\end{lstlisting}
+
+Now we can switch between the two states in a few different ways. The
+easiest way to go back and forth between the two states is just by using
+\lstinline!states.next()!. We can take out the \lstinline!if else!
+statement now, as well as the \lstinline!is_open! variable.
+
+\begin{lstlisting}
+file.menu_content.states.add
+  open:
+    opacity: 1
+  closed:
+    opacity: 0
+    
+file.menu_icon.on Events.Click, ->
+  file.menu_content.states.next()
+\end{lstlisting}
+
+By default, \lstinline!states.next! animates between the two states. To
+customize this animation, we need to add and configure
+\lstinline!states.animationOptions!:
+
+\begin{lstlisting}
+file.menu_content.states.animationOptions = 
+  time: 0.2
+\end{lstlisting}
+
+One of the nice things about states is that it makes it easy to
+customize our animation and make it more complex. Instead of fading in,
+lets have our menu expand out from the top left.
+
+To do that, we first need to set the menu's default width and height to
+0.
+
+\begin{lstlisting}
+file.menu_content.width = 0
+file.menu_content.height = 0
+\end{lstlisting}
+
+And then update the states so that \lstinline!open! resets the height
+and width to the original values, and \lstinline!closed! sets them to 0.
+To get the original height and width values of our menu, we need to save
+those values as variables before we set them to 0.
+
+\begin{lstlisting}
+original_width = file.menu_content.width
+original_height = file.menu_content.height
+
+file.menu_content.width = 0
+file.menu_content.height = 0
+\end{lstlisting}
+
+And then use those variables in \lstinline!states.add!:
+
+\begin{lstlisting}
+file.menu_content.states.add
+  open:
+    width: original_width
+    height: original_height
+  closed:
+    width: 0
+    height: 0
+\end{lstlisting}
+
+This animation would look even better with some easing:
+
+\begin{lstlisting}
+file.menu_content.states.animationOptions = 
+  time: 0.2
+  curve: "ease-out"
+\end{lstlisting}
+
+\subsection{Example 3: Touch
+interactions}\label{example-3-touch-interactions}
+
+Framer comes with a lot of useful utilites for easily prototyping
+touch-based interactions. We're going to prototype a swipe-based
+dismissal, like you'd have in a list view on a mobile app.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/230X3a0B3V163Q0K260l/Screen-Shot-2015-04-01-at-9.49.05-PM.png}
+\caption{swipey}
+\end{figure}
+
+Import ``swipe.psd'' into framer.
+
+One of the really convenient things Framer includes for touch
+interactivity is the ability to make a layer ``draggable''. To do this,
+we set \lstinline!draggable.enabled! to true.
+
+\begin{lstlisting}
+file = Framer.Importer.load "imported/example3_swipe"
+
+file.message.draggable.enabled = true
+\end{lstlisting}
+
+We can now drag the layer all over the screen!
+
+In our example, however, we want to restrict dragging to the x-axis. To
+do this, we set \lstinline!draggable.speedY! to 0.
+
+\begin{lstlisting}
+file.message.draggable.speedY = 0
+\end{lstlisting}
+
+Now we don't want the user to have to drag the message all the way off
+the screen, so we'll take over and animate the message off the screen if
+it's past a certain point.
+
+A lot of the code for prototyping touch is going to be similar to this:
+doing actions based on how much an element has moved. We can do this by
+comparing the \lstinline!x! property of the layer to either it's
+previous value or some absolute value based on the screen dimensions. We
+can listen for a number of different events, including
+\lstinline!TouchStart!, \lstinline!TouchMove! and \lstinline!TouchEnd!.
+When you're working with draggable elements, you can use
+\lstinline!DragStart!, \lstinline!DragMove! and \lstinline!DragEnd!.
+
+In our message-dismissal example we're going to listen for the
+\lstinline!DragEnd! event and then decide what to do.
+
+\begin{lstlisting}
+file.message.on Events.DragEnd, ->
+\end{lstlisting}
+
+At this point, we have to come up with some rules for how to animate the
+message. In our case, the default result will be that the message snaps
+back to its starting position. If the message has been moved more than
+halfway off the left side of the screen, we want to animate it off the
+screen. There are a couple ways we can check for this, but I think the
+most intuitive is ``when the midpoint of the message reaches the left
+edge of the screen.'' This is easy to represent in code, since Framer
+gives us a convenient \lstinline!midX! (and \lstinline!midY!) property
+which returns the center point of the element.
+
+\begin{lstlisting}
+if file.message.midX <= 0
+\end{lstlisting}
+
+So in this case, we want to animate the \lstinline!x! property of our
+message to be all the way off the screen. To ensure it's all the way off
+the screen, we'll set the \lstinline!x! value to 0 minus the width of
+the layer.
+
+\begin{lstlisting}
+w = file.message.width
+
+file.message.on Events.DragEnd, ->
+  if file.message.midX <= 0
+    file.message.animate
+      properties:
+        x: 0 - w
+\end{lstlisting}
+
+In other cases, we want to animate the message back to its original
+\lstinline!x! position, which was 0.
+
+\begin{lstlisting}
+file.message.on Events.DragEnd, ->
+  if file.message.midX < 0
+    file.message.animate
+      properties:
+        x: 0 - w
+  else
+    file.message.animate
+      properties:
+        x: 0
+\end{lstlisting}
+
+We can make the animations look a lot nicer with some easing and timing:
+
+\begin{lstlisting}
+file.message.on Events.DragEnd, ->
+  if file.message.midX < 0
+    file.message.animate
+      properties:
+        x: 0 - w
+      time: 0.1
+      curve: "ease-in"
+  else
+    file.message.animate
+      properties:
+        x: 0
+      time: 0.2
+\end{lstlisting}
+
+\textbf{Bonus}: animating the red ``delete'' bar after the message is
+dismissed.
+
+This is pretty much the same as the code for animating in the badge
+after the popup is dismissed:
+
+\begin{lstlisting}
+file.message.on Events.AnimationEnd, ->
+  if file.message.midX < 0
+    file.delete.animate
+      properties: 
+        scale: .8
+        opacity: 0
+      time: 0.2
+      curve: "ease-in"
+\end{lstlisting}
+
+\subsection{Example 4: Generating elements with
+loops}\label{example-4-generating-elements-with-loops}
+
+If we want to deal with multiple elements of the same type, we can very
+quickly end up dealing with a lot of repetition. For example, if we
+wanted a series of squares in a row, we might do:
+
+\begin{lstlisting}
+new Layer
+  width: 100
+  x: 0
+new Layer
+  width: 100
+  x: 110
+new Layer
+  width: 100
+  x: 220
+new Layer
+  width: 100
+  x: 330
+\end{lstlisting}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/060Z433w0n2o3G0v1f1U/Screen\%20Shot\%202015-03-23\%20at\%2010.17.14\%20PM.png}
+\caption{screenshot3}
+\end{figure}
+
+There's a lot of repetition there, but there's an easy way to do this
+without the repeated code using \emph{loops}.
+
+Remember when we looped through all the fruits in an array?
+
+\begin{lstlisting}
+fruits = ["apples", "oranges", "bananas"]
+
+for fruit in fruits
+  fruit.toUpperCase()
+
+# => "APPLES"
+# => "ORANGES"
+# => "BANANAS"
+\end{lstlisting}
+
+One of the convenient things about CoffeeScript is that we can make a
+new array and loop through it all in one line:
+
+\begin{lstlisting}
+for fruit in ["apples", "oranges", "bananas"]
+  print fruit
+
+# => "apples"
+# => "oranges"
+# => "bananas"
+\end{lstlisting}
+
+If we don't really need an array of \emph{things} but just want to do
+something \emph{x} number of times, we can use a shortcut to make an
+array of x items:
+
+\begin{lstlisting}
+print [1..5]
+
+# => [1,2,3,4,5]
+\end{lstlisting}
+
+So if we want to just do something 5 times:
+
+\begin{lstlisting}
+for i in [1..5]
+  print i
+
+# => 1
+# => 2
+# => 3
+# => 4
+# => 5
+\end{lstlisting}
+
+This is a fairly common pattern when you're prototyping lots of elements
+in CoffeeScript. It's a bit of a convention to use \lstinline!i! for the
+variable that gets re-assigned for each time through the loop (like in
+\lstinline!for fruit in fruits!, \lstinline!fruit! got re-assigned to
+``apple'', ``orange'', ``banana'' each time through the loop).
+\lstinline!i! as in ``iterator'' or ``index''.
+
+So again, if we wanted to create 4 squares, we can do it much more
+easily with a loop:
+
+\begin{lstlisting}
+for i in [0..3]
+  new Layer
+    width: 100
+\end{lstlisting}
+
+This will just stack all 4 squares on top of each other:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/3V1E3b250D1V0n1Q283I/Screen\%20Shot\%202015-03-23\%20at\%2010.31.48\%20PM.png}
+\caption{screenshot4}
+\end{figure}
+
+We want to set the \lstinline!x! values for the squares to 0, 110, 220,
+330, respectively. Conveniently, these are all multiples of our index (0
+* 110, 1 * 110, 2 * 110, 3 * 110).
+
+\begin{lstlisting}
+for i in [0..3]
+  new Layer
+    width: 100
+    x: i * 110
+\end{lstlisting}
+
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/3P0Q1I2a2z1n1p0o2T0g/Screen\%20Shot\%202015-03-23\%20at\%2010.34.47\%20PM.png}.
+
+\subsubsection{Fun with loops}\label{fun-with-loops}
+
+Let's do something more fun with loops. We'll make something similar to
+the way the cards stack in the iOS Passbook app:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/3x1L420w2u0k3I3V3K1L/Screen\%20Shot\%202015-03-23\%20at\%2010.42.36\%20PM.png}
+\caption{screenshot6}
+\end{figure}
+
+And we'll have the cards animate in nicely.
+\href{http://share.framerjs.com/mcx56zmj0b2o/}{View the example of the
+finished prototype}.
+
+\begin{lstlisting}
+for i in [0..4]
+  layer = new Layer
+    width: Framer.Device.screen.width
+    height: Framer.Device.screen.height
+    y: 100 * i
+    borderRadius: 50
+\end{lstlisting}
+
+We've set each layer to be the full width and height of the screen, and
+offset them by 100px from the top (to get them to stack like this, we
+multiply 100 * the index of the loop).
+
+If we want the cards to animate in from the bottom of the screen, we
+have to start with the cards being way down below the bottom of the
+screen. Let's add the height of the screen to the \lstinline!y! offset
+of each layer:
+
+\begin{lstlisting}
+for i in [0..4]
+  layer = new Layer
+    width: Framer.Device.screen.width
+    height: Framer.Device.screen.height
+    y: 100 * i + Framer.Device.screen.height
+\end{lstlisting}
+
+Now we'll animate the \lstinline!y! property to what it was originally:
+
+\begin{lstlisting}
+for i in [0..4]
+  layer = new Layer
+    width: Framer.Device.screen.width
+    height: Framer.Device.screen.height
+    y: 100 * i + Framer.Device.screen.height
+    borderRadius: 50
+      
+  layer.animate
+    properties: 
+      y: 100 * i
+\end{lstlisting}
+
+Note that we're still indented in a level, so that we're still inside
+the loop, where \lstinline!layer! is assigned to the current layer each
+time through the loop.
+
+Now all the cards animate in at the same time, which isn't quite what we
+want. If we set a delay on the animation, they'll all slide in together
+after the delay. We have to increase the delay for each time through the
+loop:
+
+\begin{lstlisting}
+layer.animate
+  properties: 
+    y: 100 * i
+  delay: i
+\end{lstlisting}
+
+Now the delay will be 0, the first time through the loop, 1 second the
+second time, 2 the third etc. To reduce it, we can multiply by
+\lstinline!i! by whatever we want the delay to be between each item:
+
+\begin{lstlisting}
+layer.animate
+  properties: 
+    y: 100 * i
+  delay: i * 0.2
+\end{lstlisting}
+
+And then match the length of the animation to that delay:
+
+\begin{lstlisting}
+layer.animate
+  properties: 
+    y: 100 * i
+  delay: i * 0.2
+  time: 0.2
+\end{lstlisting}
+
+It still doesn't look great, but adding a spring curve will make a
+\emph{huge} difference:
+
+\begin{lstlisting}
+layer.animate
+  properties: 
+    y: 100 * i
+  delay: i * 0.2
+  time: .2
+  curve:"spring(200,30)"
+\end{lstlisting}
+
+\subsubsection{Mapping values to arrays}\label{mapping-values-to-arrays}
+
+Right now, our cards are all the same colour (slightly transparent
+blue), they just look like different shades because they're stacked on
+top of each other. If we wanted to make them different colors, we can
+store a bunch of colors in an array, and then use those colors for the
+background colors of the cards.
+
+Here's a nice array of nice colors:
+
+\begin{lstlisting}
+colors = ["#f1c40f", "#2ecc71", "#1abc9c", "#3498db", "#9b59b6"]
+\end{lstlisting}
+
+And then we can access the elements in the array one at a time using
+\lstinline!i!:
+
+\begin{lstlisting}
+for i in [0..4]
+  layer = new Layer
+    backgroundColor: colors[i]
+\end{lstlisting}
+
+So the first time through the loop, we'll be setting
+\lstinline!backgroundColor! to \lstinline!colors[0]!, which is the first
+item, which is \lstinline!#f1c40f! (yellow). Second time through the
+array \lstinline!i! is 1, so we'll be grabbing \lstinline!colors[1]!,
+which is the greenish color. And so on.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/0a0J0Z260a190Q2n2g3l/Screen\%20Shot\%202015-03-23\%20at\%2010.36.42\%20PM.png}
+\caption{screenshot7}
+\end{figure}
+
+\subsection{Example 5: Multi-part
+animations}\label{example-5-multi-part-animations}
+
+Let's try something a little more complicated: a multi-step animation
+with some interactivity and multiple moving parts.
+
+We're going to prototype a push notification on the Apple Watch, like
+you would get from a calendar notification.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/2V0x1C0R0O3B0N1S1l2K/watches.png}
+\caption{watch}
+\end{figure}
+
+Import the example4\_icon.png (or make your own icon) file into Framer,
+then example4\_bg.png. Set the device to Apple watch in the 42mm size.
+
+\begin{lstlisting}
+bg = new Layer 
+  x:0, y:0, width:312, height:366, image:"images/example4_bg.png"
+
+icon = new Layer 
+  x:0, y:0, width:196, height:196, image:"images/example4_icon.png"
+\end{lstlisting}
+
+We're going to need to reference the width and height of the device, so
+we'll save those in variables called \lstinline!w! and \lstinline!h!.
+
+\begin{lstlisting}
+w = Framer.Device.screen.width
+h = Framer.Device.screen.height
+\end{lstlisting}
+
+We're going to set the initial state of the icon as being horizontally
+centered and positioned just below the bottom of the screen:
+
+\begin{lstlisting}
+icon.centerX()
+icon.y = h
+\end{lstlisting}
+
+\lstinline!centerX()! is a convenient method from Framer that
+horizontally centers our layer. There's also \lstinline!centerY()! and
+just \lstinline!center()!.
+
+\subsubsection{Multipart Animation step
+1}\label{multipart-animation-step-1}
+
+The first step of our animation involves two transitions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  sliding the icon up over the background
+\item
+  blurring the background.
+\end{enumerate}
+
+Let's start animating the icon to the center of the screen:
+
+\begin{lstlisting}
+icon.animate
+  properties:
+    midY: h / 2
+\end{lstlisting}
+
+We're setting the layer's \lstinline!midY! property to half the height
+of the device, because if we just set \lstinline!y! property, it would
+position the top edge of the layer. That would put our icon on the
+bottom half of the screen instead of at the midpoint. Each layer also
+has a \lstinline!midX! property for setting the horizontal center of a
+layer.
+
+At the same time as we animate the icon into position, we're going to
+both blur and fade the background a bit:
+
+\begin{lstlisting}
+bg.animate
+  properties: 
+    blur: 15
+    opacity: 0.6
+\end{lstlisting}
+
+The \lstinline!blur! property is set in pixels, so you can copy it right
+out of the Gaussian blur in Photoshop or Sketch.
+
+Let's speed up the animation and add an Apple-style springy curve:
+
+\begin{lstlisting}
+icon.animate
+  properties: 
+    midY: h / 2
+  time: 0.5
+  curve: "spring(120,18,0)"
+    
+bg.animate
+  properties: 
+    blur: 15
+    opacity: 0.6
+  time: 0.5
+\end{lstlisting}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/003l1t3T2E2p0g3C2Q1B/Screen\%20Shot\%202015-03-26\%20at\%208.15.13\%20PM.png}
+\caption{screenshot7}
+\end{figure}
+
+\subsubsection{Multipart Animation step
+2}\label{multipart-animation-step-2}
+
+The next step involves another two transitions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  move the icon to the top left of the screen and shrink it
+\item
+  slide in the content of the notification
+\end{enumerate}
+
+To initiate this set of animations \emph{after} the first set have
+finished, we'll listen for the \lstinline!AnimationEnd! event on the
+icon:
+
+\begin{lstlisting}
+icon.on Events.AnimationEnd, ->
+\end{lstlisting}
+
+Let's start with shrinking the icon:
+
+\begin{lstlisting}
+icon.on Events.AnimationEnd, ->
+  icon.animate
+    properties: 
+      scale: .5
+\end{lstlisting}
+
+At the same time, we'll move it to the top left of the screen.
+Unfortunately, we can't just move the icon to \lstinline!x: 0! and
+\lstinline!y: 0!, because when we used \lstinline!scale! to shrink the
+icon, the icon's bounding box didn't shrink at the same time, so the
+icon would be positioned too far from the edges. We'll have to adjust
+for that by subtracting one-half the icon's \emph{new} width from the
+\lstinline!x! and \lstinline!y! values.
+
+The icon was originally 196px, so it's 50\% scaled size is 98px, so
+we'll offset x and y by 49px.
+
+\begin{lstlisting}
+icon.on Events.AnimationEnd, ->
+  icon.animate
+    properties: 
+      scale: .5
+      x: -49
+      y: -49  
+\end{lstlisting}
+
+At the same time, let's animate in the notification content. Import
+``watchapp.psd'' at the top of the file:
+
+\begin{lstlisting}
+bg = new Layer 
+  x:0, y:0, width:312, height:366, image:"images/example4_bg.png"
+
+watch_file = Framer.Importer.load "imported/watchapp"
+
+icon = new Layer 
+  x:0, y:0, width:196, height:196, image:"images/example4_icon.png"
+\end{lstlisting}
+
+Note the order in which we're importing the files: this layers the files
+in the correct order. We could explicitly set the \lstinline!z-index!
+values of each layer using the \lstinline!index! property, but this is
+simpler.
+
+Let's set the notification layer's initial position below the bottom of
+the screen:
+
+\begin{lstlisting}
+notification = watch_file.notification
+notification.y = h
+\end{lstlisting}
+
+Now we'll animate it into the scene at the same time as we move the icon
+to the top right and shrink it:
+
+\begin{lstlisting}
+icon.on Events.AnimationEnd, ->
+  icon.animate
+    # code from earlier goes here
+  notification.animate
+    properties: 
+      y: 49
+\end{lstlisting}
+
+We're setting \lstinline!y! to 49 because it will align with the
+midpoint of the icon. Now that the notification is aligned with the
+icon, it looks like the icon is a bit too close to the edge of the
+screen. Let's push it over by 20px:
+
+\begin{lstlisting}
+icon.on Events.AnimationEnd, ->
+  icon.animate
+    properties: 
+      scale: .5
+      x: -29
+      y: -49
+  notification.animate
+    properties: 
+      y: 49
+\end{lstlisting}
+
+And speed up the animation and add a spring curve:
+
+\begin{lstlisting}
+  icon.animate
+    properties: 
+      scale: .5
+      x: -29
+      y: -49
+    time: .3
+    curve: "spring(320,26,0)"
+  notification.animate
+    properties: 
+      y: 49
+    time: .3
+    curve: "spring(320,26,0)"
+\end{lstlisting}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{https://s3.amazonaws.com/f.cl.ly/items/253z3L1l0V1D001x2A0y/Screen\%20Shot\%202015-03-26\%20at\%208.15.21\%20PM.png}
+\caption{screenshot8}
+\end{figure}
+
+\subsubsection{Multipart animation part
+3}\label{multipart-animation-part-3}
+
+The last step is to dismiss the notification panel when the button is
+pressed. We'll find the \lstinline!button! layer and add a
+\lstinline!Click! event listener:
+
+\begin{lstlisting}
+button = watch_file.button
+
+button.on Events.Click, ->
+\end{lstlisting}
+
+There are a couple things we need to do now to get back to our initial
+state:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  fade out the notification content
+\item
+  fade out the icon
+\item
+  un-blur and un-fade the background
+\end{enumerate}
+
+This is mostly code we've seen before by this point:
+
+\begin{lstlisting}
+button.on Events.Click, ->
+  notification.animate
+    properties:
+      opacity: 0
+  icon.animate
+    properties:
+      opacity: 0
+  bg.animate
+    properties:
+      opacity: 1
+      blur: 0
+\end{lstlisting}
+
+And then we'll speed all the animations up:
+
+\begin{lstlisting}
+button.on Events.Click, ->
+  notification.animate
+    properties:
+      opacity: 0
+    time: .3
+  icon.animate
+    properties:
+      opacity: 0
+    time: .3
+  bg.animate
+    properties:
+      opacity: 1
+      blur: 0
+    time: .3
+\end{lstlisting}
+
+Pretty cool, right!
+
+\section{Next Steps}\label{next-steps}
+
+I think that with the building blocks from the last few examples you
+should be able to prototype a pretty wide variety of interactions and
+animations using Framer. I've intentionally stayed away from discussing
+topics such as code organization and best practices because I find these
+concepts unnecessary for beginners and in the context of building
+prototypes to communicate experiences.
+
+If you're taking prototyping with CoffeeScript seriously, I'd strongly
+recommend learning some JavaScript fundamentals. Unfortunately, there
+are few CoffeeScript resources aimed at beginner developers, since most
+CoffeeScript developers come from the background of already knowing at
+least some JavaScript.
+
+For JavaScript (and general programming) fundamentals, I suggest working
+through the
+\href{http://www.codecademy.com/tracks/JavaScript}{Codeacademy
+JavaScript track}. It's an interactive set of tutorials that let you
+program in the browser and provides feedback on your code, and it's
+totally free.
+
+If you're looking for some more in-depth resources,
+\href{https://www.codeschool.com/}{Codeschool} has excellent JavaScript
+and CoffeeScript courses which feature excellent video tutorials and
+interactive challenges.
+
+If you're enjoying programming and want to dig a bit deeper into the
+fundamentals (using CoffeeScript), read Reginald Braithwaite's
+\href{https://leanpub.com/CoffeeScript-ristretto}{CoffeeScript
+Ristretto}, which starts at the very beginning of programming with
+functions and gets into some pretty advanced concepts, using
+CoffeeScript for all code examples.
+
+If you'd like to take your prototyping skills out of the Framer
+environment so you can make prototypes or production code for any
+website, I'd still recommend leveraging a library to help out with the
+animations. Some suggestions:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \href{https://jquery.com/}{jQuery} takes a lot of the pain out of
+  interacting with the native browser environment. Outside of Framer,
+  you might find that working with elements on a page can be a bit
+  complex and verbose. jQuery can help ease that pain, and has a large
+  plugin ecosystem that can give you a lot of extra functionality with
+  very little code. You can accomplish a lot with some basic JavaScript
+  knowledge and jQuery.
+\item
+  \href{http://visionmedia.github.io/move.js/}{Move.js} is a small and
+  easy-to-use library for making CSS-based animations simpler. CSS-based
+  animations are quickly becoming the standard because of their
+  flexibility and performance, and you likely already know a lot of the
+  syntax if you know some CSS.
+\item
+  \href{https://github.com/daneden/animate.css}{AnimateCSS} also
+  leverages CSS for animations, and lets you write minimal JavaScript
+  for your animations by moving it all to pre-written CSS.
+\item
+  \href{http://snapsvg.io/}{Snap.svg} is a great library for animating
+  vector graphics in the browser, which are resolution-independent and
+  more flexible than the boxes and circles you can make with regular
+  browser elements.
+\end{itemize}
+
+\section{Getting help}\label{getting-help}
+
+First of all, if you work with developers, they should be the first
+people you ask for help. You'll find that a lot of developers love
+sharing their knowledge and are generally excited when other members of
+their team take an interest in code. It doesn't matter if your coworkers
+have never seen CoffeeScript before; the concepts are similar accross
+all programming languages and they'll probably be able to help anyways.
+
+If you're going it alone, there is a great and growing community behind
+Framer, primarily congregating on the
+\href{https://www.facebook.com/groups/framerjs/}{Facebook page}, where
+people share tips and resources and ask and answer questions.
+
+For more programming-related questions, any developer will tell you that
+\href{http://stackoverflow.com/}{Stack Overflow} is one of the most
+valuable resources out there. Checkout the \#CoffeeScript tag to see if
+your question has been asked before, or ask a new question. You'll
+probably get an answer quickly, especially if your question is specific,
+clear, and includes a code example.
+
+When you're Googling around for answers to your questions, seek out
+answers from reputable sources like the
+\href{https://developer.mozilla.org/en-US/docs/Web/JavaScript}{Mozilla
+Developer Network}.
+
+\section{Acknowledgements}\label{acknowledgements}
+
+Thanks to \_\_\_ and \_\_\_\_ for technical review and proofreading
+assistance.
+
+\subsection{If you find a typo or
+mistake}\label{if-you-find-a-typo-or-mistake}
+
+Please report an issue on the
+\href{https://github.com/tessalt/coffeescriptbook}{Github repo} or shoot
+me a memo on \href{https://twitter.com/tessthornton}{Twitter}.
+
+\section{About the Author}\label{about-the-author}
+
+Tessa Thornton is a JavaScript and CoffeeScript developer at
+\href{http://www.shopify.com}{Shopify} in Toronto, Canada. She is an
+experienced developer, technical writer, and has been using CoffeeScript
+since before it got cool and then not cool and then cool again.
+
+She has a BA in Philosophy and Anthropology, which she puts to good use
+getting offended by strangers on the internet, and occasionally even
+writing essays.
+
+\subsection{Contact}\label{contact}
+
+Twitter: {[}@tessthornton{]}(https://twitter.com/tessthornton)
+
+Github: \href{github.com/tessalt}{tessalt}

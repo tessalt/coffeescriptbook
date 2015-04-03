@@ -30,7 +30,7 @@ Many developers consider that extra step a worthwhile cost for the benefits of w
 
 For example, the JavaScript code to output the numbers between 1 and 10 in reverse order looks like this: 
 
-```
+```Java
 var countdown, num;
 
 countdown = (function() {
@@ -45,7 +45,7 @@ countdown = (function() {
 
 The same code in CoffeeScript looks like this: 
 
-```
+```Ruby
 countdown = (num for num in [10..1])
 ```
 
@@ -95,7 +95,7 @@ So just like you learned in high school, BEDMAS still applies. If you want some 
 
 Type into your CoffeeScript console of choice and observe: 
 
-```
+```Ruby
 10 + 20
 # => 25
 
@@ -920,8 +920,6 @@ file.close.on Events.Click, ->
 It's a bit of a dull animation, so let's slide it off the screen upwards. To do this, we'll need to animate the layer's `y` property. 
 
 We'll want the layer's end position to be above the top of the screen, and to be all the way off the top of the screen, we'll need to send it above the top edge of the screen by the height of the layer itself. 
-
-![illustration maybe?]()
 
 To do that, we'll need to get the height of the layer. We can get that with `file.Popup.height`. Since the y position of the top of the screen is 0, we'll want to subtract the height from 0: 
 
