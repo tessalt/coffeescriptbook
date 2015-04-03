@@ -1,0 +1,1 @@
+pandoc src/book.md -o pkg/book.epub --epub-cover-image="src/cover.jpg" --epub-stylesheet="src/epub.css"
