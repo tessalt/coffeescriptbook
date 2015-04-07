@@ -1,8 +1,10 @@
 {
-  "updateDelay" : 0.3,
-  "deviceScale" : -1,
+  "device" : "iPhone 5S Space Gray",
+  "sharedPrototype" : 1,
   "deviceOrientation" : 0,
   "contentScale" : 1,
-  "sharedPrototype" : 0,
-  "deviceType" : "iphone-6-gold"
+  "deviceType" : "iphone-6-gold",
+  "updateDelay" : 0.3,
+  "deviceScale" : -1,
+  "delay" : 0.3
 }

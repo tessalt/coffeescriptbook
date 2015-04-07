@@ -398,6 +398,13 @@ window.Framer.Defaults.DeviceView = {
   "deviceType" : "iphone-6-gold"
 };
 
+window.Framer.Defaults.DeviceComponent = {
+  "deviceScale" : -1,
+  "orientation" : 0,
+  "contentScale" : 1,
+  "deviceType" : "iphone-6-gold"
+};
+
 window.FramerStudioInfo = {
   "deviceImagesUrl" : "file:\/\/\/Applications\/Framer%20Studio.app\/Contents\/Resources\/DeviceImages\/",
   "documentTitle" : "popup.framer"
@@ -925,7 +932,6 @@ Runtime = (function(superClass) {
     if (this.coffeescript === coffeescript) {
       return;
     }
-    console.clear();
     console.log("» Framer build " + (BUILDS++));
     this._errorHandlerRemove();
     this.coffeescript = coffeescript;

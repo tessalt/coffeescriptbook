@@ -1,3 +1,15 @@
+---
+title:
+- type: main
+  text: CoffeeScript for Framer.js
+- type: subtitle
+  text: A guide for designers
+creator:
+- role: author
+  text: Tessa Thornton
+rights: © 2015 Tessa Thornton
+...
+
 # Introduction
 
 ## What is CoffeeScript?
@@ -30,7 +42,7 @@ Many developers consider that extra step a worthwhile cost for the benefits of w
 
 For example, the JavaScript code to output the numbers between 1 and 10 in reverse order looks like this: 
 
-```Java
+```
 var countdown, num;
 
 countdown = (function() {
@@ -45,7 +57,7 @@ countdown = (function() {
 
 The same code in CoffeeScript looks like this: 
 
-```Ruby
+```
 countdown = (num for num in [10..1])
 ```
 
@@ -75,9 +87,11 @@ In this book, I'll be using Framer Studio for examples. You'll need either Frame
 
 All you'll need to follow along with this book is Framer Studio or Framer.js and CoffeeScript. For the earlier chapters, I recommend typing code into a browser-based console to observe the output yourself. I suggest [CoffeeScript REPL](http://larryng.github.io/CoffeeScript-repl/), or if you're familliar with Chrome's web developer console, you can add a plugin that will let you run CoffeeScript, like [CoffeeConsole](http://snook.ca/archives/browsers/coffeeconsole) or [Scratch JS](https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn) (go to settings and select "CoffeeScript" for the transformer).
 
+**Note**: if you're in a browser environment, anywhere you see the command `print`, substitue `console.log`. `print` is unique to Framer Studio.
+
 The later examples require using image assets created for the projects, which came in the **Assets** folder you downloaded with this ebook. 
 
-# Chapter 1: CoffeeScript for beginners
+# 1: CoffeeScript for beginners
 
 ## Math
 
@@ -95,7 +109,7 @@ So just like you learned in high school, BEDMAS still applies. If you want some 
 
 Type into your CoffeeScript console of choice and observe: 
 
-```Ruby
+```
 10 + 20
 # => 25
 
@@ -190,10 +204,10 @@ There are a couple rules about variable names:
 
 - variable names can't contain spaces
 - variable names can't start with numbers
-- variable names can contain upper case and lower case characters
 - variable names can't contain punctuation other than `_`
+- variable names can contain upper case and lower case characters
 
-There are some common naming conventions and patterns for variable names. When a variable name is more than two words, you can combine the two words together using underscores "camel casing". 
+There are some common naming conventions and patterns for variable names. When a variable name is more than two words, you can combine the two words together using underscores or "camel casing". 
 
 ```
 my_name = "Tessa"
@@ -669,7 +683,7 @@ animation =
 
 Objects are ideal for configuring animations and elements since they all have many properties of different types (some are numbers, some are strings, etc). 
 
-# Chapter 2: Simple Animations
+# 2: Simple Animations
 
 Let's open up Framer Studio and try to create some simple animations. 
 
@@ -685,7 +699,7 @@ square = new Layer()
 
 You should see a blue square on the screen. 
 
-![screenshot1](https://s3.amazonaws.com/f.cl.ly/items/3E20192V03310u1O1x20/Screen%20Shot%202015-03-16%20at%2010.52.28%20PM.png)
+![New Layer](images/img1.png)
 
 To customize the square so it's not just a plain blue square, we can pass one argument to `new Layer()`. This argument is a configuration object, you can configure the element using properties for various attributes such as width, height, position, and appearance. 
 
@@ -698,7 +712,7 @@ square = new Layer(
 )
 ```
 
-![screenshot2](https://s3.amazonaws.com/f.cl.ly/items/0e3f2F3F1f1s0r0V0y30/Screen%20Shot%202015-03-16%20at%2010.59.40%20PM.png)
+![Layer with properties](images/img2.png)
 
 To make that code a bit easier to read, we can get rid of the parentheses. 
 
@@ -798,7 +812,7 @@ square.animate
   delay: 2
 ```
 
-# Chapter 3: Events
+# 3: Events
 
 When prototyping interactions, you're often going to want to react to user input. This is done by using the `on` method to "listen" for events triggered by the user. 
 
@@ -879,13 +893,15 @@ button.on Events.Click, ->
       x: width - 100
 ```
 
-# Chapter 4: Prototyping simple interactions
+# 4: Simple interactions
 
 ## Example 1: Dismiss modal window
 
+[View finished animation.](https://s3.amazonaws.com/f.cl.ly/items/102z1T3q1w0M1u2d0u2e/popup2.gif)
+
 Import the "example1_popup" psd or Sketch file into Framer Studio. Set the device type to iPhone 6 for best arrangement. 
 
-![modal](https://s3.amazonaws.com/f.cl.ly/items/2E263s1b3E0D3g3X2L20/Screen%20Shot%202015-04-01%20at%209.33.37%20PM.png)
+![Modal window](images/img3.png)
 
 The first thing we're going to prototype is the dismissal of this popup when the user clicks on the "x". The "x" layer group is called "close", so we access it by name (it is a property of the imported `psd` object). We'll add a click event handler to the close layer: 
 
@@ -996,7 +1012,9 @@ file.popup.on Events.AnimationEnd, ->
 
 We're going to toggle a menu between closed and open states when an icon is clicked: 
 
-![dropdown](https://s3.amazonaws.com/f.cl.ly/items/0L162K1h1l1V0v1m0d1R/Image%202015-04-01%20at%209.42.32%20PM.png)
+![Dropdown menu](images/img4.png)
+
+[View finished animation](https://s3.amazonaws.com/f.cl.ly/items/342Y1p3O0I2i3P3O0I1j/dropdown.gif)
 
 Import "example2_dropdown" psd or Sketch file into Framer. 
 
@@ -1133,7 +1151,9 @@ file.menu_content.states.animationOptions =
 
 Framer comes with a lot of useful utilites for easily prototyping touch-based interactions. We're going to prototype a swipe-based dismissal, like you'd have in a list view on a mobile app. 
 
-![swipey](https://s3.amazonaws.com/f.cl.ly/items/230X3a0B3V163Q0K260l/Screen-Shot-2015-04-01-at-9.49.05-PM.png)
+![Swipe interaction](images/img5.png)
+
+[View completed animation](https://s3.amazonaws.com/f.cl.ly/items/2y190G2y3C0e3h2i422h/swipe6.gif)
 
 Import "swipe.psd" into framer. 
 
@@ -1245,7 +1265,7 @@ new Layer
   x: 330
 ```
 
-![screenshot3](https://s3.amazonaws.com/f.cl.ly/items/060Z433w0n2o3G0v1f1U/Screen%20Shot%202015-03-23%20at%2010.17.14%20PM.png)
+![Multiple layers](images/img6.png)
 
 There's a lot of repetition there, but there's an easy way to do this without the repeated code using *loops*. 
 
@@ -1306,7 +1326,7 @@ for i in [0..3]
 
 This will just stack all 4 squares on top of each other: 
 
-![screenshot4](https://s3.amazonaws.com/f.cl.ly/items/3V1E3b250D1V0n1Q283I/Screen%20Shot%202015-03-23%20at%2010.31.48%20PM.png)
+![Stacked layers](images/img7.png)
 
 We want to set the `x` values for the squares to 0, 110, 220, 330, respectively. Conveniently, these are all multiples of our index (0 * 110, 1 * 110, 2 * 110, 3 * 110). 
 
@@ -1317,15 +1337,15 @@ for i in [0..3]
     x: i * 110
 ```
 
-![screenshot5](https://s3.amazonaws.com/f.cl.ly/items/3P0Q1I2a2z1n1p0o2T0g/Screen%20Shot%202015-03-23%20at%2010.34.47%20PM.png). 
+![Multiple generated layers](images/img6.png). 
 
 ### Fun with loops
 
 Let's do something more fun with loops. We'll make something similar to the way the cards stack in the iOS Passbook app: 
 
-![screenshot6](https://s3.amazonaws.com/f.cl.ly/items/3x1L420w2u0k3I3V3K1L/Screen%20Shot%202015-03-23%20at%2010.42.36%20PM.png)
+![Stacked cards](images/img8.png)
 
-And we'll have the cards animate in nicely. [View the example of the finished prototype](http://share.framerjs.com/mcx56zmj0b2o/). 
+And we'll have the cards animate in nicely. [View the example of the finished prototype](https://s3.amazonaws.com/f.cl.ly/items/0h3v1w0u071d0v2U1U2v/cards2.gif). 
 
 ```
 for i in [0..4]
@@ -1424,7 +1444,7 @@ for i in [0..4]
 
 So the first time through the loop, we'll be setting `backgroundColor` to `colors[0]`, which is the first item, which is `#f1c40f` (yellow). Second time through the array `i` is 1, so we'll be grabbing `colors[1]`, which is the greenish color. And so on. 
 
-![screenshot7](https://s3.amazonaws.com/f.cl.ly/items/0a0J0Z260a190Q2n2g3l/Screen%20Shot%202015-03-23%20at%2010.36.42%20PM.png)
+![Colored cards](images/img9.png)
 
 ## Example 5: Multi-part animations
 
@@ -1432,7 +1452,9 @@ Let's try something a little more complicated: a multi-step animation with some 
 
 We're going to prototype a push notification on the Apple Watch, like you would get from a calendar notification. 
 
-![watch](https://s3.amazonaws.com/f.cl.ly/items/2V0x1C0R0O3B0N1S1l2K/watches.png)
+![Apple watch notification](images/img10.png)
+
+[View completed animation](https://s3.amazonaws.com/f.cl.ly/items/3V3k1c1Z3Y2v011k2l0o/watch.gif)
 
 Import the example4_icon.png  (or make your own icon) file into Framer, then example4_bg.png. Set the device to Apple watch in the 42mm size. 
 
@@ -1504,7 +1526,7 @@ bg.animate
   time: 0.5
 ```
 
-![screenshot7](https://s3.amazonaws.com/f.cl.ly/items/003l1t3T2E2p0g3C2Q1B/Screen%20Shot%202015-03-26%20at%208.15.13%20PM.png)
+![Apple watch icon](images/img11.png)
 
 ### Multipart Animation step 2
 
@@ -1604,7 +1626,7 @@ And speed up the animation and add a spring curve:
     curve: "spring(320,26,0)"
 ```
 
-![screenshot8](https://s3.amazonaws.com/f.cl.ly/items/253z3L1l0V1D001x2A0y/Screen%20Shot%202015-03-26%20at%208.15.21%20PM.png)
+![Apple watch notification](images/img12.png)
 
 ### Multipart animation part 3
 
@@ -1657,7 +1679,7 @@ button.on Events.Click, ->
     time: .3
 ```
 
-Pretty cool, right!
+And now we're back to where we started. 
 
 # Next Steps
 
@@ -1704,6 +1726,6 @@ She has a BA in Philosophy and Anthropology, which she puts to good use getting 
 
 ## Contact
 
-Twitter: [@tessthornton](https://twitter.com/tessthornton)
+Twitter: [tessthornton](http://twitter.com/tessthornton)
 
-Github: [tessalt](github.com/tessalt)
+Github: [tessalt](http://github.com/tessalt)

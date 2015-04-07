@@ -88,12 +88,6 @@ h1, h2, h3, h4, h5, h6
     page-break-after: avoid; /* Firefox, Chrome, and Safari do not support the property value "avoid" */
 }
 
-/* Pandoc with --section-divs option */
-
-div div, section section /* Nested sections */
-    {
-    margin-left: 2em; /* This will increasingly indent nested header sections */
-    }
 
 p {}
 
