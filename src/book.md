@@ -1716,7 +1716,7 @@ When you're Googling around for answers to your questions, seek out answers from
 
 # Acknowledgements
 
-Thanks to ___ and ____ for technical review and proofreading assistance. 
+Thanks to [Rich Gilbank](richgilbank) for technical review.  
 
 ## If you find a typo or mistake
 
