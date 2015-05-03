@@ -14,7 +14,7 @@ rights: © 2015 Tessa Thornton
 
 ## What is CoffeeScript?
 
-CoffeeScript is a relatively new programming language often used by front-end developers to create browser-based interfaces. 
+CoffeeScript is a relatively new programming language often used by front-end developers to create browser-based interfaces.
 
 CoffeeScript is interesting in that it *compiles to JavaScript*. Compiles just means turns into or is transformed into. When we write CoffeeScript, we need to *compile* it into JavaScript before it can run in browsers. To understand more about CoffeeScript, you'll need to understand a bit about JavaScript.
 
@@ -24,15 +24,15 @@ JavaScript is the programming language we use in browsers to do things like mani
 
 JavaScript is one of the most popular programming languages in the world, mainly because it's the *only* programming language that runs in browsers. 
 
-JavaScript was created by Brendan Eich at Netscape in 1995 to give web developers and designers an accessible way to manipualte web pages. It very quickly gained popularity because it allowed developers to add a lot more functionality to web pages and was relatively easy to learn. 
+JavaScript was created by Brendan Eich at Netscape in 1995 to give web developers and designers an accessible way to manipulate web pages. It very quickly gained popularity because it allowed developers to add a lot more functionality to web pages and was relatively easy to learn.
 
-Despite its popularity, JavaScript has always had many critics. Though many of its early flaws have been overcome in more recent releases of the language, many still consider it to be an "ugly" language with a lot of historical baggage. 
+Despite its popularity, JavaScript has always had many critics. Though many of its early flaws have been overcome in more recent releases of the language, many still consider it to be an "ugly" language with a lot of historical baggage.
 
 ## Why CoffeeScript?
 
-Though there have been various attempts to bring other programming languages to the browser, none have been successful, so we're still more or less "stuck" with JavaScript. 
+Though there have been various attempts to bring other programming languages to the browser, none have been successful, so we're still more or less "stuck" with JavaScript.
 
-In the mid-2000s, another language called Ruby was gaining popularity as a server-side programming language (meaning it isn't run in the browser, it's run on the server that hosts a web site or application). Ruby, in contrast to languages like JavaScript, was designed to be easily human-readable and writeable, with an emphasis on developer productivity even enjoyability. 
+In the mid-2000s, another language called Ruby was gaining popularity as a server-side programming language (meaning it isn't run in the browser, it's run on the server that hosts a web site or application). Ruby, in contrast to languages like JavaScript, was designed to be easily human-readable and writeable, with an emphasis on developer productivity, even enjoyability.
 
 In 2009, Ruby developer Jeremy Ashkenas sought to bring some of the features he liked most about Ruby to client-side development (client-side means stuff that happens in the browser), and created CoffeeScript. 
 
@@ -65,7 +65,7 @@ The code is both shorter and easier to read and comprehend.
 
 ## CoffeeScript and Framer.js
 
-Framer.js is a JavaScript framework for prototyping user interfaces. If you wanted to, you could include framer.js in an HTML file, and then write that takes advantage of the framework in plain JavaScript. 
+Framer.js is a JavaScript framework for prototyping user interfaces. If you wanted to, you could include framer.js in an HTML file, and then write something that takes advantage of the framework in plain JavaScript. 
 
 **Framer Studio** is a companion Mac application that is based on Framer.js. Framer Studio makes your workflow much easier with features like a live preview panel and Sketch or Photoshop importers. 
 
@@ -87,7 +87,7 @@ In this book, I'll be using Framer Studio for examples. You'll need either Frame
 
 All you'll need to follow along with this book is Framer Studio or Framer.js and CoffeeScript. For the earlier chapters, I recommend typing code into a browser-based console to observe the output yourself. I suggest [CoffeeScript REPL](http://larryng.github.io/CoffeeScript-repl/), or if you're familliar with Chrome's web developer console, you can add a plugin that will let you run CoffeeScript, like [CoffeeConsole](http://snook.ca/archives/browsers/coffeeconsole) or [Scratch JS](https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn) (go to settings and select "CoffeeScript" for the transformer).
 
-**Note**: if you're in a browser environment, anywhere you see the command `print`, substitue `console.log`. `print` is unique to Framer Studio.
+**Note**: if you're in a browser environment, anywhere you see the command `print`, substitute `console.log`. `print` is unique to Framer Studio.
 
 The later examples require using image assets created for the projects, which came in the **Assets** folder you downloaded with this ebook. 
 
@@ -97,7 +97,7 @@ The later examples require using image assets created for the projects, which ca
 
 Let's start with some simple math. 
 
-CoffeeScript supports all your familiar math operators: `+ - * \` (add, subtract, multiply, divide), plus one you may be unfamiliar with: `%` or [modulo](https://msdn.microsoft.com/en-us/library/ie/9f59bza0%28v=vs.94%29.aspx). 
+CoffeeScript supports all your familiar math operators: `+ - * /` (add, subtract, multiply, divide), plus one you may be unfamiliar with: `%` or [modulo](https://msdn.microsoft.com/en-us/library/ie/9f59bza0%28v=vs.94%29.aspx). 
 
 A lot of what you'll be doing while prototyping interactions is just simple math.
 
@@ -132,7 +132,7 @@ Numbers are the simple ones. Numbers are numbers. `200`, `-10`, `4000` are all n
 
 ### Strings
 
-When you're working with letters or words or punctuation, you're working with `strings`. Strings come in quotation marks. **Anything in quotation marks is a string**. You can use single quotes or double quotes, but there are fewer complications when you use double-quotes.
+When you're working with letters, words or punctuation, you're working with `strings`. Strings come in quotation marks. **Anything in quotation marks is a string**. You can use single quotes or double quotes, but there are fewer complications when you use double-quotes.
 
 ```
 "This is a string"
@@ -200,12 +200,12 @@ print "my new favorite color is " + color
 # => "my new favorite color is red"
 ```
 
-There are a couple rules about variable names: 
+There are a few rules about variable names: 
 
 - variable names can't contain spaces
 - variable names can't start with numbers
-- variable names can't contain punctuation other than `_`
-- variable names can contain upper case and lower case characters
+- variable names can't contain punctuation or symbols other than `_`
+- variable names _can_ contain upper case and lower case characters
 
 There are some common naming conventions and patterns for variable names. When a variable name is more than two words, you can combine the two words together using underscores or "camel casing". 
 
@@ -315,7 +315,7 @@ else
 # => "You're too young to learn to drive"
 ```
 
-**Note** `>=` means "greater than or eaqual to" just as `<=` means "less than or equal to".
+**Note** `>=` means "greater than or equal to" just as `<=` means "less than or equal to".
 
 ### Indentation
 
@@ -401,9 +401,9 @@ checkAge()
 
 Functions can be even more useful if we can give them values to work with. These values are called *arguments*. If we give `checkAge` an age argument, we don't need to have a separate age variable.
 
-Let's rewrite `checkAge` to accept an `age` *argument*:
+Let's rewrite `checkAge` to accept an `age` *argument*.
 
-In CoffeeScript, we can give a function the ability to accept arguments by adding parentheses containing the argument name before the `->` sign. 
+In CoffeeScript, we can give a function the ability to accept arguments by adding parentheses containing the argument name before the `->` sign:
 
 ```
 checkAge = (age) ->
@@ -614,7 +614,7 @@ book =
     died: 2007
 ```
 
-Note that we use `=` and `:` in the above example. Note the difference: `=` assigns a varibale name (book) to an object, and `:` matches up names and values. `author` is the name, and the object containing `name`, `born`, and `died` is the value. 
+Note that we use `=` and `:` in the above example. Note the difference: `=` assigns a variable name (book) to an object, and `:` matches up names and values. `author` is the name, and the object containing `name`, `born`, and `died` is the value. 
 
 To access properties in an object, we use dots: 
 
