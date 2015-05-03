@@ -245,7 +245,7 @@ Booleans are values that are either true or false. They're indicated with just t
 myBoolean = true
 ```
 
-Boolean values are often the result of making comparisons:
+Boolean values are often the result of making comparisons (remember from math class that `>` is "greater than" and `<` is "less than"):
 
 ```
 10 > 9
@@ -663,7 +663,11 @@ book.read()
 # => "All this happened, more or less."
 ```
 
-This is how the `.length` method and the `toUpperCase` method work. They are methods that belong to all string objects. 
+This is how the `toUpperCase` method works. It's a _method_ that belongs to all string objects.  
+
+##### What's the difference between a function and a method?
+
+Not much! A method is a function that belongs to an object. So we can say that a string has a `toUpperCase` method, meaning that the string has a property `toUpperCase`, and that property is a function. 
 
 #### Configuration objects
 
