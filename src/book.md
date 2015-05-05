@@ -1710,7 +1710,7 @@ First of all, if you work with developers, they should be the first people you a
 
 If you're going it alone, there is a great and growing community behind Framer, primarily congregating on the [Facebook page](https://www.facebook.com/groups/framerjs/), where people share tips and resources and ask and answer questions. 
 
-For more programming-related questions, any developer will tell you that [Stack Overflow](http://stackoverflow.com/) is one of the most valuable resources out there. Checkout the #CoffeeScript tag to see if your question has been asked before, or ask a new question. You'll probably get an answer quickly, especially if your question is specific, clear, and includes a code example. 
+For more programming-related questions, any developer will tell you that [Stack Overflow](http://stackoverflow.com/) is one of the most valuable resources out there. Check out the #CoffeeScript tag to see if your question has been asked before, or ask a new question. You'll probably get an answer quickly, especially if your question is specific, clear, and includes a code example. 
 
 When you're Googling around for answers to your questions, seek out answers from reputable sources like the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript). 
 
