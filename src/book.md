@@ -970,7 +970,7 @@ file.close.on Events.Click, ->
 
 ### Multiple animations
 
-Once the modal is dismissed, our prototype currently just shows a mustache badge. It would be cool if that badge popped up from nowhere after you'd dismissed the mdoal.
+Once the modal is dismissed, our prototype currently just shows a mustache badge. It would be cool if that badge popped up from nowhere after you'd dismissed the modal.
 
 To do an animation *after* another one, we have to "listen" for the end of the first animation. We can attach an `AnimationEnd` event listener to the popup layer (the one that is animating), and then do something else once it's finished animating: 
 
