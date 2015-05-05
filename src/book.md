@@ -1112,7 +1112,7 @@ file.menu_content.states.animationOptions =
   time: 0.2
 ```
 
-One of the nice things about states is that it makes it easy to customize our animation and make it more complex. Instead of fading in, lets have our menu expand out from the top left. 
+One of the nice things about states is that they make it easy to customize our animation and make it more complex. Instead of fading in, lets have our menu expand out from the top left. 
 
 To do that, we first need to set the menu's default width and height to 0. 
 
