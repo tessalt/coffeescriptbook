@@ -584,7 +584,7 @@ for plate in plates
 
 ### Objects
 
-Objects are one of the most useful data types in CoffeeScript. An object is a collection of *properties*. In programming, a *property* is an association between a *name* and a *value*. A name-value pair could be something like "price: $10", where *price* is the name, and *$10* is the value, or "age: 30", where *age* is the name, nad *30* is the value.
+Objects are one of the most useful data types in CoffeeScript. An object is a collection of *properties*. In programming, a *property* is an association between a *name* and a *value*. A name-value pair could be something like "price: $10", where *price* is the name, and *$10* is the value, or "age: 30", where *age* is the name, and *30* is the value.
 
 If something has properties, you can store them in an object. For example, a "book" object might have a `title` property, an `author` property, and a `genre` property. In CoffeeScript, we would code that as: 
 
