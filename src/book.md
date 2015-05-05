@@ -111,7 +111,7 @@ Type into your CoffeeScript console of choice and observe:
 
 ```
 10 + 20
-# => 25
+# => 30
 
 150 - 5 * 20
 # => 50
