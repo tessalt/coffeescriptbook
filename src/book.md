@@ -148,7 +148,7 @@ You can squish strings together using a `+` sign. This is called *concatenating*
 
 #### Doing things with numbers and strings
 
-Since anything in quotation marks is a string, you can end up with numbers that are actually strings (becasue they're in quotation marks). `"40"` is a string, `40` is a number. 
+Since anything in quotation marks is a string, you can end up with numbers that are actually strings (because they're in quotation marks). `"40"` is a string, `40` is a number. 
 
 Some strange things can happen if you treat strings like numbers: 
 
