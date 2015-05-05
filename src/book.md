@@ -207,7 +207,7 @@ There are a few rules about variable names:
 - variable names can't contain punctuation or symbols other than `_`
 - variable names _can_ contain upper case and lower case characters
 
-There are some common naming conventions and patterns for variable names. When a variable name is more than two words, you can combine the two words together using underscores or "camel casing".
+There are some common naming conventions and patterns for variable names. When a variable name is more than two words, you can combine the two words together using underscores or "camelCasing" (lowercase first letter of first word, uppercase first letter of subsequent words).
 
 ```
 my_name = "Tessa"
