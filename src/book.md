@@ -1080,7 +1080,7 @@ And now our menu toggles open when we click it.
 
 ### Easier interactions with states
 
-Framer gives us an easier way to transition between different states, called "states" turns out. Basically, you give a layer a set of named states which specify what it should look like when it is in that state. For example, our menu will have an "open" state where the opacity is 1, and a "closed" state where the opacity is 0.
+Framer gives us an easier way to transition between different arrangements of our UI, called "states". Basically, you give a layer a set of named states which specify what it should look like when it is in that state. For example, our menu will have an "open" state where the opacity is 1, and a "closed" state where the opacity is 0.
 
 To add states to our layer, we use the `states.add` method. Each state consists of a name and property pair, where the property contains the various options for the appearance:
 
