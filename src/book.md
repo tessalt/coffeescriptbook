@@ -120,7 +120,7 @@ Type into your CoffeeScript console of choice and observe:
 # => 2900
 ```
 
-Numbers and math will behave more or less the way you remember from middle school. If you get stuck trying to do something like rounding a number, check out the [MDN documentation for `Math`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) or just try a search.
+Numbers and math will behave more or less the way you remember from middle school. If you get stuck trying to do something like rounding a decimal number to the nearest whole number, check out the [MDN documentation for `Math`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) or just try a search.
 
 ## Types of data
 
