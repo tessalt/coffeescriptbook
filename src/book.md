@@ -305,9 +305,9 @@ num isnt 10
 Comparing variables is only useful if we do something with the outcome of the comparison. That's what conditional statements are for. CoffeeScript uses simple `if/else` statements to run different code in different scenarios: 
 
 ```
-num = 14
+age = 14
 
-if num >= 16
+if age >= 16
   print "you can learn to drive"
 else
   print "you're too young to learn to drive"
