@@ -928,7 +928,7 @@ file.close.on Events.Click, ->
 That's a bit too slow, so let's adjust the `time` property:
 
 ```
-file = Framer.Importer.load "imported/Popup"
+file = Framer.Importer.load "imported/popup"
 
 file.close.on Events.Click, ->
   file.popup.animate
@@ -941,10 +941,10 @@ It's a bit of a dull animation, so let's slide it off the screen upwards. To do 
 
 We'll want the layer's end position to be above the top of the screen, and to be all the way off the top of the screen, we'll need to send it above the top edge of the screen by the height of the layer itself.
 
-To do that, we'll need to get the height of the layer. We can get that with `file.Popup.height`. Since the y position of the top of the screen is 0, we'll want to subtract the height from 0:
+To do that, we'll need to get the height of the layer. We can get that with `file.popup.height`. Since the y position of the top of the screen is 0, we'll want to subtract the height from 0:
 
 ```
-layerHeight = file.Popup.height
+layerHeight = file.popup.height
 
 file.close.on Events.Click, ->
   file.popup.animate
