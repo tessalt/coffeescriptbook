@@ -85,7 +85,7 @@ In this book, I'll be using Framer Studio for examples. You'll need either Frame
 
 ## Setup
 
-All you'll need to follow along with this book is Framer Studio or Framer.js and CoffeeScript. For the earlier chapters, I recommend typing code into a browser-based console to observe the output yourself. I suggest [CoffeeScript REPL](http://larryng.github.io/coffeescript-repl/), or if you're familliar with Chrome's web developer console, you can add a plugin that will let you run CoffeeScript, like [CoffeeConsole](http://snook.ca/archives/browsers/coffeeconsole) or [Scratch JS](https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn) (go to settings and select "CoffeeScript" for the transformer).
+All you'll need to follow along with this book is Framer Studio or Framer.js and CoffeeScript. For the earlier chapters, I recommend typing code into a browser-based console to observe the output yourself. I suggest [CoffeeScript REPL](http://larryng.github.io/coffeescript-repl/), or if you're familiar with Chrome's web developer console, you can add a plugin that will let you run CoffeeScript, like [CoffeeConsole](http://snook.ca/archives/browsers/coffeeconsole) or [Scratch JS](https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn) (go to settings and select "CoffeeScript" for the transformer).
 
 **Note**: if you're in a browser environment, anywhere you see the command `print`, substitute `console.log`. `print` is unique to Framer Studio.
 
@@ -157,7 +157,7 @@ Some strange things can happen if you treat strings like numbers:
 # => "5050"
 ```
 
-Instead of adding the numbers together mathemtically, the two strings were squished together. If one of the values is a string, and one is a number, we get the same result:
+Instead of adding the numbers together mathematically, the two strings were squished together. If one of the values is a string, and one is a number, we get the same result:
 
 ```
 "50" + 50
@@ -749,7 +749,7 @@ Let's add our first animation. To animate a layer, we use the `animate` method.
 square.animate()
 ```
 
-By itself, `.animate()` isn't goint to do anything. We need to pass it a *configuration object* to tell it what to animate, and how to animate it. A configuration object will follow this format:
+By itself, `.animate()` isn't going to do anything. We need to pass it a *configuration object* to tell it what to animate, and how to animate it. A configuration object will follow this format:
 
 ```
 configObject =
@@ -1153,7 +1153,7 @@ file.menu_content.states.animationOptions =
 
 ## Example 3: Touch interactions
 
-Framer comes with a lot of useful utilites for easily prototyping touch-based interactions. We're going to prototype a swipe-based dismissal, like you'd have in a list view on a mobile app.
+Framer comes with a lot of useful utilities for easily prototyping touch-based interactions. We're going to prototype a swipe-based dismissal, like you'd have in a list view on a mobile app.
 
 ![Swipe interaction](images/img5.png)
 
@@ -1430,7 +1430,7 @@ layer.animate
 
 ### Mapping values to arrays
 
-Right now, our cards are all the same colour (slightly transparent blue), they just look like different shades because they're stacked on top of each other. If we wanted to make them different colors, we can store a bunch of colors in an array, and then use those colors for the background colors of the cards.
+Right now, our cards are all the same color (slightly transparent blue), they just look like different shades because they're stacked on top of each other. If we wanted to make them different colors, we can store a bunch of colors in an array, and then use those colors for the background colors of the cards.
 
 Here's a nice array of nice colors:
 
@@ -1706,7 +1706,7 @@ If you'd like to take your prototyping skills out of the Framer environment so y
 
 # Getting help
 
-First of all, if you work with developers, they should be the first people you ask for help. You'll find that a lot of developers love sharing their knowledge and are generally excited when other members of their team take an interest in code. It doesn't matter if your coworkers have never seen CoffeeScript before; the concepts are similar accross all programming languages and they'll probably be able to help anyways.
+First of all, if you work with developers, they should be the first people you ask for help. You'll find that a lot of developers love sharing their knowledge and are generally excited when other members of their team take an interest in code. It doesn't matter if your coworkers have never seen CoffeeScript before; the concepts are similar across all programming languages and they'll probably be able to help anyways.
 
 If you're going it alone, there is a great and growing community behind Framer, primarily congregating on the [Facebook page](https://www.facebook.com/groups/framerjs/), where people share tips and resources and ask and answer questions.
 
