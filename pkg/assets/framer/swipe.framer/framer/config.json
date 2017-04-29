@@ -1,10 +1,22 @@
 {
-  "device" : "iPhone 5S Space Gray",
-  "sharedPrototype" : 1,
-  "deviceOrientation" : 0,
-  "contentScale" : 1,
-  "deviceType" : "iphone-6-spacegray",
+  "orientation" : 0,
   "updateDelay" : 0.3,
-  "deviceScale" : -1,
-  "delay" : 0.3
+  "delay" : 0.3,
+  "cachedDeviceHeight" : 1334,
+  "fullScreen" : false,
+  "cachedDeviceWidth" : 750,
+  "contentScale" : 1,
+  "sharedPrototype" : 1,
+  "propertyPanelToggleStates" : {
+
+  },
+  "deviceType" : "apple-iphone-7-black",
+  "projectId" : "34FCE3F3-28D2-4780-802A-6B65B1552240",
+  "deviceOrientation" : 0,
+  "selectedHand" : "",
+  "device" : "iPhone 5S Space Gray",
+  "foldedCodeRanges" : [
+
+  ],
+  "deviceScale" : "fit"
 }
