@@ -1,10 +1,22 @@
 {
-  "device" : "iPhone 5S Space Gray",
-  "sharedPrototype" : 0,
-  "deviceOrientation" : 0,
-  "contentScale" : 1,
-  "deviceType" : "applewatchsport-42-aluminum-sportband-green",
+  "orientation" : 0,
   "updateDelay" : 0.3,
-  "deviceScale" : -1,
-  "delay" : 0.3
+  "delay" : 0.3,
+  "cachedDeviceHeight" : 390,
+  "fullScreen" : false,
+  "cachedDeviceWidth" : 312,
+  "contentScale" : 1,
+  "sharedPrototype" : 0,
+  "propertyPanelToggleStates" : {
+
+  },
+  "deviceType" : "apple-watch-series-2-42mm-space-black-steel-black",
+  "projectId" : "98BA9AC5-2D23-4618-B70E-C332EFB31BD9",
+  "deviceOrientation" : 0,
+  "selectedHand" : "",
+  "device" : "iPhone 5S Space Gray",
+  "foldedCodeRanges" : [
+
+  ],
+  "deviceScale" : "fit"
 }
